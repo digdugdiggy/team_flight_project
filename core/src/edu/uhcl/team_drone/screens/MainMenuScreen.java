@@ -110,7 +110,14 @@ public class MainMenuScreen implements Screen {
         });
 
         // actions
-        //playButton.addAction(Actions.moveBy(+50, 0, 2));
+        float playX, playY;
+        playX = playButton.getX();
+        playY = playButton.getY();
+       
+        playButton.addAction(Actions.sequence(
+                Actions.moveTo(playX-1000, playY),
+                Actions.moveTo(playX, playY, 1)
+        ));
     }
 
     @Override
