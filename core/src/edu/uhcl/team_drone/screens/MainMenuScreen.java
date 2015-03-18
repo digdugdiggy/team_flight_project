@@ -4,9 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -24,6 +28,8 @@ public class MainMenuScreen implements Screen {
     private Stage stage;    // Scene2d stage
     private Main game;      // Reference to the base game class for setScreen()
 
+    TextButton playButton;
+
     public MainMenuScreen(Main gameIn) {
         this.game = gameIn;
     }
@@ -35,7 +41,7 @@ public class MainMenuScreen implements Screen {
 
         // make menu          
         // Buttons        
-        TextButton playButton = new TextButton("Play", Assets.blueTextBtnStyle);
+        playButton = new TextButton("Play", Assets.blueTextBtnStyle);
         TextButton flyButton = new TextButton("Fly", Assets.blueTextBtnStyle);
         TextButton quitButton = new TextButton("Quit", Assets.blueTextBtnStyle);
         TextButton optionsButton = new TextButton("Options", Assets.blueTextBtnStyle);
@@ -109,15 +115,24 @@ public class MainMenuScreen implements Screen {
             }
         });
 
-        // actions
-        float playX, playY;
-        playX = playButton.getX();
-        playY = playButton.getY();
-       
-        playButton.addAction(Actions.sequence(
-                Actions.moveTo(playX-1000, playY),
-                Actions.moveTo(playX, playY, 1)
-        ));
+        // actions   
+        // adding delay fadein action to all buttons        
+        label.addAction(makeDelayedFadeIn(0f));
+        playButton.addAction(makeDelayedFadeIn(0.25f));
+        flyButton.addAction(makeDelayedFadeIn(0.25f));
+        optionsButton.addAction(makeDelayedFadeIn(0.5f));
+        quitButton.addAction(makeDelayedFadeIn(0.75f));
+    }
+
+    private SequenceAction makeDelayedFadeIn(float delay) {
+        // this function returns a Sequence of actions
+        // 1. Make button invisible, 2. delay parameter amount, 3. fadeIn 0.25s
+        SequenceAction sequence = new SequenceAction(
+                Actions.fadeOut(0),
+                Actions.delay(delay),
+                Actions.fadeIn(0.25f)
+        );
+        return sequence;
     }
 
     @Override
