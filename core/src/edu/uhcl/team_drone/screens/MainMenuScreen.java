@@ -21,13 +21,6 @@ public class MainMenuScreen implements Screen {
     // This class is for displaying the main menu. It has multiple buttons to
     // launch other game modes,and is the central navigation point of the 
     // program.
-//    private static final String[] menuTooltips = {
-//
-//    "Practice Drone flight in the software simulator",
-//       "Connect to and fly a real AR drone",
-//       "Set Game Options",
-//       "Exit"
-//   }
     private Stage stage;    // Scene2d stage
     private Main game;      // Reference to the base game class for setScreen()
 
@@ -49,14 +42,15 @@ public class MainMenuScreen implements Screen {
         TextButton quitButton = new TextButton("Quit", Assets.blueTextBtnStyle);
         TextButton optionsButton = new TextButton("Options", Assets.blueTextBtnStyle);
 
-        // Label for the bottom info bar
-        Label bottomInfoBar = new Label("text"], Assets.bottomBarStyle);
-        bottomInfoBar.setAlignment(Align.center);
-        
         // Label for game title at top of menu
         Label label = new Label("Drone Control", Assets.labelStyle);
         label.setAlignment(Align.center);
         label.setFontScale(2f);
+        
+        // Label for the bottom info bar
+        Label bottomInfoBar = new Label("text", Assets.bottomBarStyle);
+        bottomInfoBar.setAlignment(Align.center);
+        
 
         // 
         // Setup table layout
@@ -82,15 +76,17 @@ public class MainMenuScreen implements Screen {
         childTable.row();
 
         childTable.add(optionsButton)
-                .size(180, 65).colspan(2)
+                .size(180, 66).colspan(2)
+                .padTop(10)
                 .align(Align.center)
                 .space(10);
 
         rootTable.add(childTable);
-        rootTable.row();
+        rootTable.row();       
         rootTable.add(quitButton).size(180, 65).align(Align.center).space(10);
         rootTable.row();
-        rootTable.add(bottomInfoBar).padTop(22).fill().width(802).expand();
+        rootTable.add(bottomInfoBar).padTop(12).fill().width(802).expand();
+
         // add the root table to the stage
         stage.addActor(rootTable);
 
@@ -102,7 +98,7 @@ public class MainMenuScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new PlayScreen(game));
             }
-        });
+        });        
 
         flyButton.addListener(new ClickListener() {
             @Override
