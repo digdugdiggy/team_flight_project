@@ -22,8 +22,7 @@ public class SplashScreen implements Screen {
     private final Image splashImage;
 
     private boolean animationDone = false;
-
-    // test
+    
     public SplashScreen(Main gameIn) {
         this.game = gameIn;
         splashTexture = Assets.manager.get("2d/logo/Logo-Circled-small.png", Texture.class);
