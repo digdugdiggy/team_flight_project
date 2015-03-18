@@ -41,11 +41,11 @@ public class DebugRender {
             temp = "            dz: " + frmt.format(owner.getDz());
             writeString(temp, 120, 30);
 
-            temp = "pitch: " + frmt.format(owner.gyro.getCurrentPitch());
+            temp = "pitch: " + frmt.format(owner.gyroCmpnt.getCurrentPitch());
             writeString(temp, 10, 130);
-            temp = "roll: " + frmt.format(owner.gyro.getCurrentRoll());
+            temp = "roll: " + frmt.format(owner.gyroCmpnt.getCurrentRoll());
             writeString(temp, 10, 110);
-            temp = "yaw: " + frmt.format(owner.gyro.getCurrentYaw());
+            temp = "yaw: " + frmt.format(owner.gyroCmpnt.getCurrentYaw());
             writeString(temp, 10, 90);
             
             temp = "FPS: " + Gdx.graphics.getFramesPerSecond();

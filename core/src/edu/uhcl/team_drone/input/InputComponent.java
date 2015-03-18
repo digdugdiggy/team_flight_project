@@ -89,11 +89,11 @@ public class InputComponent extends InputAdapter {
         
         if (keys.containsKey(DEBUGON)) {
             PlayScreen.debug.isVisible = true;
-            PlayScreen.collision.debugOn = true;
+            PlayScreen.collisionWorld.debugOn = true;
         }
         if (keys.containsKey(DEBUGOFF)) {
             PlayScreen.debug.isVisible = false;
-            PlayScreen.collision.debugOn = false;
+            PlayScreen.collisionWorld.debugOn = false;
         }                
     }
         

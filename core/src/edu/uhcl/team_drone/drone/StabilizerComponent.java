@@ -19,7 +19,7 @@ public class StabilizerComponent {
     }
 
     private void updateRoll(float dt) {
-        rollPID.updateProcessVariable(-owner.gyro.getCurrentRoll());
+        rollPID.updateProcessVariable(-owner.gyroCmpnt.getCurrentRoll());
         rollPID.setSetPoint(owner.getControlRollAmt());        
 
         float rollResult = (float) rollPID.performPID(dt);
@@ -27,7 +27,7 @@ public class StabilizerComponent {
     }
 
     private void updatePitch(float dt) {
-        pitchPID.updateProcessVariable(-owner.gyro.getCurrentPitch());
+        pitchPID.updateProcessVariable(-owner.gyroCmpnt.getCurrentPitch());
         pitchPID.setSetPoint(owner.getControlPitchAmt());       
 
         float pitchResult = (float) pitchPID.performPID(dt);

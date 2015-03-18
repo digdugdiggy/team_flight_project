@@ -21,13 +21,13 @@ import edu.uhcl.team_drone.drone.Drone;
 public class CollisionWorld {
 
     public static boolean debugOn = false;
-    btCollisionObject world;
+    private btCollisionObject world;
     btCollisionShape shape;
     
     btCollisionConfiguration collisionConfig;
     btDispatcher dispatcher;
     btBroadphaseInterface broadPhase;
-    btCollisionWorld collisionWorld;
+    public static btCollisionWorld btWorld;
     
     DebugDrawer debugDrawer;
 
@@ -35,44 +35,49 @@ public class CollisionWorld {
     MyContactListener contactListener;
 
     public CollisionWorld(Drone droneIn) {
-        this.drone = droneIn;        
-        debugDrawer = new DebugDrawer();        
+        this.drone = droneIn;       
         
+        // debug renderer to see collision shapes 
+        debugDrawer = new DebugDrawer();     
+        
+        // enabling debug drawing
+        btWorld.setDebugDrawer(debugDrawer);        
+        debugDrawer.setDebugMode(btIDebugDraw.DebugDrawModes.DBG_DrawWireframe);
+        
+        // Make bullet world
         collisionConfig = new btDefaultCollisionConfiguration();
         dispatcher = new btCollisionDispatcher(collisionConfig);
         broadPhase = new btDbvtBroadphase();
-        collisionWorld = new btCollisionWorld(dispatcher, broadPhase, collisionConfig);
-        contactListener = new MyContactListener();
+        btWorld = new btCollisionWorld(dispatcher, broadPhase, collisionConfig);
         
+        // make contact listener to detect collisions
+        contactListener = new MyContactListener();         
                
-        world = new btCollisionObject();
-        
+        // make the world object from g3db file               
         btCollisionShape mazeShape = Bullet.obtainStaticNodeShape(Assets.manager.get(
                 "3d/levels/BestMaze.g3db",
-                Model.class).nodes);
-        
+                Model.class).nodes);     
+        world = new btCollisionObject(); 
         world.setCollisionShape(mazeShape); 
-        world.forceActivationState(Collision.DISABLE_DEACTIVATION);
+        world.forceActivationState(Collision.DISABLE_DEACTIVATION);       
         
-        // enabling debug drawing
-        collisionWorld.setDebugDrawer(debugDrawer);        
-        debugDrawer.setDebugMode(btIDebugDraw.DebugDrawModes.DBG_DrawWireframe);
 
-        // add the drone collision object to this world
-        drone.collision.getCollisionObject().forceActivationState(Collision.DISABLE_DEACTIVATION);
-        collisionWorld.addCollisionObject(drone.collision.getCollisionObject(), (short) 1, (short) 1);
-        collisionWorld.addCollisionObject(world, (short) 1, (short) 1);
+        // add the drone collisionCmpnt object to this world
+        drone.collisionCmpnt.getCollisionObject().forceActivationState(Collision.DISABLE_DEACTIVATION);
+        btWorld.addCollisionObject(drone.collisionCmpnt.getCollisionObject(), (short) 1, (short) 1);
+        btWorld.addCollisionObject(world, (short) 1, (short) 1);
 
     }
 
 
     public void render(PerspectiveCamera camIn) {
 
-        collisionWorld.performDiscreteCollisionDetection();
+        // perform collision detection and summon ContactListener
+        btWorld.performDiscreteCollisionDetection();
 
         if (debugOn) {
             debugDrawer.begin(camIn);
-            collisionWorld.debugDrawWorld();
+            btWorld.debugDrawWorld();
             debugDrawer.end();
         }
     }

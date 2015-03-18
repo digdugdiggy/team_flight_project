@@ -52,17 +52,17 @@ public class PIDGraph {
         rollData.setData(
                 counter,
                 positionX + counter,
-                positionY + HALF_HEIGHT + (drone.gyro.getCurrentRoll() * GRAPH_HEIGHT));
+                positionY + HALF_HEIGHT + (drone.gyroCmpnt.getCurrentRoll() * GRAPH_HEIGHT));
         pData.setData(
                 counter,
                 positionX + counter,
                 positionY + HALF_HEIGHT
-                + ((float) drone.stable.getRollPID().getProportional() * 10));
+                + ((float) drone.stabilityCmpnt.getRollPID().getProportional() * 10));
         iData.setData(
                 counter,
                 positionX + counter,
                 positionY + HALF_HEIGHT
-                + ((float) drone.stable.getRollPID().getIntegral() * GRAPH_HEIGHT));
+                + ((float) drone.stabilityCmpnt.getRollPID().getIntegral() * GRAPH_HEIGHT));
 
         counter++;
         if (counter >= GRAPH_WIDTH) {

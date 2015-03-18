@@ -43,10 +43,10 @@ public class AttitudeIndicator {
     }
 
     protected void update(Drone droneIn) {
-        float rotation = droneIn.gyro.getCurrentRoll() * 45;
+        float rotation = droneIn.gyroCmpnt.getCurrentRoll() * 45;
         indicatorMoving.setRotation(rotation);
 
-        float pitch = droneIn.gyro.getCurrentPitch();
+        float pitch = droneIn.gyroCmpnt.getCurrentPitch();
 
         indicatorMoving.setPosition(
                 indicatorMoving.getX(),

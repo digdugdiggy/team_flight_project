@@ -3,12 +3,13 @@ package edu.uhcl.team_drone.drone;
 import edu.uhcl.team_drone.input.InputComponent;
 import com.badlogic.gdx.math.Vector3;
 import edu.uhcl.team_drone.input.ControllerInput;
+import edu.uhcl.team_drone.screens.PlayScreen;
 
 public class Drone implements DroneInterface {
 
     private final static int MAX_SPEED = 2500;
-    private final static int TILT_TO_MOVEMENT_FACTOR = 50;
-    private final static float MAX_TILT = 0.50f;
+    private final static int TILT_TO_MOVEMENT_FACTOR = 100;
+    private final static float MAX_TILT = 0.30f;
     private final static float AIR_RESISTANCE = 1f;
 
     private Vector3 position, direction, up, right, temp;
@@ -20,11 +21,11 @@ public class Drone implements DroneInterface {
 
     private float controlRollAmt = 0, controlPitchAmt = 0;
 
-    public StabilizerComponent stable;
-    public InputComponent input;
-    public ControllerInput controller;
-    public GyroComponent gyro;
-    public CollisionComponent collision;
+    public StabilizerComponent stabilityCmpnt;
+    public InputComponent inputCmpnt;
+    public ControllerInput controllerCmpnt;
+    public GyroComponent gyroCmpnt;
+    public CollisionComponent collisionCmpnt;
 
     private boolean simulated; // whether this is a software drone or a physical one.
 
@@ -32,8 +33,8 @@ public class Drone implements DroneInterface {
         this.simulated = simulatedIn;
 
         if (!simulated) {
-            input = new InputComponent(this);
-            gyro = new GyroComponent(this);
+            inputCmpnt = new InputComponent(this);
+            gyroCmpnt = new GyroComponent(this);
         } else {
 
             position = new Vector3(0, 600, 0);
@@ -43,11 +44,12 @@ public class Drone implements DroneInterface {
             right = direction.cpy().crs(up).nor();
             temp = new Vector3();
 
-            stable = new StabilizerComponent(this);
-            input = new InputComponent(this);
-            controller = new ControllerInput(this);
-            gyro = new GyroComponent(this);
-            collision = new CollisionComponent(this);
+            stabilityCmpnt = new StabilizerComponent(this);
+            inputCmpnt = new InputComponent(this);
+            controllerCmpnt = new ControllerInput(this);
+            gyroCmpnt = new GyroComponent(this);
+            collisionCmpnt = new CollisionComponent(this);
+            
 
             dx = dy = dz = 0;
             speedX = speedY = speedZ = 0;
@@ -56,14 +58,14 @@ public class Drone implements DroneInterface {
 
     public void update(float dt) {
         if (!simulated) {
-            controller.update();
-            input.update(dt);
+            controllerCmpnt.update();
+            inputCmpnt.update(dt);
         } else {
-            controller.update();
-            input.update(dt);
+            controllerCmpnt.update();
+            inputCmpnt.update(dt);
             updateVectors();
-            gyro.update(dt);
-            collision.update();
+            gyroCmpnt.update(dt);
+            collisionCmpnt.update();
             
             
 
@@ -89,7 +91,7 @@ public class Drone implements DroneInterface {
             checkSpeedLimits();
             // problems with faster linearSpeed in diagonals
             position.add(speedX * dt, speedY * dt, speedZ * dt);
-            stable.update(dt, input.isKeyPressed());
+            stabilityCmpnt.update(dt, inputCmpnt.isKeyPressed());
 
             linearSpeed = position.cpy().dst(previousPosition) / dt;       
 
@@ -142,25 +144,25 @@ public class Drone implements DroneInterface {
     @Override
     public void roll(float rollIn) {
 
-        if (gyro.getCurrentRoll() > 0) {
-            if (gyro.getCurrentRoll() < MAX_TILT) {
+        if (gyroCmpnt.getCurrentRoll() > 0) {
+            if (gyroCmpnt.getCurrentRoll() < MAX_TILT) {
                 up.rotate(direction, rollIn);
-            } else if (gyro.getCurrentRoll() >= MAX_TILT) {
+            } else if (gyroCmpnt.getCurrentRoll() >= MAX_TILT) {
                 if (rollIn > 0) {
                     up.rotate(direction, rollIn);
                 }
             }
 
-        } else if (gyro.getCurrentRoll() < 0) {
-            if (gyro.getCurrentRoll() > -MAX_TILT) {
+        } else if (gyroCmpnt.getCurrentRoll() < 0) {
+            if (gyroCmpnt.getCurrentRoll() > -MAX_TILT) {
                 up.rotate(direction, rollIn);
-            } else if (gyro.getCurrentRoll() <= MAX_TILT) {
+            } else if (gyroCmpnt.getCurrentRoll() <= MAX_TILT) {
                 if (rollIn < 0) {
                     up.rotate(direction, rollIn);
                 }
             }
 
-        } else if (gyro.getCurrentRoll() == 0) {
+        } else if (gyroCmpnt.getCurrentRoll() == 0) {
             up.rotate(direction, rollIn);
         }
     }
@@ -168,25 +170,25 @@ public class Drone implements DroneInterface {
     // rotate view clockwise/counter-clockwise
     @Override
     public void pitch(float pitchIn) {
-        if (gyro.getCurrentPitch() > 0) {
-            if (gyro.getCurrentPitch() < MAX_TILT) {
+        if (gyroCmpnt.getCurrentPitch() > 0) {
+            if (gyroCmpnt.getCurrentPitch() < MAX_TILT) {
                 up.rotate(right, pitchIn);
-            } else if (gyro.getCurrentPitch() >= MAX_TILT) {
+            } else if (gyroCmpnt.getCurrentPitch() >= MAX_TILT) {
                 if (pitchIn > 0) {
                     up.rotate(right, pitchIn);
                 }
             }
 
-        } else if (gyro.getCurrentPitch() < 0) {
-            if (gyro.getCurrentPitch() > -MAX_TILT) {
+        } else if (gyroCmpnt.getCurrentPitch() < 0) {
+            if (gyroCmpnt.getCurrentPitch() > -MAX_TILT) {
                 up.rotate(right, pitchIn);
-            } else if (gyro.getCurrentPitch() <= MAX_TILT) {
+            } else if (gyroCmpnt.getCurrentPitch() <= MAX_TILT) {
                 if (pitchIn < 0) {
                     up.rotate(right, pitchIn);
                 }
             }
 
-        } else if (gyro.getCurrentPitch() == 0) {
+        } else if (gyroCmpnt.getCurrentPitch() == 0) {
             up.rotate(right, pitchIn);
         }
 

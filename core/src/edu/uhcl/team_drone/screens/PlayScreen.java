@@ -21,7 +21,7 @@ public class PlayScreen implements Screen {
     private WorldManager worldManager;
     
     //
-    public static CollisionWorld collision;
+    public static CollisionWorld collisionWorld;
     //
     private Viewport view;
 
@@ -41,11 +41,12 @@ public class PlayScreen implements Screen {
         Bullet.init();
         drone = new Drone(true);
         worldManager = new WorldManager();   
-        collision = new CollisionWorld(drone);
+        collisionWorld = new CollisionWorld(drone);
+        drone.collisionCmpnt.registerWithWorld(collisionWorld.btWorld);
         ui = new PlayUI(drone,view);
         debug = new DebugRender(drone);
 
-        Gdx.input.setInputProcessor(drone.input);
+        Gdx.input.setInputProcessor(drone.inputCmpnt);
         updateCameraFromDrone();
     }
 
@@ -63,7 +64,7 @@ public class PlayScreen implements Screen {
 
         debug.update();
         ui.render(delta);
-        collision.render(cam);
+        collisionWorld.render(cam);
         updateCameraFromDrone();
     }
 
@@ -97,5 +98,9 @@ public class PlayScreen implements Screen {
 
     @Override
     public void hide() {
+    }
+    
+    public CollisionWorld getWorld(){
+        return collisionWorld;
     }
 }
