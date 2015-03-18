@@ -12,7 +12,6 @@ public class Drone implements DroneInterface {
     private final static float MAX_TILT = 0.50f;
     private final static float AIR_RESISTANCE = 1f;
 
-
     private Vector3 position, direction, up, right, temp;
 
     private float dx, dy, dz; // current accelerations
