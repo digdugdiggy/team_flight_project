@@ -3,7 +3,6 @@ package edu.uhcl.team_drone.drone;
 import edu.uhcl.team_drone.input.InputComponent;
 import com.badlogic.gdx.math.Vector3;
 import edu.uhcl.team_drone.input.ControllerInput;
-import edu.uhcl.team_drone.input.Xbox360Input;
 
 public class Drone implements DroneInterface {
 
@@ -65,6 +64,8 @@ public class Drone implements DroneInterface {
             updateVectors();
             gyro.update(dt);
             collision.update();
+            
+            
 
             moveFromTilt();
 
@@ -96,17 +97,18 @@ public class Drone implements DroneInterface {
         }
 
     }
+        private void moveFromTilt() {
+        temp.set(up).nor();
+        dx = temp.x * TILT_TO_MOVEMENT_FACTOR;        
+        dz = temp.z * TILT_TO_MOVEMENT_FACTOR;
+    }
 
     private void updateVectors() {
         right = direction.cpy().crs(up).nor();
         direction = up.cpy().crs(right).nor();
     }
 
-    private void moveFromTilt() {
-        temp.set(up).nor();
-        dx = temp.x * TILT_TO_MOVEMENT_FACTOR;        
-        dz = temp.z * TILT_TO_MOVEMENT_FACTOR;
-    }
+
 
     private void checkSpeedLimits() {
         if (speedX > MAX_SPEED) {
