@@ -9,8 +9,8 @@ public class StabilizerComponent {
 
     public StabilizerComponent(Drone ownerIn) {
         this.owner = ownerIn;
-        rollPID = new PIDController(40, 0, 0);
-        pitchPID = new PIDController(80, 0, 0);
+        rollPID = new PIDController(100, 0, 0);
+        pitchPID = new PIDController(100, 0, 0);
     }
 
     public void update(float dt, boolean isKeyPressed) {        

@@ -35,3 +35,11 @@ grey_button_down
   orig: 380, 90
   offset: 0, 0
   index: -1
+bottombar
+  rotate: false
+  xy: 405, 344
+  size: 402, 55
+  split: 2, 2, 6, 2
+  orig: 402, 55
+  offset: 0, 0
+  index: -1

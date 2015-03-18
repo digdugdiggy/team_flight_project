@@ -66,10 +66,10 @@ public class PIDController {
         } else if ((previousResult - result) > MAX_CHANGE) {
             result = previousResult - MAX_CHANGE;
         }
-        if (result > 0.5) {
-            result = 0.5;
-        } else if (result < -0.5) {
-            result = -0.5;
+        if (result > 1.0) {
+            result = 1.0;
+        } else if (result < -1.0) {
+            result = -1.0;
         }
 
         // set up error for next run
