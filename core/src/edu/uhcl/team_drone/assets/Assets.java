@@ -33,6 +33,7 @@ public class Assets {
     public static TextButtonStyle smallTextBtnStyle;
     public static TextButtonStyle blueTextBtnStyle;
     public static LabelStyle labelStyle;
+    public static LabelStyle bottomBarStyle;
 
     public static void init() {
         atlas = new TextureAtlas(Gdx.files.internal("2d/menu/ui.pack"));
@@ -83,19 +84,21 @@ public class Assets {
                         manager.get("2d/menu/clouds.jpg", Texture.class)));
         
         greyButtonPatchUp = new NinePatchDrawable(atlas.createPatch("grey_button_up"));
-        greyButtonPatchDown = new NinePatchDrawable(atlas.createPatch("grey_button_down"));
-     
-
+        greyButtonPatchDown = new NinePatchDrawable(atlas.createPatch("grey_button_down"));     
+        
+        // grey button style
         textBtnStyle = new TextButtonStyle(
                 greyButtonPatchUp, greyButtonPatchDown, greyButtonPatchUp, bigFont);
         textBtnStyle.downFontColor = Color.DARK_GRAY;
         textBtnStyle.fontColor = Color.BLACK;
         
+        // alternate small font blue button style
         smallTextBtnStyle = new TextButtonStyle(
                 greyButtonPatchUp, greyButtonPatchDown, greyButtonPatchUp, smallFont);
         textBtnStyle.downFontColor = Color.DARK_GRAY;
         textBtnStyle.fontColor = Color.BLACK;
         
+        // blue button style
         NinePatchDrawable bluepatch = new NinePatchDrawable(atlas.createPatch("blue_button"));
         NinePatchDrawable bluepatchDown = new NinePatchDrawable(atlas.createPatch("blue_button_down"));
         blueTextBtnStyle = new TextButtonStyle(
@@ -103,15 +106,20 @@ public class Assets {
         textBtnStyle.downFontColor = Color.DARK_GRAY;
         textBtnStyle.fontColor = Color.BLACK;
 
+        // style for the bottom info bar
+        bottomBarStyle = new LabelStyle(smallFont, Color.BLACK);
+        bottomBarStyle.background = new NinePatchDrawable(atlas.createPatch("bottombar"));
+        bottomBarStyle.fontColor = Color.BLACK;
+
+        // style for Title label at top of menu's
         labelStyle = new LabelStyle(bigFont, Color.BLACK);
         labelStyle.background = new NinePatchDrawable(
                 new NinePatch(atlas.createPatch("blue_button")));
-                       // manager.get("yellow_button01.png", Texture.class)));
         labelStyle.background.setMinWidth(100);
         labelStyle.fontColor = Color.BLACK;
     }
-    
-    public static void dispose(){
+
+    public static void dispose() {
         atlas.dispose();
         manager.dispose();
         bigFont.dispose();
