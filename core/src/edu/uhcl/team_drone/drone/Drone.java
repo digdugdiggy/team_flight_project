@@ -7,7 +7,7 @@ import edu.uhcl.team_drone.input.Xbox360Input;
 
 public class Drone implements DroneInterface {
 
-    private final static int MAX_SPEED = 1600;
+    private final static int MAX_SPEED = 2500;
     private final static float MAX_TILT = 0.50f;
     private final static float AIR_RESISTANCE = 1f;
 
@@ -103,8 +103,8 @@ public class Drone implements DroneInterface {
 
     private void moveFromTilt() {
         temp.set(up).nor();
-        dx = temp.x * 30;        
-        dz = temp.z * 30;
+        dx = temp.x * 50;        
+        dz = temp.z * 50;
     }
 
     private void checkSpeedLimits() {
