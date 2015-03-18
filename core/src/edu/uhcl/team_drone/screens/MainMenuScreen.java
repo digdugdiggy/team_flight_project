@@ -28,7 +28,7 @@ public class MainMenuScreen implements Screen {
     private Stage stage;    // Scene2d stage
     private Main game;      // Reference to the base game class for setScreen()
 
-    TextButton playButton;
+    
 
     public MainMenuScreen(Main gameIn) {
         this.game = gameIn;
@@ -41,7 +41,7 @@ public class MainMenuScreen implements Screen {
 
         // make menu          
         // Buttons        
-        playButton = new TextButton("Play", Assets.blueTextBtnStyle);
+        TextButton playButton = new TextButton("Play", Assets.blueTextBtnStyle);
         TextButton flyButton = new TextButton("Fly", Assets.blueTextBtnStyle);
         TextButton quitButton = new TextButton("Quit", Assets.blueTextBtnStyle);
         TextButton optionsButton = new TextButton("Options", Assets.blueTextBtnStyle);
