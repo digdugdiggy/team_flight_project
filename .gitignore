@@ -64,3 +64,5 @@ build/
 .DS_Store
 
 .nb-gradle/profiles/private/aux-config
+.nb-gradle/private/cache/core-fb83b73eb3c879b18d343675f32aca61
+.nb-gradle/private/cache/desktop-9bccb601584b92d9c041663102aef73f
