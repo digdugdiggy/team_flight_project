@@ -38,9 +38,7 @@ public class CollisionWorld {
         this.drone = droneIn;       
         
         // debug renderer to see collision shapes 
-        debugDrawer = new DebugDrawer();     
-        
-        
+        debugDrawer = new DebugDrawer();  
         
         // Make bullet world
         collisionConfig = new btDefaultCollisionConfiguration();

@@ -57,6 +57,7 @@ public class OptionsScreen implements Screen{
         backToMenuButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                Assets.menuSoundPlayer.playClickSound();
                 game.setScreen(new MainMenuScreen(game));
             }
         });

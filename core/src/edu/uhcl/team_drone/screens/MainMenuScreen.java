@@ -18,7 +18,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.uhcl.team_drone.assets.Assets;
 import edu.uhcl.team_drone.main.Main;
 import edu.uhcl.team_drone.screens.main_menu.BottomInfoBar;
-import edu.uhcl.team_drone.screens.main_menu.MenuSoundPlayer;
 
 public class MainMenuScreen implements Screen {
 
@@ -28,12 +27,11 @@ public class MainMenuScreen implements Screen {
     private Stage stage;    // Scene2d stage
     private Main game;      // Reference to the base game class for setScreen()
     
-    public static MenuSoundPlayer menuSoundPlayer;
+    
     private BottomInfoBar infoBar; // class to store bottom tooltip bar
 
     public MainMenuScreen(Main gameIn) {
-        this.game = gameIn;
-        this.menuSoundPlayer = new MenuSoundPlayer();
+        this.game = gameIn;        
     }
 
     @Override
@@ -111,7 +109,7 @@ public class MainMenuScreen implements Screen {
         quitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                menuSoundPlayer.playClickSound();
+                Assets.menuSoundPlayer.playClickSound();
                 Gdx.app.exit();
             }
         });  
@@ -143,7 +141,7 @@ public class MainMenuScreen implements Screen {
         actorIn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                menuSoundPlayer.playClickSound();
+                Assets.menuSoundPlayer.playClickSound();
                 game.setScreen(screenIn);
             }
         });
@@ -187,8 +185,7 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void dispose() {
-        stage.dispose();
-        menuSoundPlayer.dispose();
+        stage.dispose();        
     }
 
 }

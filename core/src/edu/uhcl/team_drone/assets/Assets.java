@@ -13,11 +13,14 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
+import edu.uhcl.team_drone.screens.main_menu.MenuSoundPlayer;
 
 public class Assets {
     
     // This class serves as a general asset directory. All assets used are loaded here.
 
+    public static MenuSoundPlayer menuSoundPlayer;
+    
     public static AssetManager manager = new AssetManager();
     
     private static TextureAtlas atlas;
@@ -43,6 +46,8 @@ public class Assets {
         makeFonts();
         manager.finishLoading();
         makeUI();
+        
+        menuSoundPlayer = new MenuSoundPlayer();
     }
 
     private static void loadMenuAssets() {       
@@ -124,6 +129,7 @@ public class Assets {
         manager.dispose();
         bigFont.dispose();
         smallFont.dispose();
+        menuSoundPlayer.dispose();
     }
 
 }
