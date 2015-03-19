@@ -126,8 +126,8 @@ public class MainMenuScreen implements Screen {
         actorIn.addListener(new InputListener() {
             @Override
             public void enter(InputEvent e, float x, float y, int point, Actor fromActor) {   
-                if(fromActor !=  null){
-                    Assets.menuSoundPlayer.playRolloverSound();
+                if(fromActor instanceof Table){                    
+                    Assets.menuSoundPlayer.playRolloverSound();                    
                 }                
                 infoBar.setText(stringIn);                  
             }

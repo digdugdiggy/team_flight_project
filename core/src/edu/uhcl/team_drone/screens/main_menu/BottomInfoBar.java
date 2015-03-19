@@ -8,12 +8,11 @@ public class BottomInfoBar extends Label {
 
     public BottomInfoBar(CharSequence text, LabelStyle style) {
         super(text, style);
-        this.setAlignment(Align.center);
-        this.setFontScale(1.5f);
+        this.setAlignment(Align.center);        
     }
 
     public void addToTable(Table tableIn) {
-        tableIn.add(this).padTop(12).fill().width(802).expand();
+        tableIn.add(this).padTop(8).height(40).fill().width(802).expand();
     }
 
 }

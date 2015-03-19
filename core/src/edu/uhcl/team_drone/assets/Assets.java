@@ -27,6 +27,7 @@ public class Assets {
 
     public static BitmapFont bigFont;
     public static BitmapFont smallFont;
+    public static BitmapFont robotoFont;
 
     public static NinePatchDrawable backgroundPatch;
     public static NinePatchDrawable greyButtonPatchUp;
@@ -54,8 +55,7 @@ public class Assets {
         manager.load("2d/logo/Logo-Circled-small.png", Texture.class);
 
         manager.load("blue_panel.png", Texture.class);
-        manager.load("blue_button13.png", Texture.class);
-        manager.load("yellow_button01.png", Texture.class);
+        manager.load("blue_button13.png", Texture.class);       
         
         manager.load("2d/hud/Attitude-Background.png", Texture.class);
         manager.load("2d/hud/Attitude-Inner-Lines.png", Texture.class);
@@ -78,8 +78,13 @@ public class Assets {
         FreeTypeFontParameter params = new FreeTypeFontParameter();
         params.size = 60;
         bigFont = gen.generateFont(params);        
-        params.size = 24;
+        params.size = 40;
         smallFont = gen.generateFont(params);
+        
+        gen = new FreeTypeFontGenerator(Gdx.files.internal("Roboto-Regular.ttf"));
+        params = new FreeTypeFontParameter();
+        params.size = 28;
+        robotoFont = gen.generateFont(params);
     }
 
     private static void makeUI() {
@@ -97,9 +102,9 @@ public class Assets {
         textBtnStyle.downFontColor = Color.DARK_GRAY;
         textBtnStyle.fontColor = Color.BLACK;
         
-        // alternate small font blue button style
+        // alternate small font button style
         smallTextBtnStyle = new TextButtonStyle(
-                greyButtonPatchUp, greyButtonPatchDown, greyButtonPatchUp, smallFont);
+                greyButtonPatchUp, greyButtonPatchDown, greyButtonPatchUp, robotoFont);
         textBtnStyle.downFontColor = Color.DARK_GRAY;
         textBtnStyle.fontColor = Color.BLACK;
         
@@ -107,12 +112,12 @@ public class Assets {
         NinePatchDrawable bluepatch = new NinePatchDrawable(atlas.createPatch("blue_button"));
         NinePatchDrawable bluepatchDown = new NinePatchDrawable(atlas.createPatch("blue_button_down"));
         blueTextBtnStyle = new TextButtonStyle(
-                bluepatch, bluepatchDown, bluepatch, bigFont);
+                bluepatch, bluepatchDown, bluepatch, robotoFont);
         textBtnStyle.downFontColor = Color.DARK_GRAY;
         textBtnStyle.fontColor = Color.BLACK;
 
         // style for the bottom info bar
-        bottomBarStyle = new LabelStyle(smallFont, Color.BLACK);
+        bottomBarStyle = new LabelStyle(robotoFont, Color.BLACK);
         bottomBarStyle.background = new NinePatchDrawable(atlas.createPatch("bottombar"));
         bottomBarStyle.fontColor = Color.BLACK;
 
