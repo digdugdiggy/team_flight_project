@@ -39,8 +39,7 @@ public class MainMenuScreen implements Screen {
         stage = new Stage(new FitViewport(800, 600));
         Gdx.input.setInputProcessor(stage);
 
-        // make menu          
-        // Buttons        
+        // make menu Buttons and set their text and style                
         TextButton playButton = new TextButton("Play", Assets.blueTextBtnStyle);
         TextButton flyButton = new TextButton("Fly", Assets.blueTextBtnStyle);
         TextButton quitButton = new TextButton("Quit", Assets.blueTextBtnStyle);
@@ -126,8 +125,10 @@ public class MainMenuScreen implements Screen {
     private void addTooltipAction(Actor actorIn, final String stringIn) {
         actorIn.addListener(new InputListener() {
             @Override
-            public void enter(InputEvent e, float x, float y, int point, Actor fromActor) {                
-                //menuSoundPlayer.playRolloverSound();
+            public void enter(InputEvent e, float x, float y, int point, Actor fromActor) {   
+                if(fromActor !=  null){
+                    Assets.menuSoundPlayer.playRolloverSound();
+                }                
                 infoBar.setText(stringIn);                  
             }
 
