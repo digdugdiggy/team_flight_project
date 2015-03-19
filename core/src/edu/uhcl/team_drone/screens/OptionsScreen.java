@@ -13,12 +13,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.uhcl.team_drone.assets.Assets;
 import edu.uhcl.team_drone.main.Main;
+import edu.uhcl.team_drone.screens.main_menu.BottomInfoBar;
 
 public class OptionsScreen implements Screen{
     
     private Stage stage;
 
     private Main game;
+    
+    private BottomInfoBar infoBar;
     
     public OptionsScreen(Main gameIn) {
         this.game = gameIn;
@@ -30,22 +33,26 @@ public class OptionsScreen implements Screen{
         Gdx.input.setInputProcessor(stage);
         
         TextButton backToMenuButton = new TextButton("Back to Menu", Assets.blueTextBtnStyle);
-        
-        
+                
         Label label = new Label("OPTIONS", Assets.labelStyle);
         label.setAlignment(Align.center);
         
-        Table outerMenuTable = new Table();
-        outerMenuTable.setBackground(Assets.backgroundPatch);
-        outerMenuTable.setFillParent(true);
-        outerMenuTable.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        Table rootTable = new Table();
+        rootTable.setBackground(Assets.backgroundPatch);
+        rootTable.setFillParent(true);
+        rootTable.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         
-        outerMenuTable.add(label).align(Align.center).padBottom(100).size(400, 100);
-        outerMenuTable.row();
+        rootTable.add(label).align(Align.center).padBottom(100).size(400, 100);
+        rootTable.row();
 
-        outerMenuTable.row();
-        outerMenuTable.add(backToMenuButton).size(300, 80).align(Align.center).space(40).padTop(10);
-        stage.addActor(outerMenuTable);
+        rootTable.row();
+        rootTable.add(backToMenuButton).size(300, 80).align(Align.center).space(40).padTop(10).padBottom(180);
+        rootTable.row();        
+        
+        infoBar = new BottomInfoBar("", Assets.bottomBarStyle);
+        infoBar.addToTable(rootTable);
+        
+        stage.addActor(rootTable);
         
         backToMenuButton.addListener(new ClickListener() {
             @Override

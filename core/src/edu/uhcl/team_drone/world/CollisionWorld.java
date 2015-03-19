@@ -40,15 +40,17 @@ public class CollisionWorld {
         // debug renderer to see collision shapes 
         debugDrawer = new DebugDrawer();     
         
-        // enabling debug drawing
-        btWorld.setDebugDrawer(debugDrawer);        
-        debugDrawer.setDebugMode(btIDebugDraw.DebugDrawModes.DBG_DrawWireframe);
+        
         
         // Make bullet world
         collisionConfig = new btDefaultCollisionConfiguration();
         dispatcher = new btCollisionDispatcher(collisionConfig);
         broadPhase = new btDbvtBroadphase();
         btWorld = new btCollisionWorld(dispatcher, broadPhase, collisionConfig);
+        
+        // enabling debug drawing
+        btWorld.setDebugDrawer(debugDrawer);        
+        debugDrawer.setDebugMode(btIDebugDraw.DebugDrawModes.DBG_DrawWireframe);
         
         // make contact listener to detect collisions
         contactListener = new MyContactListener();         

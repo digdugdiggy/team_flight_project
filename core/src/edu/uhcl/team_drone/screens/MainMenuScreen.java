@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.uhcl.team_drone.assets.Assets;
 import edu.uhcl.team_drone.main.Main;
 import edu.uhcl.team_drone.screens.main_menu.BottomInfoBar;
+import edu.uhcl.team_drone.screens.main_menu.MenuSoundPlayer;
 
 public class MainMenuScreen implements Screen {
 
@@ -27,10 +28,12 @@ public class MainMenuScreen implements Screen {
     private Stage stage;    // Scene2d stage
     private Main game;      // Reference to the base game class for setScreen()
     
-    private BottomInfoBar infoBar;
+    public static MenuSoundPlayer menuSoundPlayer;
+    private BottomInfoBar infoBar; // class to store bottom tooltip bar
 
     public MainMenuScreen(Main gameIn) {
         this.game = gameIn;
+        this.menuSoundPlayer = new MenuSoundPlayer();
     }
 
     @Override
@@ -108,6 +111,7 @@ public class MainMenuScreen implements Screen {
         quitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                menuSoundPlayer.playClickSound();
                 Gdx.app.exit();
             }
         });  
@@ -124,8 +128,9 @@ public class MainMenuScreen implements Screen {
     private void addTooltipAction(Actor actorIn, final String stringIn) {
         actorIn.addListener(new InputListener() {
             @Override
-            public void enter(InputEvent e, float x, float y, int point, Actor fromActor) {
-                infoBar.setText(stringIn);
+            public void enter(InputEvent e, float x, float y, int point, Actor fromActor) {                
+                //menuSoundPlayer.playRolloverSound();
+                infoBar.setText(stringIn);                  
             }
 
             @Override
@@ -138,6 +143,7 @@ public class MainMenuScreen implements Screen {
         actorIn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                menuSoundPlayer.playClickSound();
                 game.setScreen(screenIn);
             }
         });
@@ -182,6 +188,7 @@ public class MainMenuScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        menuSoundPlayer.dispose();
     }
 
 }
