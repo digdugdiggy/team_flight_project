@@ -9,41 +9,39 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.uhcl.team_drone.assets.Assets;
 import edu.uhcl.team_drone.drone.Drone;
 
+// This class is responsible for displaying the in-game HUD.
+// It displays data like Altitude, attitude, orientation
+// liftoff button
+
 public class PlayUI {
 
     private Drone drone;
-    private AttitudeIndicator attitudeIndicator;
-    private Image hudBackground;
+    
+    private AttitudeIndicator attitudeIndicator;    
 
-    private Stage stage;
+    private Stage stage;   
 
-    private Table table;
-
-    public PlayUI(Drone owner, Viewport viewIn) {
-       
+    public PlayUI(Drone owner, Viewport viewIn) {       
         this.drone = owner;
-        stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
         
+        // make stage, let it acept input for button clicks, etc
+        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);        
 
-        table = new Table();
+        //table to organize hud
+        Table table = new Table();
         table.setFillParent(true);
-        hudBackground = new Image(Assets.manager.get("2d/hud/uiFrames.png", Texture.class));
+        
+        // create and add the attitude indicator to HUD
+        attitudeIndicator = new AttitudeIndicator(table);
+        stage.addActor(table);
+        
+        // create and add the background hud image
+        Image hudBackground = new Image(Assets.manager.get("2d/hud/uiFrames.png", Texture.class));
         hudBackground.setWidth(stage.getWidth());
         hudBackground.setHeight(stage.getHeight());
-        
-        
-        attitudeIndicator = new AttitudeIndicator(table);
-
-        
-        
-       
-        
-        
-        stage.addActor(table);
         stage.addActor(hudBackground);
-        
-        
+
     }
 
     public void render(float dt) {
