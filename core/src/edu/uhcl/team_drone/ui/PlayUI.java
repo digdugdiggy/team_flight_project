@@ -50,14 +50,9 @@ public class PlayUI {
         compassIndicator = new CompassIndicator(compassTable);
         
         stage.addActor(compassTable);
-       
-        
-       
-
     }
 
-    public void render(float dt) {
-        
+    public void render(float dt) {        
         attitudeIndicator.update(drone);
         compassIndicator.update(drone);
         stage.act();
@@ -67,5 +62,8 @@ public class PlayUI {
 
     public void dispose() {
         stage.dispose();
+    }
+    public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);        
     }
 }
