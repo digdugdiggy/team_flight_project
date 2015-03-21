@@ -37,8 +37,8 @@ public class Drone implements DroneInterface {
             gyroCmpnt = new GyroComponent(this);
         } else {
 
-            position = new Vector3(0, 600, 0);
-            previousPosition = new Vector3(0, 100, 0);
+            position = new Vector3(0, 1000, 0);
+            previousPosition = new Vector3(0, 1000, 0);
             direction = new Vector3(1, 0, 0);
             up = new Vector3(0, 1, 0);
             right = direction.cpy().crs(up).nor();
