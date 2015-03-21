@@ -44,9 +44,7 @@ public class CompassIndicator {
     
     protected void update(Drone droneIn){
         float droneAngle = droneIn.gyroCmpnt.getCurrentYaw();
-        indicatorMoving.setRotation(-droneAngle);
-        System.out.println(droneAngle);
-        
+        indicatorMoving.setRotation(-droneAngle);  
     }
 
 }
