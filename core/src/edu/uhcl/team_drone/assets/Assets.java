@@ -61,6 +61,8 @@ public class Assets {
         manager.load("2d/hud/Attitude-Inner-Lines.png", Texture.class);
         manager.load("2d/hud/Attitude-Inner-Small.png", Texture.class);
         manager.load("2d/hud/Attitude-Outer-Small.png", Texture.class);
+        manager.load("2d/hud/uiFrames.png", Texture.class);
+        
         
         manager.load("2d/menu/clouds.jpg", Texture.class);
     }

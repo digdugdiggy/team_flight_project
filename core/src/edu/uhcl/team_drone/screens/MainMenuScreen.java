@@ -36,7 +36,7 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new FitViewport(800, 600));
+        stage = new Stage(new FitViewport(800, 600));        
         Gdx.input.setInputProcessor(stage);
 
         // make menu Buttons and set their text and style                
@@ -57,7 +57,7 @@ public class MainMenuScreen implements Screen {
         // Setup table layout
         //
         
-        Table rootTable = new Table();
+        Table rootTable = new Table();        
         rootTable.setBackground(Assets.backgroundPatch);
         rootTable.setFillParent(true);
         rootTable.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

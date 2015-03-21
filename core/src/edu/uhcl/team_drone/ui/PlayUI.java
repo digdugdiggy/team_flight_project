@@ -1,20 +1,19 @@
 package edu.uhcl.team_drone.ui;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.uhcl.team_drone.assets.Assets;
 import edu.uhcl.team_drone.drone.Drone;
-import edu.uhcl.team_drone.screens.PlayScreen;
 
 public class PlayUI {
 
     private Drone drone;
     private AttitudeIndicator attitudeIndicator;
+    private Image hudBackground;
 
     private Stage stage;
 
@@ -25,24 +24,14 @@ public class PlayUI {
         this.drone = owner;
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
+        
 
         table = new Table();
         table.setFillParent(true);
-
-        //table.debugAll();    
+        hudBackground = new Image(Assets.manager.get("2d/hud/uiFrames.png", Texture.class));
+        hudBackground.setWidth(stage.getWidth());
+        hudBackground.setHeight(stage.getHeight());
         
-//        Table innerTable = new Table();
-//        table.setFillParent(true);
-//        
-//        TextButton propUp = new TextButton("P up", Assets.smallTextBtnStyle);
-//        propUp.scaleBy(0.25f);
-//        TextButton propDown = new TextButton("P down", Assets.smallTextBtnStyle);
-//        
-//        innerTable.add(propUp).size(70,50);
-//        innerTable.row();
-//        innerTable.add(propDown).size(70,50);
-//        table.add(innerTable).bottom().size(100,100);
- 
         
         attitudeIndicator = new AttitudeIndicator(table);
 
@@ -52,6 +41,7 @@ public class PlayUI {
         
         
         stage.addActor(table);
+        stage.addActor(hudBackground);
         
         
     }
