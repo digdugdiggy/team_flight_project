@@ -19,24 +19,23 @@ import edu.uhcl.team_drone.assets.Assets;
 import edu.uhcl.team_drone.main.Main;
 import edu.uhcl.team_drone.screens.main_menu.BottomInfoBar;
 
+    // This class is for displaying the main menu. It has multiple buttons to
+// launch other game modes,and is the central navigation point of the 
+// program.
 public class MainMenuScreen implements Screen {
 
-    // This class is for displaying the main menu. It has multiple buttons to
-    // launch other game modes,and is the central navigation point of the 
-    // program.
     private Stage stage;    // Scene2d stage
     private Main game;      // Reference to the base game class for setScreen()
-    
-    
+
     private BottomInfoBar infoBar; // class to store bottom tooltip bar
 
     public MainMenuScreen(Main gameIn) {
-        this.game = gameIn;        
+        this.game = gameIn;
     }
 
     @Override
     public void show() {
-        stage = new Stage(new FitViewport(800, 600));        
+        stage = new Stage(new FitViewport(800, 600));
         Gdx.input.setInputProcessor(stage);
 
         // make menu Buttons and set their text and style                
@@ -51,13 +50,12 @@ public class MainMenuScreen implements Screen {
         label.setFontScale(2f);
 
         // Label for the bottom info bar
-        infoBar = new BottomInfoBar("", Assets.bottomBarStyle);        
+        infoBar = new BottomInfoBar("", Assets.bottomBarStyle);
 
         // 
         // Setup table layout
-        //
-        
-        Table rootTable = new Table();        
+        //        
+        Table rootTable = new Table();
         rootTable.setBackground(Assets.backgroundPatch);
         rootTable.setFillParent(true);
         rootTable.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -87,23 +85,23 @@ public class MainMenuScreen implements Screen {
         rootTable.row();
         rootTable.add(quitButton).size(180, 65).align(Align.center).space(10);
         rootTable.row();
-        infoBar.addToTable(rootTable);        
+        infoBar.addToTable(rootTable);
         // END table layout
-        
+
         // add the root table to the stage
-        stage.addActor(rootTable);        
-        
+        stage.addActor(rootTable);
+
         // add tooltip actions to all buttons
         addTooltipAction(playButton, "Practice flying a quadcopter in the simulator");
         addTooltipAction(flyButton, "Connect to and fly a real AR drone 2.0");
         addTooltipAction(quitButton, "Quit to Operating System");
         addTooltipAction(optionsButton, "Change game options");
-        
+
         // add click actions to buttons in order to traverse to other screens
         addClickAction(playButton, new PlayScreen(game));
         addClickAction(flyButton, new FlyScreen(game));
-        addClickAction(optionsButton, new OptionsScreen(game));       
-        
+        addClickAction(optionsButton, new OptionsScreen(game));
+
         // make quit button close game
         quitButton.addListener(new ClickListener() {
             @Override
@@ -111,8 +109,8 @@ public class MainMenuScreen implements Screen {
                 Assets.menuSoundPlayer.playClickSound();
                 Gdx.app.exit();
             }
-        });  
-          
+        });
+
         // adding delay fadein action to all buttons        
         label.addAction(makeDelayedFadeIn(0f));
         playButton.addAction(makeDelayedFadeIn(0.25f));
@@ -125,11 +123,11 @@ public class MainMenuScreen implements Screen {
     private void addTooltipAction(Actor actorIn, final String stringIn) {
         actorIn.addListener(new InputListener() {
             @Override
-            public void enter(InputEvent e, float x, float y, int point, Actor fromActor) {   
-                if(fromActor instanceof Table){                    
-                    Assets.menuSoundPlayer.playRolloverSound();                    
-                }                
-                infoBar.setText(stringIn);                  
+            public void enter(InputEvent e, float x, float y, int point, Actor fromActor) {
+                if (fromActor instanceof Table) {
+                    Assets.menuSoundPlayer.playRolloverSound();
+                }
+                infoBar.setText(stringIn);
             }
 
             @Override
@@ -138,7 +136,8 @@ public class MainMenuScreen implements Screen {
             }
         });
     }
-    private void addClickAction(Actor actorIn, final Screen screenIn){
+
+    private void addClickAction(Actor actorIn, final Screen screenIn) {
         actorIn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -186,7 +185,7 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void dispose() {
-        stage.dispose();        
+        stage.dispose();
     }
 
 }
