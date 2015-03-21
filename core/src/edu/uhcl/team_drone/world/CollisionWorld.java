@@ -21,46 +21,47 @@ import edu.uhcl.team_drone.drone.Drone;
 public class CollisionWorld {
 
     public static boolean debugOn = false;
-    private btCollisionObject world;
-    btCollisionShape shape;
-    
-    btCollisionConfiguration collisionConfig;
-    btDispatcher dispatcher;
-    btBroadphaseInterface broadPhase;
+
     public static btCollisionWorld btWorld;
-    
-    DebugDrawer debugDrawer;
+
+    private btCollisionObject world;
+    private btCollisionShape shape;
+
+    private btCollisionConfiguration collisionConfig;
+    private btDispatcher dispatcher;
+    private btBroadphaseInterface broadPhase;
+
+    private DebugDrawer debugDrawer;
 
     private Drone drone;
-    MyContactListener contactListener;
+    private MyContactListener contactListener;
 
     public CollisionWorld(Drone droneIn) {
-        this.drone = droneIn;       
-        
+        this.drone = droneIn;
+
         // debug renderer to see collision shapes 
-        debugDrawer = new DebugDrawer();  
-        
+        debugDrawer = new DebugDrawer();
+
         // Make bullet world
         collisionConfig = new btDefaultCollisionConfiguration();
         dispatcher = new btCollisionDispatcher(collisionConfig);
         broadPhase = new btDbvtBroadphase();
         btWorld = new btCollisionWorld(dispatcher, broadPhase, collisionConfig);
-        
+
         // enabling debug drawing
-        btWorld.setDebugDrawer(debugDrawer);        
+        btWorld.setDebugDrawer(debugDrawer);
         debugDrawer.setDebugMode(btIDebugDraw.DebugDrawModes.DBG_DrawWireframe);
-        
+
         // make contact listener to detect collisions
-        contactListener = new MyContactListener();         
-               
+        contactListener = new MyContactListener();
+
         // make the world object from g3db file               
         btCollisionShape mazeShape = Bullet.obtainStaticNodeShape(Assets.manager.get(
                 "3d/levels/BestMaze.g3db",
-                Model.class).nodes);     
-        world = new btCollisionObject(); 
-        world.setCollisionShape(mazeShape); 
-        world.forceActivationState(Collision.DISABLE_DEACTIVATION);       
-        
+                Model.class).nodes);
+        world = new btCollisionObject();
+        world.setCollisionShape(mazeShape);
+        world.forceActivationState(Collision.DISABLE_DEACTIVATION);
 
         // add the drone collisionCmpnt object to this world
         drone.collisionCmpnt.getCollisionObject().forceActivationState(Collision.DISABLE_DEACTIVATION);
@@ -68,7 +69,6 @@ public class CollisionWorld {
         btWorld.addCollisionObject(world, (short) 1, (short) 1);
 
     }
-
 
     public void render(PerspectiveCamera camIn) {
 
@@ -82,4 +82,3 @@ public class CollisionWorld {
         }
     }
 }
-
