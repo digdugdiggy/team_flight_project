@@ -35,8 +35,9 @@ public class GyroComponent {
     }
 
     private void findYaw() { // must be called after FindPitch();         
-        currentYaw = (float) Math.asin(owner.getDirection().x / Math.cos(currentPitch));
-        currentYaw = 90 - MathUtils.radiansToDegrees * currentYaw;
+        currentYaw = (float) Math.atan2((double)owner.getDirection().z , (double)owner.getDirection().x);
+        currentYaw = MathUtils.radiansToDegrees * currentYaw;
+        
         currentYaw = (currentYaw + 360) % 360;
     }
 
