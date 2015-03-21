@@ -9,10 +9,10 @@ import com.badlogic.gdx.physics.bullet.collision.btCollisionWorld;
 import com.badlogic.gdx.physics.bullet.collision.btSphereShape;
 
 public class CollisionComponent {
-    
+
     btCollisionShape collisionShape;
     btCollisionObject collisionObject;
-    
+
     private Matrix4 transform;
 
     private Drone owner;
@@ -30,6 +30,8 @@ public class CollisionComponent {
                 new Quaternion(),
                 new Vector3(1, 1, 1));
         collisionObject.setWorldTransform(transform);
+        // set collisionflags
+        collisionObject.setCollisionFlags(collisionObject.getCollisionFlags() | btCollisionObject.CollisionFlags.CF_CUSTOM_MATERIAL_CALLBACK);
     }
 
     public void registerWithWorld(btCollisionWorld worldIn) {
@@ -38,19 +40,17 @@ public class CollisionComponent {
     }
 
     public void update() {
-        updateTransform();    
+        updateTransform();
         collisionObject.setWorldTransform(transform);
     }
 
     private void updateTransform() {
         transform.set(owner.getPosition(), new Quaternion());
-        
+
     }
 
     public btCollisionObject getCollisionObject() {
         return collisionObject;
     }
-    
-    
 
 }

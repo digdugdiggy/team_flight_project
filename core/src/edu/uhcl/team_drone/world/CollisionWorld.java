@@ -62,7 +62,8 @@ public class CollisionWorld {
         world = new btCollisionObject();
         world.setCollisionShape(mazeShape);
         world.forceActivationState(Collision.DISABLE_DEACTIVATION);
-
+        world.setCollisionFlags(world.getCollisionFlags() | btCollisionObject.CollisionFlags.CF_CUSTOM_MATERIAL_CALLBACK);
+        
         // add the drone collisionCmpnt object to this world
         drone.collisionCmpnt.getCollisionObject().forceActivationState(Collision.DISABLE_DEACTIVATION);
         btWorld.addCollisionObject(drone.collisionCmpnt.getCollisionObject(), (short) 1, (short) 1);
