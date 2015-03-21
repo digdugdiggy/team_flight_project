@@ -18,6 +18,7 @@ public class PlayUI {
     private Drone drone;
     
     private AttitudeIndicator attitudeIndicator;    
+    private CompassIndicator compassIndicator;
 
     private Stage stage;   
 
@@ -26,30 +27,45 @@ public class PlayUI {
         
         // make stage, let it acept input for button clicks, etc
         stage = new Stage();
+        
         Gdx.input.setInputProcessor(stage);        
 
-        //table to organize hud
-        Table table = new Table();
-        table.setFillParent(true);
-        
-        // create and add the attitude indicator to HUD
-        attitudeIndicator = new AttitudeIndicator(table);
-        stage.addActor(table);
-        
-        // create and add the background hud image
+         // create and add the background hud image
         Image hudBackground = new Image(Assets.manager.get("2d/hud/uiFrames.png", Texture.class));
         hudBackground.setWidth(stage.getWidth());
         hudBackground.setHeight(stage.getHeight());
+        //hudBackground.setZIndex(0);
         stage.addActor(hudBackground);
+        
+        //table to organize hud
+        Table table = new Table();        
+        table.setFillParent(true);
+        
+        // create and add the attitude indicator to HUD        
+        attitudeIndicator = new AttitudeIndicator(table);
+        stage.addActor(table);
+        
+//        // create and add compass
+        Table compassTable = new Table();
+        compassIndicator = new CompassIndicator(compassTable);
+        
+        stage.addActor(compassTable);
+       
+        
+       
 
     }
 
     public void render(float dt) {
+        
         attitudeIndicator.update(drone);
+        compassIndicator.update(drone);
         stage.act();
         stage.draw();
+
     }
-    public void dispose(){
+
+    public void dispose() {
         stage.dispose();
     }
 }

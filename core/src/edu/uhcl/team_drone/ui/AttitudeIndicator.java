@@ -24,10 +24,10 @@ public class AttitudeIndicator {
 
         // container that holds two objects on top of each other
         Stack stack = new Stack();
-        
+
         // make bg for indicator and add it to stack
         Image indicatorStaticBlueBG = new Image(
-                Assets.manager.get("2d/hud/Attitude-Inner-Small.png", Texture.class));        
+                Assets.manager.get("2d/hud/Attitude-Inner-Small.png", Texture.class));
         stack.add(indicatorStaticBlueBG);
 
         // moving portion of the attitude indicator, add to stack
@@ -37,12 +37,13 @@ public class AttitudeIndicator {
 
         // static portion of indicator, add to stack
         Image indicatorStatic = new Image(
-                Assets.manager.get("2d/hud/Attitude-Outer-Small.png", Texture.class));        
+                Assets.manager.get("2d/hud/Attitude-Outer-Small.png", Texture.class));
         indicatorStatic.setOrigin(indicatorStatic.getWidth() / 2, indicatorStatic.getHeight() / 2);
         stack.add(indicatorStatic);
 
         // position the stack into the table
         table.add(stack).size(INDICATOR_SIZE.x, INDICATOR_SIZE.y);
+
         indicatorMoving.setOrigin(INDICATOR_SIZE.x / 2, INDICATOR_SIZE.y / 2);
         table.right().bottom();
         indicatorHomePos = indicatorMoving.getY();

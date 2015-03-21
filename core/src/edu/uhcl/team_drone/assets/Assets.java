@@ -57,10 +57,17 @@ public class Assets {
         manager.load("blue_panel.png", Texture.class);
         manager.load("blue_button13.png", Texture.class);       
         
+        // attitude indicator
         manager.load("2d/hud/Attitude-Background.png", Texture.class);
         manager.load("2d/hud/Attitude-Inner-Lines.png", Texture.class);
         manager.load("2d/hud/Attitude-Inner-Small.png", Texture.class);
         manager.load("2d/hud/Attitude-Outer-Small.png", Texture.class);
+        
+        // compass 
+        manager.load("2d/hud/CompassInner.png", Texture.class);
+        manager.load("2d/hud/CompassOuter.png", Texture.class);
+        
+        // HUD frame
         manager.load("2d/hud/uiFrames.png", Texture.class);
         
         
