@@ -31,7 +31,7 @@ public class CollisionComponent {
                 new Vector3(1, 1, 1));
         collisionObject.setWorldTransform(transform);
         // set collisionflags
-        collisionObject.setCollisionFlags(collisionObject.getCollisionFlags() | btCollisionObject.CollisionFlags.CF_CUSTOM_MATERIAL_CALLBACK);
+        //collisionObject.setCollisionFlags(collisionObject.getCollisionFlags() | btCollisionObject.CollisionFlags.CF_CUSTOM_MATERIAL_CALLBACK);
     }
 
     public void registerWithWorld(btCollisionWorld worldIn) {
@@ -46,7 +46,6 @@ public class CollisionComponent {
 
     private void updateTransform() {
         transform.set(owner.getPosition(), new Quaternion());
-
     }
 
     public btCollisionObject getCollisionObject() {
