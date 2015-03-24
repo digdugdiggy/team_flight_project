@@ -4,16 +4,11 @@
   <auxiliary>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-      <group name="gtfo">
-        <file>file:/C:/Users/Behr/Documents/GitHub/team_flight_project/core/src/edu/uhcl/team_drone/ui/CompassIndicator.java</file>
-      </group>
+      <group name="gtfo"/>
     </open-files>
     <editor-bookmarks lastBookmarkId="0" xmlns="http://www.netbeans.org/ns/editor-bookmarks/2"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-      <group name="gtfo">
-        <file>file:/C:/Users/Behr/Documents/GitHub/team_flight_project/core/src/edu/uhcl/team_drone/world/CollisionWorld.java</file>
-        <file>file:/C:/Users/Behr/Documents/GitHub/team_flight_project/core/src/edu/uhcl/team_drone/drone/CollisionComponent.java</file>
-      </group>
+      <group name="gtfo"/>
     </open-files>
   </auxiliary>
 </gradle-project-properties>

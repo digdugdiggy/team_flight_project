@@ -61,12 +61,11 @@ public class CollisionWorld {
                 Model.class).nodes);
         world = new btCollisionObject();
         world.setCollisionShape(mazeShape);
-        world.forceActivationState(Collision.DISABLE_DEACTIVATION);
-        //world.setCollisionFlags(world.getCollisionFlags() | btCollisionObject.CollisionFlags.CF_CUSTOM_MATERIAL_CALLBACK);
+        //world.forceActivationState(Collision.DISABLE_DEACTIVATION);        
 
         // add the drone collisionCmpnt object to this world
-        drone.collisionCmpnt.getCollisionObject().forceActivationState(Collision.DISABLE_DEACTIVATION);
-        //btWorld.addCollisionObject(drone.collisionCmpnt.getCollisionObject());
+        //drone.collisionCmpnt.getCollisionObject().forceActivationState(Collision.DISABLE_DEACTIVATION);
+        
         btWorld.addCollisionObject(world);
 
     }
@@ -74,6 +73,7 @@ public class CollisionWorld {
     public void render(PerspectiveCamera camIn) {
 
         // perform collision detection and summon ContactListener
+        
         btWorld.performDiscreteCollisionDetection();
 
         if (debugOn) {

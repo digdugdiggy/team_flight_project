@@ -1,19 +1,16 @@
 package edu.uhcl.team_drone.world;
 
 import com.badlogic.gdx.physics.bullet.collision.ContactListener;
+import com.badlogic.gdx.physics.bullet.collision.btCollisionObject;
 
 public class MyContactListener extends ContactListener {
 
     @Override
-    public boolean onContactAdded(
-            int userValue0,
-            int partId0,
-            int index0,
-            int userValue1,
-            int partId1,
-            int index1) {
+    public void onContactStarted(
+            btCollisionObject obj1,
+            btCollisionObject obj2) {
         System.out.println("COLLIDE");
-        return true;
+
     }
 
 
