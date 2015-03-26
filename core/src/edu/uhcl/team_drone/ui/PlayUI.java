@@ -27,8 +27,7 @@ public class PlayUI {
         
         // make stage, let it acept input for button clicks, etc
         stage = new Stage();
-        
-        Gdx.input.setInputProcessor(stage);        
+           
 
          // create and add the background hud image
         Image hudBackground = new Image(Assets.manager.get("2d/hud/uiFrames.png", Texture.class));

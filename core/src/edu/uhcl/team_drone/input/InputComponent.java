@@ -28,6 +28,7 @@ public class InputComponent extends InputAdapter {
     private int TOGGLEMODE = Input.Keys.F11;
     private int DEBUGON = Input.Keys.F1;
     private int DEBUGOFF = Input.Keys.F2;
+    private int PAUSE = Input.Keys.ESCAPE;
     
     // Number of keys current pressed
     private int keysPressed = 0;
@@ -61,7 +62,7 @@ public class InputComponent extends InputAdapter {
             owner.setControlRollAmt(owner.getControlRollAmt() + 0.13f);
         } 
         else {
-            owner.setControlRollAmt(0);
+            //owner.setControlRollAmt(0);
         }
 
         // forward/backward
@@ -76,7 +77,7 @@ public class InputComponent extends InputAdapter {
             }            
         }
         else{
-            owner.setControlPitchAmt(0);
+            //owner.setControlPitchAmt(0);
         }
 
         // rotations
@@ -94,7 +95,11 @@ public class InputComponent extends InputAdapter {
         if (keys.containsKey(DEBUGOFF)) {
             PlayScreen.debug.isVisible = false;
             PlayScreen.collisionWorld.debugOn = false;
-        }                
+        }
+        if (keys.containsKey(PAUSE)) {
+            PlayScreen.isPaused = !PlayScreen.isPaused;
+            keys.remove(PAUSE, 0);
+        }
     }
         
     
