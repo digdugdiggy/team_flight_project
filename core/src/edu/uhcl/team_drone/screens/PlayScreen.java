@@ -48,7 +48,7 @@ public class PlayScreen implements Screen {
         ui = new PlayUI(drone, view);
         debug = new DebugRender(drone);
 
-        Gdx.input.setInputProcessor(drone.inputCmpnt);
+        Gdx.input.setInputProcessor(drone.input.getInputProcessor());
         updateCameraFromDrone();
         pause = new PauseMenu(game, this);
 

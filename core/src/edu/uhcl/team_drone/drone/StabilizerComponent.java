@@ -13,7 +13,7 @@ public class StabilizerComponent {
         pitchPID = new PIDController(100, 0, 0);
     }
 
-    public void update(float dt, boolean isKeyPressed) {        
+    public void update(float dt) {        
         updateRoll(dt);
         updatePitch(dt);
     }
