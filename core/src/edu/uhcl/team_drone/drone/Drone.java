@@ -1,5 +1,6 @@
 package edu.uhcl.team_drone.drone;
 
+import edu.uhcl.team_drone.drone.pid.StabilizerComponent;
 import com.badlogic.gdx.math.Vector3;
 import edu.uhcl.team_drone.input.KeyboardControllerInputComponent;
 

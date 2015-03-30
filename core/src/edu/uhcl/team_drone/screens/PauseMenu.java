@@ -24,8 +24,7 @@ public class PauseMenu {
     private PlayScreen playScreen;
     
     private MenuInput menuKeyInput;
-    private InputMultiplexer inputMixer;
-    
+    private InputMultiplexer inputMixer;    
 
     public PauseMenu(Main gameIn, PlayScreen screenIn) {
         this.playScreen = screenIn;
@@ -105,6 +104,7 @@ public class PauseMenu {
     }
 
     private class MenuInput extends InputAdapter {
+
         @Override
         public boolean keyUp(int keycode) {
             if (keycode == Input.Keys.ESCAPE) {

@@ -1,4 +1,6 @@
-package edu.uhcl.team_drone.drone;
+package edu.uhcl.team_drone.drone.pid;
+
+import edu.uhcl.team_drone.drone.Drone;
 
 public class StabilizerComponent {
 

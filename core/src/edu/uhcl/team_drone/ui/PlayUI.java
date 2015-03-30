@@ -26,8 +26,7 @@ public class PlayUI {
         this.drone = owner;
         
         // make stage, let it acept input for button clicks, etc
-        stage = new Stage();
-           
+        stage = new Stage();           
 
          // create and add the background hud image
         Image hudBackground = new Image(Assets.manager.get("2d/hud/uiFrames.png", Texture.class));
