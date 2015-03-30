@@ -1,5 +1,6 @@
-package edu.uhcl.team_drone.input;
+package edu.uhcl.team_drone.input.hardware;
 
+import edu.uhcl.team_drone.input.hardware.DroneDriver;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.utils.IntIntMap;

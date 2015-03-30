@@ -1,4 +1,4 @@
-package edu.uhcl.team_drone.input;
+package edu.uhcl.team_drone.input.hardware;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;

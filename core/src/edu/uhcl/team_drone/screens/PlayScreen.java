@@ -17,37 +17,41 @@ import edu.uhcl.team_drone.world.WorldManager;
 
 public class PlayScreen implements Screen {
 
-    private Drone drone;    
+    private Drone drone;
     private WorldManager worldManager;
-    
+
     //
     public static CollisionWorld collisionWorld;
     //
     private Viewport view;
 
+    public static boolean isPaused = false;
     public static DebugRender debug;
     private Main game;
     private PlayUI ui;
+    private PauseMenu pause;
 
     public PlayScreen(Main gameIn) {
         this.game = gameIn;
-        view = new FitViewport(800,600);
+        view = new FitViewport(800, 600);
         view.setCamera(cam);
-        view.apply();        
+        view.apply();
     }
 
     @Override
     public void show() {
         Bullet.init();
         drone = new Drone(true);
-        worldManager = new WorldManager();   
+        worldManager = new WorldManager();
         collisionWorld = new CollisionWorld(drone);
         drone.collisionCmpnt.registerWithWorld(collisionWorld.btWorld);
-        ui = new PlayUI(drone,view);
+        ui = new PlayUI(drone, view);
         debug = new DebugRender(drone);
 
-        Gdx.input.setInputProcessor(drone.inputCmpnt);
+        Gdx.input.setInputProcessor(drone.input.getInputProcessor());
         updateCameraFromDrone();
+        pause = new PauseMenu(game, this);
+
     }
 
     @Override
@@ -58,26 +62,36 @@ public class PlayScreen implements Screen {
         Gdx.gl.glDepthFunc(GL20.GL_LEQUAL);
         Gdx.gl.glPolygonOffset(1.0f, 1.0f);
 
-        drone.update(Gdx.graphics.getDeltaTime());
+        renderRunning(delta);
 
-        worldManager.render(cam, Gdx.graphics.getDeltaTime(), drone);
-
-        debug.update();
-        ui.render(delta);
-        collisionWorld.render(cam);
-        updateCameraFromDrone();
     }
 
     @Override
     public void resize(int width, int height) {
         view.update(width, height);
         ui.resize(width, height);
+        pause.resize(width, height);
+    }
+
+    private void renderRunning(float delta) {
+        if (!isPaused) {
+            drone.update(delta);
+            debug.update();
+            collisionWorld.render(cam);
+        }
+
+        worldManager.render(cam, delta, drone);
+        ui.render(delta);
+
+        pause.render(isPaused);
+
+        updateCameraFromDrone();
     }
 
     @Override
     public void dispose() {
         // throw away heavy objects
-        modelBatch.dispose();        
+        modelBatch.dispose();
         ui.dispose();
         debug.dispose();
     }
@@ -89,7 +103,7 @@ public class PlayScreen implements Screen {
         cam.update();
     }
 
-      @Override
+    @Override
     public void pause() {
     }
 
@@ -100,8 +114,13 @@ public class PlayScreen implements Screen {
     @Override
     public void hide() {
     }
-    
-    public CollisionWorld getWorld(){
+
+    public CollisionWorld getWorld() {
         return collisionWorld;
     }
+
+    public Drone getDrone() {
+        return drone;
+    }
+
 }

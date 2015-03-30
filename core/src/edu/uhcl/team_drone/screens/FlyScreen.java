@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.uhcl.team_drone.drone.Drone;
-import edu.uhcl.team_drone.input.HardwareInputComponent;
+import edu.uhcl.team_drone.input.hardware.HardwareInputComponent;
 import edu.uhcl.team_drone.main.Main;
 import edu.uhcl.team_drone.ui.PlayUI;
 

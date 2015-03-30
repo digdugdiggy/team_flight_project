@@ -1,9 +1,7 @@
 package edu.uhcl.team_drone.drone;
 
-import edu.uhcl.team_drone.input.InputComponent;
 import com.badlogic.gdx.math.Vector3;
-import edu.uhcl.team_drone.input.ControllerInput;
-import edu.uhcl.team_drone.screens.PlayScreen;
+import edu.uhcl.team_drone.input.KeyboardControllerInputComponent;
 
 public class Drone implements DroneInterface {
 
@@ -22,8 +20,7 @@ public class Drone implements DroneInterface {
     private float controlRollAmt = 0, controlPitchAmt = 0;
 
     public StabilizerComponent stabilityCmpnt;
-    public InputComponent inputCmpnt;
-    public ControllerInput controllerCmpnt;
+    public KeyboardControllerInputComponent input;
     public GyroComponent gyroCmpnt;
     public CollisionComponent collisionCmpnt;
 
@@ -33,7 +30,7 @@ public class Drone implements DroneInterface {
         this.simulated = simulatedIn;
 
         if (!simulated) {
-            inputCmpnt = new InputComponent(this);
+            input = new KeyboardControllerInputComponent(this);
             gyroCmpnt = new GyroComponent(this);
         } else {
 
@@ -45,11 +42,9 @@ public class Drone implements DroneInterface {
             temp = new Vector3();
 
             stabilityCmpnt = new StabilizerComponent(this);
-            inputCmpnt = new InputComponent(this);
-            controllerCmpnt = new ControllerInput(this);
+            input = new KeyboardControllerInputComponent(this);
             gyroCmpnt = new GyroComponent(this);
             collisionCmpnt = new CollisionComponent(this);
-            
 
             dx = dy = dz = 0;
             speedX = speedY = speedZ = 0;
@@ -57,17 +52,14 @@ public class Drone implements DroneInterface {
     }
 
     public void update(float dt) {
-        if (!simulated) {
-            controllerCmpnt.update();
-            inputCmpnt.update(dt);
+        if (!simulated) {            
+            input.update(dt);
+
         } else {
-            controllerCmpnt.update();
-            inputCmpnt.update(dt);
+            input.update(dt);
             updateVectors();
             gyroCmpnt.update(dt);
             collisionCmpnt.update();
-            
-            
 
             moveFromTilt();
 
@@ -91,17 +83,18 @@ public class Drone implements DroneInterface {
             checkSpeedLimits();
             // problems with faster linearSpeed in diagonals
             position.add(speedX * dt, speedY * dt, speedZ * dt);
-            stabilityCmpnt.update(dt, inputCmpnt.isKeyPressed());
+            stabilityCmpnt.update(dt);
 
-            linearSpeed = position.cpy().dst(previousPosition) / dt;       
+            linearSpeed = position.cpy().dst(previousPosition) / dt;
 
             previousPosition = position.cpy();
         }
 
     }
-        private void moveFromTilt() {
+
+    private void moveFromTilt() {
         temp.set(up).nor();
-        dx = temp.x * TILT_TO_MOVEMENT_FACTOR;        
+        dx = temp.x * TILT_TO_MOVEMENT_FACTOR;
         dz = temp.z * TILT_TO_MOVEMENT_FACTOR;
     }
 
@@ -109,8 +102,6 @@ public class Drone implements DroneInterface {
         right = direction.cpy().crs(up).nor();
         direction = up.cpy().crs(right).nor();
     }
-
-
 
     private void checkSpeedLimits() {
         if (speedX > MAX_SPEED) {
@@ -196,7 +187,6 @@ public class Drone implements DroneInterface {
 
     @Override
     public void altitude(float altitudeIn) {
-        System.out.println(position.y);
         if (position.y > 80 && position.y < 6000) {
             position.add(0, altitudeIn * 10, 0);
         } else {

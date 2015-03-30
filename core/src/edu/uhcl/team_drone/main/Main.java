@@ -1,6 +1,6 @@
 package edu.uhcl.team_drone.main;
 
-import edu.uhcl.team_drone.input.DroneDriver;
+import edu.uhcl.team_drone.input.hardware.DroneDriver;
 import edu.uhcl.team_drone.assets.Assets;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;

@@ -1,4 +1,4 @@
-package edu.uhcl.team_drone.input;
+package edu.uhcl.team_drone.input.controller;
 
 import com.badlogic.gdx.controllers.PovDirection;
 
