@@ -21,14 +21,14 @@ public class CollisionComponent {
 
     public CollisionComponent(Drone ownerIn) {
         this.owner = ownerIn;
-        this.collisionShape = new btSphereShape(200f);
+        this.collisionShape = new btSphereShape(600f);
         this.active = false;
         collisionObject = new btCollisionObject();
         collisionObject.setCollisionShape(collisionShape);
         transform = new Matrix4(
                 owner.getPosition(),
                 new Quaternion(),
-                new Vector3(1, 1, 1));
+                new Vector3(0,0,0));
         collisionObject.setWorldTransform(transform);
         // set collisionflags
         //collisionObject.setCollisionFlags(collisionObject.getCollisionFlags() | btCollisionObject.CollisionFlags.CF_CUSTOM_MATERIAL_CALLBACK);

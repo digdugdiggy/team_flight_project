@@ -18,7 +18,7 @@ import edu.uhcl.team_drone.world.WorldManager;
 public class PlayScreen implements Screen {
 
     private Drone drone;
-    private WorldManager worldManager;
+    public static WorldManager worldManager;
 
     //
     public static CollisionWorld collisionWorld;
@@ -42,9 +42,11 @@ public class PlayScreen implements Screen {
     public void show() {
         Bullet.init();
         drone = new Drone(true);
+
         worldManager = new WorldManager();
         collisionWorld = new CollisionWorld(drone);
-        drone.collisionCmpnt.registerWithWorld(collisionWorld.btWorld);
+
+        //drone.collisionCmpnt.registerWithWorld(collisionWorld.btWorld);
         ui = new PlayUI(drone, view);
         debug = new DebugRender(drone);
 
@@ -57,10 +59,12 @@ public class PlayScreen implements Screen {
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-        Gdx.gl.glEnable(GL20.GL_POLYGON_OFFSET_FILL);
-        Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
+//        Gdx.gl.glEnable(GL20.GL_POLYGON_OFFSET_FILL);
+        //Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
+        //Gdx.gl.glDepthRangef(0.5f, 40000);
         Gdx.gl.glDepthFunc(GL20.GL_LEQUAL);
         Gdx.gl.glPolygonOffset(1.0f, 1.0f);
+
 
         renderRunning(delta);
 
@@ -76,12 +80,13 @@ public class PlayScreen implements Screen {
     private void renderRunning(float delta) {
         if (!isPaused) {
             drone.update(delta);
-            debug.update();
+            
             collisionWorld.render(cam);
         }
 
         worldManager.render(cam, delta, drone);
         ui.render(delta);
+        debug.update();
 
         pause.render(isPaused);
 

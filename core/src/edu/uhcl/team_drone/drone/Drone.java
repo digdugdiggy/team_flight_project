@@ -188,7 +188,8 @@ public class Drone implements DroneInterface {
 
     @Override
     public void altitude(float altitudeIn) {
-        if (position.y > 80 && position.y < 6000) {
+        System.out.println(position.y);
+        if (position.y > 200 && position.y < 6000) {
             position.add(0, altitudeIn * 10, 0);
         } else {
             if (altitudeIn > 0 && position.y < 1000) {

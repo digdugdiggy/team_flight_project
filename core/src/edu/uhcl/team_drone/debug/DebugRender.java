@@ -10,47 +10,23 @@ import java.text.NumberFormat;
 public class DebugRender {
 
     private Drone owner;
-    private SpriteBatch sb;
-    private NumberFormat frmt;
+    private SpriteBatch sb;    
     private PIDGraph graph;
     public boolean isVisible = false;
 
     public DebugRender(Drone ownerIn) {
         this.owner = ownerIn;
-        sb = new SpriteBatch();
-        frmt = new DecimalFormat("###.##");
+        sb = new SpriteBatch();        
         graph = new PIDGraph(sb, owner);
         graph.setPosition(230, 370);
     }
 
     public void update() {
-
         if (isVisible) {
-            
-            
-            
-            
             sb.begin();
-
-            String temp = "speedX: " + frmt.format(owner.getSpeedX());
-            writeString(temp, 10, 50);
-            temp = "speedZ: " + frmt.format(owner.getSpeedZ());
-            writeString(temp, 120, 50);
-            temp = "            dx: " + frmt.format(owner.getDx());
-            writeString(temp, 10, 30);
-            temp = "            dz: " + frmt.format(owner.getDz());
-            writeString(temp, 120, 30);
-
-            temp = "pitch: " + frmt.format(owner.gyroCmpnt.getCurrentPitch());
-            writeString(temp, 10, 130);
-            temp = "roll: " + frmt.format(owner.gyroCmpnt.getCurrentRoll());
-            writeString(temp, 10, 110);
-            temp = "yaw: " + frmt.format(owner.gyroCmpnt.getCurrentYaw());
-            writeString(temp, 10, 90);
-            
+            String temp;
             temp = "FPS: " + Gdx.graphics.getFramesPerSecond();
             writeString(temp, 10, 400);
-
             sb.end();
 
             graph.render();
