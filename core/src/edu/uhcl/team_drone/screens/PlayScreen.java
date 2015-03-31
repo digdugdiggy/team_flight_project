@@ -17,7 +17,7 @@ import edu.uhcl.team_drone.world.WorldManager;
 
 public class PlayScreen implements Screen {
 
-    private Drone drone;
+    private static Drone drone;
     public static WorldManager worldManager;
 
     //
@@ -63,7 +63,7 @@ public class PlayScreen implements Screen {
         //Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
         //Gdx.gl.glDepthRangef(0.5f, 40000);
         Gdx.gl.glDepthFunc(GL20.GL_LEQUAL);
-        Gdx.gl.glPolygonOffset(1.0f, 1.0f);
+        Gdx.gl.glPolygonOffset(2.0f, 2.0f);
 
 
         renderRunning(delta);
@@ -124,7 +124,7 @@ public class PlayScreen implements Screen {
         return collisionWorld;
     }
 
-    public Drone getDrone() {
+    public static Drone getDrone() {
         return drone;
     }
 

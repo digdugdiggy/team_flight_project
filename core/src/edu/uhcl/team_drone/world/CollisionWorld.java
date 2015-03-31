@@ -19,6 +19,10 @@ import edu.uhcl.team_drone.drone.Drone;
 import edu.uhcl.team_drone.screens.PlayScreen;
 
 public class CollisionWorld {
+    
+    public static final short WORLD_FLAG = 1<<8;
+    public static final short DRONE_FLAG = 1<<9;
+    public static final short ALL_FLAG = 1<<8;    
 
     public static boolean debugOn = false;
 
@@ -64,12 +68,10 @@ public class CollisionWorld {
 //              
 //        
 //        btWorld.addCollisionObject(world);
-        
-        drone.collisionCmpnt.registerWithWorld(btWorld);
-        for(btCollisionObject obj : PlayScreen.worldManager.programmaticLevel.colObjs ){
-            btWorld.addCollisionObject(obj);
+        btWorld.addCollisionObject(drone.collisionCmpnt.getCollisionObject(), DRONE_FLAG, WORLD_FLAG);        
+        for (btCollisionObject obj : PlayScreen.worldManager.programmaticLevel.colObjs) {
+                        btWorld.addCollisionObject(obj,WORLD_FLAG, DRONE_FLAG);                        
         }
-        
     }
 
     public void render(PerspectiveCamera camIn) {

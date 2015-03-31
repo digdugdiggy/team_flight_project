@@ -21,8 +21,8 @@ public class Main extends Game {
         modelBatch = new ModelBatch();        
        
         cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());        
-        cam.near = 1000f;
-        cam.far = 20000f;        
+        cam.near = 500f;
+        cam.far = 30000f;        
         cam.update(true);       
                 
         setScreen(new DebugScreen(this));        

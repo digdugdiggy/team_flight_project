@@ -52,11 +52,10 @@ public class Level {
             while (b == -1 || b == 0 || b == 1) {
                 b = randInt(-10, 10);
             }
-            makeCube(a, 0, b);
-            makeCube(a, 1, b);
-            makeCube(a, 2, b);
+            makeCubeStack(a,b);            
         }
 
+        
         for (ModelInstance instance : modelInstances) {
             btCollisionShape colShape = new btBoxShape(CUBE_OFFSET);
             btCollisionObject obj = new btCollisionObject();
@@ -76,9 +75,8 @@ public class Level {
         Model grid = modelBuilder.createLineGrid(
                 LEVEL_SIZE / GRID_SIZE, LEVEL_SIZE / GRID_SIZE, GRID_SIZE, GRID_SIZE,
                 new Material(ColorAttribute.createDiffuse(Color.WHITE)),
-                VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal);        
-        renderInstances.add(new ModelInstance(grid));
-        modelInstances.add(new ModelInstance(grid));
+                VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal);
+        renderInstances.add(new ModelInstance(grid, 0, 2, 0));        
     }
 
     private void makeCube(float x, float y, float z) {
@@ -90,7 +88,7 @@ public class Level {
         );
 
         Model cube = modelBuilder.createBox(
-                GRID_SIZE, GRID_SIZE, GRID_SIZE,
+                GRID_SIZE - 2, GRID_SIZE - 2, GRID_SIZE - 2,
                 new Material(ColorAttribute.createDiffuse(Color.GRAY)),
                 VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal);
         ModelInstance cubeModel = new ModelInstance(cube, cubePos);
@@ -98,7 +96,7 @@ public class Level {
         modelInstances.add(cubeModel);
         
         Model grid = modelBuilder.createLineGrid(
-                1, 1, GRID_SIZE, GRID_SIZE,
+                1, 1, GRID_SIZE-1, GRID_SIZE-1,
                 new Material(ColorAttribute.createAmbient(Color.WHITE)),
                 VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal);
 
@@ -124,6 +122,11 @@ public class Level {
 
     }
 
+    private void makeCubeStack(float x, float z){
+        makeCube(x,0,z);
+        makeCube(x,1,z);
+        makeCube(x,2,z);        
+    }
     public void render() {
         Main.modelBatch.begin(Main.cam);
         Main.modelBatch.render(renderInstances, environment);

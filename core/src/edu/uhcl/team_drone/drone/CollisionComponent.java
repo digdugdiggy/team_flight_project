@@ -17,12 +17,11 @@ public class CollisionComponent {
 
     private Drone owner;
 
-    private boolean active;
 
     public CollisionComponent(Drone ownerIn) {
         this.owner = ownerIn;
         this.collisionShape = new btSphereShape(600f);
-        this.active = false;
+        
         collisionObject = new btCollisionObject();
         collisionObject.setCollisionShape(collisionShape);
         transform = new Matrix4(
@@ -33,11 +32,7 @@ public class CollisionComponent {
         // set collisionflags
         //collisionObject.setCollisionFlags(collisionObject.getCollisionFlags() | btCollisionObject.CollisionFlags.CF_CUSTOM_MATERIAL_CALLBACK);
     }
-
-    public void registerWithWorld(btCollisionWorld worldIn) {
-        worldIn.addCollisionObject(collisionObject);
-        this.active = true;
-    }
+  
 
     public void update() {
         updateTransform();

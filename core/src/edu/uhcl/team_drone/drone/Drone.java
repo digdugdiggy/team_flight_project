@@ -258,5 +258,11 @@ public class Drone implements DroneInterface {
     public void setControlPitchAmt(float controlPitchAmt) {
         this.controlPitchAmt = controlPitchAmt;
     }
+    
+    public void moveToPosition(float x, float y, float z){
+        this.position.set(x, y, z);
+        dx = dy = dz = 0;
+        speedX = speedY = speedZ = 0;
+    }
 
 }
