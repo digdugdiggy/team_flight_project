@@ -15,8 +15,6 @@ public class Drone implements DroneInterface {
 
     private float dx, dy, dz; // current accelerations
     private float speedX, speedY, speedZ; // current Speeds    
-    private float linearSpeed;
-    private Vector3 previousPosition;
 
     private float controlRollAmt = 0, controlPitchAmt = 0;
 
@@ -35,8 +33,7 @@ public class Drone implements DroneInterface {
             gyroCmpnt = new GyroComponent(this);
         } else {
 
-            position = new Vector3(0, 1000, 0);
-            previousPosition = new Vector3(0, 1000, 0);
+            position = new Vector3(1000, 1000, 1000);           
             direction = new Vector3(1, 0, 0);
             up = new Vector3(0, 1, 0);
             right = direction.cpy().crs(up).nor();
@@ -86,9 +83,6 @@ public class Drone implements DroneInterface {
             position.add(speedX * dt, speedY * dt, speedZ * dt);
             stabilityCmpnt.update(dt);
 
-            linearSpeed = position.cpy().dst(previousPosition) / dt;
-
-            previousPosition = position.cpy();
         }
 
     }
@@ -237,11 +231,7 @@ public class Drone implements DroneInterface {
 
     public float getSpeedZ() {
         return speedZ;
-    }
-
-    public float getSpeed() {
-        return linearSpeed;
-    }
+    }  
 
     public float getControlRollAmt() {
         return controlRollAmt;

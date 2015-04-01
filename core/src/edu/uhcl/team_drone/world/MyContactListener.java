@@ -15,6 +15,6 @@ public class MyContactListener extends ContactListener {
         System.out.println(obj1.getWorldTransform().getTranslation(Vector3.Zero));
         System.out.println();
         System.out.println(obj2.getWorldTransform().getTranslation(Vector3.Zero));
-        PlayScreen.getDrone().moveToPosition(0, 1000, 0);
+        PlayScreen.getDrone().moveToPosition(1000, 1000, 1000);
     }
 }
