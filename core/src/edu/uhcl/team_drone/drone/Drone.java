@@ -3,13 +3,15 @@ package edu.uhcl.team_drone.drone;
 import edu.uhcl.team_drone.drone.pid.StabilizerComponent;
 import com.badlogic.gdx.math.Vector3;
 import edu.uhcl.team_drone.input.KeyboardControllerInputComponent;
+import edu.uhcl.team_drone.main.Main;
+import edu.uhcl.team_drone.screens.PlayScreen;
 
 public class Drone implements DroneInterface {
 
-    private final static int MAX_SPEED = 2500;
-    private final static int TILT_TO_MOVEMENT_FACTOR = 100;
+    private final static int MAX_SPEED = 3500;
+    private final static int TILT_TO_MOVEMENT_FACTOR = 200;
     private final static float MAX_TILT = 0.30f;
-    private final static float AIR_RESISTANCE = 1f;
+    private final static float AIR_RESISTANCE = 5f;
 
     private Vector3 position, direction, up, right, temp;
 
@@ -253,6 +255,9 @@ public class Drone implements DroneInterface {
         this.position.set(x, y, z);
         dx = dy = dz = 0;
         speedX = speedY = speedZ = 0;
+        //direction.set(Vector3.Zero);
+        up = new Vector3(0, 1, 0);
+        //Main.cam.lookAt(x+1000, y, 0);
     }
 
 }

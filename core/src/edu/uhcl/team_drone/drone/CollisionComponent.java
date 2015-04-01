@@ -9,6 +9,8 @@ import com.badlogic.gdx.physics.bullet.collision.btCollisionWorld;
 import com.badlogic.gdx.physics.bullet.collision.btSphereShape;
 
 public class CollisionComponent {
+    
+    private final static float DRONE_COLLISION_SIZE = 400;
 
     btCollisionShape collisionShape;
     btCollisionObject collisionObject;
@@ -20,7 +22,7 @@ public class CollisionComponent {
 
     public CollisionComponent(Drone ownerIn) {
         this.owner = ownerIn;
-        this.collisionShape = new btSphereShape(600f);
+        this.collisionShape = new btSphereShape(DRONE_COLLISION_SIZE);
         
         collisionObject = new btCollisionObject();
         collisionObject.setCollisionShape(collisionShape);

@@ -30,7 +30,7 @@ public class MapGenerator {
     private final int columns;
     private final int rows;
 
-    Random rand = new Random();
+    private Random rand = new Random();
 
     public MapGenerator(int widthIn, int heightIn) {
         // ENSURE MAZE SIZE IS ODD
@@ -63,6 +63,7 @@ public class MapGenerator {
         mapCells[currentX][currentY].setImage('#');     
         
         int loopCount = 0;
+        boolean firstLoop = true;
 
         while ( loopCount < MAX_LOOPS) {
             loopCount++;
@@ -70,6 +71,10 @@ public class MapGenerator {
             // choose a random direction
             Collections.shuffle(directions);
             Direction chosenDirection = directions.get(rand.nextInt(directions.size()));
+            if(firstLoop){
+                firstLoop = false;
+                chosenDirection = Direction.E;
+            }
             
             //Move two cells in that direction
             int nextX = currentX + chosenDirection.changeInX * 2;
@@ -113,7 +118,6 @@ public class MapGenerator {
     public void printMap() {
         for (int x = 1; x < rows-1; x++) {
             for (int y = 1; y < columns-1; y++) {
-
                 char out = mapCells[y][x].getImage();
                 System.out.print(out);
             }
@@ -122,13 +126,14 @@ public class MapGenerator {
     }
 
     public char[][] getMap() {
-        char[][] charMap = new char[columns-1][rows-1];
-        for (int x = 1; x < rows-1; x++) {
-            for (int y = 1; y < columns-1; y++) {
+        char[][] charMap = new char[columns][rows];
+        for (int x = 0; x < rows; x++) {
+            for (int y = 0; y < columns; y++) {
                 charMap[y][x] = mapCells[y][x].getImage();
             }
         }
         return charMap;
     }
+    
 
 }

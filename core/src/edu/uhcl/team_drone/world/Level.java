@@ -22,9 +22,8 @@ public class Level {
 
     private final int LEVEL_SIZE = 100000;
     private final int GRID_SIZE = 2000;
-    private final int MAZE_DIMENSION = 9;
-
-    private final Vector3 CUBE_OFFSET = new Vector3(1000, 1000, 1000);
+    private final int MAZE_DIMENSION = 11;
+    private final Vector3 CUBE_OFFSET = new Vector3(GRID_SIZE / 2, GRID_SIZE / 2, GRID_SIZE / 2);
 
     private ModelBuilder modelBuilder;
 
@@ -113,8 +112,8 @@ public class Level {
         grid4Model.transform.setToRotation(Vector3.Z, 270);
         grid4Model.transform.setTranslation((CUBE_OFFSET.x * x * 2), cubePos.y, cubePos.z);
         renderInstances.add(grid4Model);
-
     }
+    
 
     private void makeCubeStack(float x, float z) {
         makeCube(x, 0, z);
@@ -148,27 +147,12 @@ public class Level {
         return randomNum;
     }
 
-    private void makeRandomMap() {
-
-        for (int i = 0; i < 80; i++) {
-            int a = randInt(-10, 10);
-            int b = randInt(-10, 10);
-            while (a == -1 || a == 0 || a == 1) {
-                a = randInt(-10, 10);
-            }
-            while (b == -1 || b == 0 || b == 1) {
-                b = randInt(-10, 10);
-            }
-            makeCubeStack(a, b);
-        }
-    }
-
     private void makeNewMap() {
         mapgen = new MapGenerator(MAZE_DIMENSION, MAZE_DIMENSION);
         char[][] charMap = mapgen.getMap();
 
-        for (int x = 1; x < MAZE_DIMENSION - 1; x++) {
-            for (int y = 1; y < MAZE_DIMENSION - 1; y++) {
+        for (int x = 0; x < MAZE_DIMENSION ; x++) {
+            for (int y = 0; y < MAZE_DIMENSION ; y++) {
                 if (charMap[y][x] == 'X') {
                     makeCubeStack(y - MAZE_DIMENSION / 2, x - MAZE_DIMENSION / 2);
                 }
