@@ -21,21 +21,21 @@ import java.util.Random;
 public class Level {
 
     private final int LEVEL_SIZE = 100000;
-    private final int GRID_SIZE = 2000;
+    private final int GRID_SIZE = 3000;
     private final int MAZE_DIMENSION = 11;
     private final Vector3 CUBE_OFFSET = new Vector3(GRID_SIZE / 2, GRID_SIZE / 2, GRID_SIZE / 2);
 
-    private ModelBuilder modelBuilder;
+    private final ModelBuilder modelBuilder;
 
-    Array<ModelInstance> renderInstances = new Array<ModelInstance>();
-    Array<ModelInstance> modelInstances = new Array<ModelInstance>();
-    Array<btCollisionObject> colObjs = new Array<btCollisionObject>();
+    private Array<ModelInstance> renderInstances = new Array<ModelInstance>();
+    private Array<ModelInstance> modelInstances = new Array<ModelInstance>();
+    protected Array<btCollisionObject> colObjs = new Array<btCollisionObject>();
 
     private Environment environment;
 
-    Random rand;
+    private Random rand;
 
-    MapGenerator mapgen;
+    private MapGenerator mapgen;
 
     public Level() {
         rand = new Random();
@@ -46,7 +46,8 @@ public class Level {
 
         makeFloor();
 
-        // makeRandomMap();
+        //makeCube(1.5f,0,1.5f);
+        
         makeNewMap();
 
         for (ModelInstance instance : modelInstances) {
@@ -68,11 +69,11 @@ public class Level {
         Model grid = modelBuilder.createLineGrid(
                 LEVEL_SIZE / GRID_SIZE, LEVEL_SIZE / GRID_SIZE, GRID_SIZE, GRID_SIZE,
                 new Material(ColorAttribute.createDiffuse(Color.WHITE)),
-                VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal);
-        renderInstances.add(new ModelInstance(grid, 0, 2, 0));
+                VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal);        
+        renderInstances.add(new ModelInstance(grid, 1500, 2, 1500));
     }
 
-    private void makeCube(float x, float y, float z) {
+    private void makeCube(float x, float y, float z, Color colorIn) {
 
         Vector3 cubePos = new Vector3(
                 CUBE_OFFSET.x + (CUBE_OFFSET.x * x * 2),
@@ -82,7 +83,7 @@ public class Level {
 
         Model cube = modelBuilder.createBox(
                 GRID_SIZE - 2, GRID_SIZE - 2, GRID_SIZE - 2,
-                new Material(ColorAttribute.createDiffuse(Color.GRAY)),
+                new Material(ColorAttribute.createDiffuse(colorIn)),
                 VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal);
         ModelInstance cubeModel = new ModelInstance(cube, cubePos);
         renderInstances.add(cubeModel);
@@ -95,7 +96,7 @@ public class Level {
 
         ModelInstance grid1Model = new ModelInstance(grid);
         grid1Model.transform.setToRotation(Vector3.X, 90);
-        grid1Model.transform.setTranslation(cubePos.x, cubePos.y, 2000 + (CUBE_OFFSET.z * z * 2));
+        grid1Model.transform.setTranslation(cubePos.x, cubePos.y, GRID_SIZE + (CUBE_OFFSET.z * z * 2));
         renderInstances.add(grid1Model);
 
         ModelInstance grid2Model = new ModelInstance(grid);
@@ -105,7 +106,7 @@ public class Level {
 
         ModelInstance grid3Model = new ModelInstance(grid);
         grid3Model.transform.setToRotation(Vector3.Z, 90);
-        grid3Model.transform.setTranslation(2000 + (CUBE_OFFSET.x * x * 2), cubePos.y, cubePos.z);
+        grid3Model.transform.setTranslation(GRID_SIZE + (CUBE_OFFSET.x * x * 2), cubePos.y, cubePos.z);
         renderInstances.add(grid3Model);
 
         ModelInstance grid4Model = new ModelInstance(grid);
@@ -113,12 +114,11 @@ public class Level {
         grid4Model.transform.setTranslation((CUBE_OFFSET.x * x * 2), cubePos.y, cubePos.z);
         renderInstances.add(grid4Model);
     }
-    
 
-    private void makeCubeStack(float x, float z) {
-        makeCube(x, 0, z);
-        makeCube(x, 1, z);
-        makeCube(x, 2, z);
+    private void makeCubeStack(float x, float z, Color colorIn) {
+        makeCube(x, 0, z, colorIn);
+        makeCube(x, 1, z, colorIn);
+        makeCube(x, 2, z, colorIn);
     }
 
     public void render() {
@@ -151,10 +151,12 @@ public class Level {
         mapgen = new MapGenerator(MAZE_DIMENSION, MAZE_DIMENSION);
         char[][] charMap = mapgen.getMap();
 
-        for (int x = 0; x < MAZE_DIMENSION ; x++) {
-            for (int y = 0; y < MAZE_DIMENSION ; y++) {
+        for (int x = 0; x < MAZE_DIMENSION; x++) {
+            for (int y = 0; y < MAZE_DIMENSION; y++) {
                 if (charMap[y][x] == 'X') {
-                    makeCubeStack(y - MAZE_DIMENSION / 2, x - MAZE_DIMENSION / 2);
+                    makeCubeStack(y - MAZE_DIMENSION / 2, x - MAZE_DIMENSION / 2, Color.GRAY);
+                } else if (charMap[y][x] == '#') {
+                    makeCube(y - MAZE_DIMENSION / 2, 0.5f, x - MAZE_DIMENSION / 2, Color.BLUE);
                 }
             }
         }

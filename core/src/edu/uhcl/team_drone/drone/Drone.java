@@ -3,15 +3,13 @@ package edu.uhcl.team_drone.drone;
 import edu.uhcl.team_drone.drone.pid.StabilizerComponent;
 import com.badlogic.gdx.math.Vector3;
 import edu.uhcl.team_drone.input.KeyboardControllerInputComponent;
-import edu.uhcl.team_drone.main.Main;
-import edu.uhcl.team_drone.screens.PlayScreen;
 
 public class Drone implements DroneInterface {
 
-    private final static int MAX_SPEED = 3500;
+    private final static int MAX_SPEED = 3000;
     private final static int TILT_TO_MOVEMENT_FACTOR = 200;
     private final static float MAX_TILT = 0.30f;
-    private final static float AIR_RESISTANCE = 5f;
+    private final static float AIR_RESISTANCE = 6f;
 
     private Vector3 position, direction, up, right, temp;
 
@@ -35,7 +33,7 @@ public class Drone implements DroneInterface {
             gyroCmpnt = new GyroComponent(this);
         } else {
 
-            position = new Vector3(1000, 1000, 1000);           
+            position = new Vector3(1000, 1000, 1000);
             direction = new Vector3(1, 0, 0);
             up = new Vector3(0, 1, 0);
             right = direction.cpy().crs(up).nor();
@@ -52,7 +50,7 @@ public class Drone implements DroneInterface {
     }
 
     public void update(float dt) {
-        if (!simulated) {            
+        if (!simulated) {
             input.update(dt);
 
         } else {
@@ -179,12 +177,10 @@ public class Drone implements DroneInterface {
         } else if (gyroCmpnt.getCurrentPitch() == 0) {
             up.rotate(right, pitchIn);
         }
-
     }
 
     @Override
-    public void altitude(float altitudeIn) {
-        System.out.println(position.y);
+    public void altitude(float altitudeIn) {        
         if (position.y > 200 && position.y < 6000) {
             position.add(0, altitudeIn * 10, 0);
         } else {
@@ -196,7 +192,6 @@ public class Drone implements DroneInterface {
                 }
             }
         }
-
     }
 
     public Vector3 getPosition() {
@@ -233,7 +228,7 @@ public class Drone implements DroneInterface {
 
     public float getSpeedZ() {
         return speedZ;
-    }  
+    }
 
     public float getControlRollAmt() {
         return controlRollAmt;
@@ -250,14 +245,12 @@ public class Drone implements DroneInterface {
     public void setControlPitchAmt(float controlPitchAmt) {
         this.controlPitchAmt = controlPitchAmt;
     }
-    
-    public void moveToPosition(float x, float y, float z){
+
+    public void moveToPosition(float x, float y, float z) {
         this.position.set(x, y, z);
         dx = dy = dz = 0;
         speedX = speedY = speedZ = 0;
-        //direction.set(Vector3.Zero);
+        direction.set(1, 0, 0);
         up = new Vector3(0, 1, 0);
-        //Main.cam.lookAt(x+1000, y, 0);
     }
-
 }

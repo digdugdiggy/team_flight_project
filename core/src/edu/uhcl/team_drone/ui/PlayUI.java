@@ -36,16 +36,16 @@ public class PlayUI {
         stage.addActor(hudBackground);
         
         //table to organize hud
-        Table table = new Table();        
-        table.setFillParent(true);
+        Table hudTable = new Table();        
+        hudTable.setFillParent(true);
         
         // create and add the attitude indicator to HUD        
-        attitudeIndicator = new AttitudeIndicator(table);
-        stage.addActor(table);
+        attitudeIndicator = new AttitudeIndicator(hudTable);
+        stage.addActor(hudTable);
         
 //        // create and add compass
         Table compassTable = new Table();
-        compassIndicator = new CompassIndicator(compassTable);
+        compassIndicator = new CompassIndicator(compassTable, stage);
         
         stage.addActor(compassTable);
     }

@@ -101,7 +101,7 @@ public class PlayScreen implements Screen {
         debug.dispose();
     }
 
-    private void updateCameraFromDrone() {
+    public static void updateCameraFromDrone() {
         cam.position.set(drone.getPosition());
         cam.direction.set(drone.getDirection());
         cam.up.set(drone.getUp());

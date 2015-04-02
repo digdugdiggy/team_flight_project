@@ -25,19 +25,19 @@ public class AttitudeIndicator {
         // container that holds two objects on top of each other
         Stack stack = new Stack();
 
-        // make bg for indicator and add it to stack
+        // Background for the indicator : add it to stack
         Image indicatorStaticBlueBG = new Image(
-                Assets.manager.get("2d/hud/Attitude-Inner-Small.png", Texture.class));
+                Assets.manager.get("2d/hud/attitudeIndicator/background.png", Texture.class));
         stack.add(indicatorStaticBlueBG);
 
         // moving portion of the attitude indicator, add to stack
         indicatorMoving = new Image(
-                Assets.manager.get("2d/hud/Attitude-Inner-Lines.png", Texture.class));
+                Assets.manager.get("2d/hud/attitudeIndicator/inner-lines.png", Texture.class));
         stack.add(indicatorMoving);
 
         // static portion of indicator, add to stack
         Image indicatorStatic = new Image(
-                Assets.manager.get("2d/hud/Attitude-Outer-Small.png", Texture.class));
+                Assets.manager.get("2d/hud/attitudeIndicator/outer.png", Texture.class));
         indicatorStatic.setOrigin(indicatorStatic.getWidth() / 2, indicatorStatic.getHeight() / 2);
         stack.add(indicatorStatic);
 
@@ -52,7 +52,7 @@ public class AttitudeIndicator {
     protected void update(Drone droneIn) {
         // update rotation
         float rotation = droneIn.gyroCmpnt.getCurrentRoll() * 45;
-        indicatorMoving.setRotation(rotation);
+        indicatorMoving.setRotation(-rotation);
 
         // update pitch
         float pitch = droneIn.gyroCmpnt.getCurrentPitch();

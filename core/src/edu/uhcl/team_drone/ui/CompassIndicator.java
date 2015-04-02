@@ -2,6 +2,7 @@ package edu.uhcl.team_drone.ui;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -21,7 +22,7 @@ public class CompassIndicator {
     // keeps track of the initial position for the moving indicator
     private float indicatorHomePos;
     
-    public CompassIndicator(Table tableIn){
+    public CompassIndicator(Table tableIn, Stage stageIn){
         // container that holds two objects on top of each other
         Stack stack = new Stack();
 
@@ -32,19 +33,19 @@ public class CompassIndicator {
 
         // moving portion of the attitude indicator, add to stack
         indicatorMoving = new Image(
-                Assets.manager.get("2d/hud/CompassInner.png", Texture.class));
+                Assets.manager.get("2d/hud/CompassInner.png", Texture.class));        
+        indicatorMoving.setOrigin(INDICATOR_SIZE.x / 2, INDICATOR_SIZE.y / 2);
         stack.add(indicatorMoving);
 
         // position the stack into the table
-        tableIn.add(stack).size(INDICATOR_SIZE.x, INDICATOR_SIZE.y);
-        indicatorMoving.setOrigin(INDICATOR_SIZE.x / 2, INDICATOR_SIZE.y / 2);
+        tableIn.add(stack).size(INDICATOR_SIZE.x, INDICATOR_SIZE.y);        
         tableIn.left().bottom();
         indicatorHomePos = indicatorMoving.getRotation();
     }
     
     protected void update(Drone droneIn){
         float droneAngle = droneIn.gyroCmpnt.getCurrentYaw();
-        indicatorMoving.setRotation(-droneAngle);
+        indicatorMoving.setRotation(droneAngle);
     }
 
 }

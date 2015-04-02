@@ -22,12 +22,13 @@ public class DebugRender {
     }
 
     public void update() {
-        if (isVisible) {
-            sb.begin();
+        sb.begin();
             String temp;
             temp = "FPS: " + Gdx.graphics.getFramesPerSecond();
             writeString(temp, 10, 400);
             sb.end();
+        if (isVisible) {
+            
 
             graph.render();
         }
