@@ -86,14 +86,18 @@ public class Assets {
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal("font1.ttf"));
         FreeTypeFontParameter params = new FreeTypeFontParameter();
         params.size = 60;
-        bigFont = gen.generateFont(params);        
+        bigFont = gen.generateFont(params);    
+        bigFont.setFixedWidthGlyphs("0123456789");
         params.size = 40;
         smallFont = gen.generateFont(params);
+        smallFont.setFixedWidthGlyphs("0123456789");
+        
         
         gen = new FreeTypeFontGenerator(Gdx.files.internal("Roboto-Regular.ttf"));
         params = new FreeTypeFontParameter();
-        params.size = 28;
+        params.size = 28;        
         robotoFont = gen.generateFont(params);
+        robotoFont.setFixedWidthGlyphs("0123456789");
     }
 
     private static void makeUI() {

@@ -14,7 +14,7 @@ import edu.uhcl.team_drone.drone.Drone;
 
 public class CompassIndicator {
     
-    private static final Vector2 INDICATOR_SIZE = new Vector2(150, 150);
+    private static final Vector2 INDICATOR_SIZE = new Vector2(190, 190);
 
     // portion of the indicator that rotates
     private Image indicatorMoving;
@@ -22,7 +22,7 @@ public class CompassIndicator {
     // keeps track of the initial position for the moving indicator
     private float indicatorHomePos;
     
-    public CompassIndicator(Table tableIn, Stage stageIn){
+    public CompassIndicator(Table tableIn){
         // container that holds two objects on top of each other
         Stack stack = new Stack();
 

@@ -1,10 +1,10 @@
 package edu.uhcl.team_drone.ui;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.uhcl.team_drone.assets.Assets;
 import edu.uhcl.team_drone.drone.Drone;
@@ -19,6 +19,7 @@ public class PlayUI {
     
     private AttitudeIndicator attitudeIndicator;    
     private CompassIndicator compassIndicator;
+    public Timer timeIndicator;
 
     private Stage stage;   
 
@@ -26,36 +27,36 @@ public class PlayUI {
         this.drone = owner;
         
         // make stage, let it acept input for button clicks, etc
-        stage = new Stage();           
+        stage = new Stage(new FitViewport(800, 600));           
+        
+        // create and add timer
+        Table timerTable = new Table();
+        timerTable.setFillParent(true);
+        timeIndicator = new Timer(timerTable);
+        timeIndicator.start();
+        stage.addActor(timerTable);  
 
-         // create and add the background hud image
-        Image hudBackground = new Image(Assets.manager.get("2d/hud/uiFrames.png", Texture.class));
-        hudBackground.setWidth(stage.getWidth());
-        hudBackground.setHeight(stage.getHeight());
-        //hudBackground.setZIndex(0);
-        stage.addActor(hudBackground);
-        
-        //table to organize hud
-        Table hudTable = new Table();        
-        hudTable.setFillParent(true);
-        
+        // create Attitude display
+        Table attitudeTable = new Table();
+        attitudeTable.setFillParent(true);
         // create and add the attitude indicator to HUD        
-        attitudeIndicator = new AttitudeIndicator(hudTable);
-        stage.addActor(hudTable);
-        
-//        // create and add compass
+        attitudeIndicator = new AttitudeIndicator(attitudeTable);
+        stage.addActor(attitudeTable);
+
+        // create and add compass
         Table compassTable = new Table();
-        compassIndicator = new CompassIndicator(compassTable, stage);
+        compassIndicator = new CompassIndicator(compassTable);
+        stage.addActor(compassTable);        
         
-        stage.addActor(compassTable);
     }
+
 
     public void render(float dt) {        
         attitudeIndicator.update(drone);
         compassIndicator.update(drone);
+        timeIndicator.update(dt);
         stage.act();
         stage.draw();
-
     }
 
     public void dispose() {

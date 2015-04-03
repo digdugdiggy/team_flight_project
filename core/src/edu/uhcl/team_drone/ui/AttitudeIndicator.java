@@ -12,7 +12,7 @@ import edu.uhcl.team_drone.drone.Drone;
 // attitude indicator, which displays Pitch and Roll information
 public class AttitudeIndicator {
 
-    private static final Vector2 INDICATOR_SIZE = new Vector2(150, 150);
+    private static final Vector2 INDICATOR_SIZE = new Vector2(190, 190);
 
     // portion of the indicator that moves
     private Image indicatorMoving;
