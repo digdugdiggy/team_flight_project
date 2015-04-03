@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import edu.uhcl.team_drone.screens.main_menu.MenuSoundPlayer;
@@ -33,6 +34,7 @@ public class Assets {
     public static NinePatchDrawable greyButtonPatchUp;
     public static NinePatchDrawable greyButtonPatchDown;
     
+    public static SliderStyle sliderStyle;
     public static TextButtonStyle textBtnStyle;
     public static TextButtonStyle smallTextBtnStyle;
     public static TextButtonStyle blueTextBtnStyle;
@@ -42,8 +44,7 @@ public class Assets {
     public static void init() {
         atlas = new TextureAtlas(Gdx.files.internal("2d/menu/ui.pack"));
         
-        loadMenuAssets();
-        load3dModels();
+        loadMenuAssets();        
         makeFonts();
         manager.finishLoading();
         makeUI();
@@ -53,33 +54,24 @@ public class Assets {
 
     private static void loadMenuAssets() {       
         manager.load("2d/logo/Logo-Circled-small.png", Texture.class);
-
         manager.load("blue_panel.png", Texture.class);
         manager.load("blue_button13.png", Texture.class);       
         
-        // attitude indicator
-        
+        // attitude indicator        
         manager.load("2d/hud/attitudeIndicator/background.png", Texture.class);
         manager.load("2d/hud/attitudeIndicator/inner-lines.png", Texture.class);
         manager.load("2d/hud/attitudeIndicator/outer.png", Texture.class);
         
         // compass 
         manager.load("2d/hud/CompassInner.png", Texture.class);
-        manager.load("2d/hud/CompassOuter.png", Texture.class);
-        
-        // HUD frame
-        manager.load("2d/hud/uiFrames.png", Texture.class);
-        
-        
+        manager.load("2d/hud/CompassOuter.png", Texture.class);        
+                
+        // HUD frame        
         manager.load("2d/menu/clouds.jpg", Texture.class);
-    }
-
-    private static void load3dModels() {
         
-        manager.load("3d/skybox/SKYBOX.g3db", Model.class);        
-        manager.load("3d/levels/newMaze.g3db", Model.class);
-        manager.load("3d/levels/BestMaze.g3db", Model.class);
-        
+        // load slider 
+        manager.load("2d/menu/slider/bar.png", Texture.class);
+        manager.load("2d/menu/slider/knob.png", Texture.class);
     }
 
     private static void makeFonts() {       
@@ -140,6 +132,12 @@ public class Assets {
                 new NinePatch(atlas.createPatch("blue_button")));
         labelStyle.background.setMinWidth(100);
         labelStyle.fontColor = Color.BLACK;
+
+        sliderStyle = new SliderStyle();
+        sliderStyle.background = new NinePatchDrawable(
+                new NinePatch(manager.get("2d/menu/slider/bar.png", Texture.class)));
+        sliderStyle.knob = new NinePatchDrawable(
+                new NinePatch(manager.get("2d/menu/slider/knob.png", Texture.class)));
     }
 
     public static void dispose() {

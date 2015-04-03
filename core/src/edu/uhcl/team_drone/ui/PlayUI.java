@@ -1,12 +1,9 @@
 package edu.uhcl.team_drone.ui;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import edu.uhcl.team_drone.assets.Assets;
 import edu.uhcl.team_drone.drone.Drone;
 
 // This class is responsible for displaying the in-game HUD.
@@ -19,7 +16,7 @@ public class PlayUI {
     
     private AttitudeIndicator attitudeIndicator;    
     private CompassIndicator compassIndicator;
-    public Timer timeIndicator;
+    public static Timer timeIndicator;
 
     private Stage stage;   
 

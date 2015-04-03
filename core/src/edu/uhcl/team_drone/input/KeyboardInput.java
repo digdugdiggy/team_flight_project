@@ -34,8 +34,7 @@ public class KeyboardInput extends InputAdapter {
     private int ENDCONNECTION = Input.Keys.F12;
     private int TOGGLEMODE = Input.Keys.F11;
     private int DEBUGON = Input.Keys.F1;
-    private int DEBUGOFF = Input.Keys.F2;
-    private int PAUSE = Input.Keys.ESCAPE;
+    private int DEBUGOFF = Input.Keys.F2;    
 
     public KeyboardInput(Drone ownerIn) {
         this.owner = ownerIn;
@@ -86,10 +85,6 @@ public class KeyboardInput extends InputAdapter {
             PlayScreen.debug.isVisible = false;
             PlayScreen.collisionWorld.debugOn = false;
         }
-//        if (keys.containsKey(PAUSE)) {
-//            PlayScreen.isPaused = !PlayScreen.isPaused;
-//            keys.remove(PAUSE, 0);
-//        }
     }
 
     @Override
@@ -105,6 +100,7 @@ public class KeyboardInput extends InputAdapter {
     public boolean keyUp(int keycode) {// called by libgdx on every key release   
         if (keycode == Input.Keys.ESCAPE) {
             PlayScreen.isPaused = !PlayScreen.isPaused;
+            PlayScreen.ui.timeIndicator.stop();
         } else {
             keysPressed--;
             keys.remove(keycode, 0);

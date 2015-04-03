@@ -39,8 +39,7 @@ public class Timer {
         }
     }
 
-    public void start() {
-        timeCount = 0;
+    public void start() {        
         isActive = true;
     }
 
@@ -56,5 +55,4 @@ public class Timer {
     public String getTime() {
         return formatter.format(timeCount);
     }
-
 }

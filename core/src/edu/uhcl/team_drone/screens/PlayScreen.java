@@ -28,7 +28,7 @@ public class PlayScreen implements Screen {
     public static boolean isPaused = false;
     public static DebugRender debug;
     private Main game;
-    private PlayUI ui;
+    public static PlayUI ui;
     private PauseMenu pause;
 
     public PlayScreen(Main gameIn) {
@@ -59,15 +59,10 @@ public class PlayScreen implements Screen {
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-//        Gdx.gl.glEnable(GL20.GL_POLYGON_OFFSET_FILL);
-        //Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
-        //Gdx.gl.glDepthRangef(0.5f, 40000);
         Gdx.gl.glDepthFunc(GL20.GL_LEQUAL);
         Gdx.gl.glPolygonOffset(2.0f, 2.0f);
 
-
         renderRunning(delta);
-
     }
 
     @Override
@@ -79,8 +74,7 @@ public class PlayScreen implements Screen {
 
     private void renderRunning(float delta) {
         if (!isPaused) {
-            drone.update(delta);
-            
+            drone.update(delta);            
             collisionWorld.render(cam);
         }
 

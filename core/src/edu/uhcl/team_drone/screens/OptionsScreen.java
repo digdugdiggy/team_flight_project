@@ -4,12 +4,15 @@ import edu.uhcl.team_drone.screens.main_menu.MainMenuScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.uhcl.team_drone.assets.Assets;
@@ -23,6 +26,9 @@ public class OptionsScreen implements Screen {
     private Main game;
 
     private BottomInfoBar infoBar;
+    
+    Label sliderLabel;
+    Slider slider;
 
     public OptionsScreen(Main gameIn) {
         this.game = gameIn;
@@ -46,12 +52,21 @@ public class OptionsScreen implements Screen {
         rootTable.add(label).align(Align.center).padBottom(100).size(400, 100);
         rootTable.row();
 
+        slider = new Slider(0, 100, 10, false, Assets.sliderStyle);
+        rootTable.add(slider).size(600, 30);
+        sliderLabel = new Label(Float.toString(slider.getValue()), Assets.labelStyle);
+        rootTable.add(sliderLabel);
+        
+
         rootTable.row();
-        rootTable.add(backToMenuButton).size(300, 80).align(Align.center).space(40).padTop(10).padBottom(180);
+        rootTable.add(backToMenuButton).size(300, 80).bottom().align(Align.center).space(40).padTop(10).padBottom(180);
         rootTable.row();
+        
 
         infoBar = new BottomInfoBar("", Assets.bottomBarStyle);
         infoBar.addToTable(rootTable);
+
+        
 
         stage.addActor(rootTable);
 
@@ -66,6 +81,7 @@ public class OptionsScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        sliderLabel.setText(Float.toString(slider.getValue()));
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act();
