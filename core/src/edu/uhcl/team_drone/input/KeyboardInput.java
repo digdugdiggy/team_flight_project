@@ -4,7 +4,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.utils.IntIntMap;
 import edu.uhcl.team_drone.drone.Drone;
-import edu.uhcl.team_drone.screens.PlayScreen;
+import edu.uhcl.team_drone.screens.playscreen.PlayScreen;
 
 public class KeyboardInput extends InputAdapter {
 
@@ -99,8 +99,7 @@ public class KeyboardInput extends InputAdapter {
     @Override
     public boolean keyUp(int keycode) {// called by libgdx on every key release   
         if (keycode == Input.Keys.ESCAPE) {
-            PlayScreen.isPaused = !PlayScreen.isPaused;
-            PlayScreen.ui.timeIndicator.stop();
+            PlayScreen.setState(PlayScreen.GAME_STATES.PAUSED); 
         } else {
             keysPressed--;
             keys.remove(keycode, 0);

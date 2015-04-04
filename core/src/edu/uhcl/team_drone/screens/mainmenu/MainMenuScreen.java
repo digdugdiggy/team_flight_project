@@ -1,4 +1,4 @@
-package edu.uhcl.team_drone.screens.main_menu;
+package edu.uhcl.team_drone.screens.mainmenu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -19,7 +19,7 @@ import edu.uhcl.team_drone.assets.Assets;
 import edu.uhcl.team_drone.main.Main;
 import edu.uhcl.team_drone.screens.FlyScreen;
 import edu.uhcl.team_drone.screens.OptionsScreen;
-import edu.uhcl.team_drone.screens.PlayScreen;
+import edu.uhcl.team_drone.screens.playscreen.PlayScreen;
 
     // This class is for displaying the main menu. It has multiple buttons to
 // launch other game modes,and is the central navigation point of the 

@@ -36,6 +36,8 @@ public class Level {
     private Random rand;
 
     private MapGenerator mapgen;
+    
+    private ModelInstance finalCube;
 
     public Level() {
         rand = new Random();
@@ -46,10 +48,9 @@ public class Level {
 
         makeFloor();
 
-        //makeCube(1.5f,0,1.5f);
+        generateNewMap();
         
-        makeNewMap();
-
+        // make collision shapes for all of the instances created
         for (ModelInstance instance : modelInstances) {
             btCollisionShape colShape = new btBoxShape(CUBE_OFFSET);
             btCollisionObject obj = new btCollisionObject();
@@ -57,19 +58,30 @@ public class Level {
             obj.setWorldTransform(instance.transform);
             colObjs.add(obj);
         }
+
+        // add ending shape
+        btCollisionShape colShape = new btBoxShape(CUBE_OFFSET);
+        btCollisionObject obj = new btCollisionObject();
+        obj.setCollisionShape(colShape);
+        obj.setWorldTransform(finalCube.transform);
+        obj.setUserIndex(100);
+        colObjs.add(obj);
     }
 
-    private void makeFloor() {
+    private void makeFloor() { // Tihs method creates the floor and adds it to render instances.
+        
+        // makes a large rectangle for the 3D floor. 
         Model floorModel = modelBuilder.createBox(
                 LEVEL_SIZE, 1, LEVEL_SIZE,
                 new Material(ColorAttribute.createDiffuse(Color.LIGHT_GRAY)),
                 VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal);
         renderInstances.add(new ModelInstance(floorModel));
 
+        // adds a grid over the floor
         Model grid = modelBuilder.createLineGrid(
                 LEVEL_SIZE / GRID_SIZE, LEVEL_SIZE / GRID_SIZE, GRID_SIZE, GRID_SIZE,
                 new Material(ColorAttribute.createDiffuse(Color.WHITE)),
-                VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal);        
+                VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal);
         renderInstances.add(new ModelInstance(grid, 1500, 2, 1500));
     }
 
@@ -138,16 +150,7 @@ public class Level {
         return colObjs;
     }
 
-    private int randInt(int min, int max) {
-
-        rand = new Random();
-
-        int randomNum = rand.nextInt((max - min) + 1) + min;
-
-        return randomNum;
-    }
-
-    private void makeNewMap() {
+    private void generateNewMap() {
         mapgen = new MapGenerator(MAZE_DIMENSION, MAZE_DIMENSION);
         char[][] charMap = mapgen.getMap();
 
@@ -156,10 +159,54 @@ public class Level {
                 if (charMap[y][x] == 'X') {
                     makeCubeStack(y - MAZE_DIMENSION / 2, x - MAZE_DIMENSION / 2, Color.GRAY);
                 } else if (charMap[y][x] == '#') {
-                    makeCube(y - MAZE_DIMENSION / 2, 0.5f, x - MAZE_DIMENSION / 2, Color.BLUE);
+                    makeCube(y - MAZE_DIMENSION / 2, 0.5f, x - MAZE_DIMENSION / 2, Color.GREEN);
+                } else if (charMap[y][x] == 'E') {
+                    makeFinalCube(y - MAZE_DIMENSION / 2, 0.5f, x - MAZE_DIMENSION / 2, Color.BLUE);
+                    //makeCube(y - MAZE_DIMENSION / 2, 0.5f, x - MAZE_DIMENSION / 2, Color.BLUE);
                 }
             }
         }
+    }
+
+    private void makeFinalCube(float x, float y, float z, Color colorIn) {
+        
+        Vector3 cubePos = new Vector3(
+                CUBE_OFFSET.x + (CUBE_OFFSET.x * x * 2),
+                CUBE_OFFSET.y + (CUBE_OFFSET.y * y * 2),
+                CUBE_OFFSET.z + (CUBE_OFFSET.z * z * 2)
+        );
+
+        Model cube = modelBuilder.createBox(
+                GRID_SIZE - 2, GRID_SIZE - 2, GRID_SIZE - 2,
+                new Material(ColorAttribute.createDiffuse(colorIn)),
+                VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal);
+        finalCube = new ModelInstance(cube, cubePos);
+        renderInstances.add(finalCube);        
+
+        Model grid = modelBuilder.createLineGrid(
+                1, 1, GRID_SIZE - 1, GRID_SIZE - 1,
+                new Material(ColorAttribute.createAmbient(Color.WHITE)),
+                VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal);
+
+        ModelInstance grid1Model = new ModelInstance(grid);
+        grid1Model.transform.setToRotation(Vector3.X, 90);
+        grid1Model.transform.setTranslation(cubePos.x, cubePos.y, GRID_SIZE + (CUBE_OFFSET.z * z * 2));
+        renderInstances.add(grid1Model);
+
+        ModelInstance grid2Model = new ModelInstance(grid);
+        grid2Model.transform.setToRotation(Vector3.X, 270);
+        grid2Model.transform.setTranslation(cubePos.x, cubePos.y, (CUBE_OFFSET.z * z * 2));
+        renderInstances.add(grid2Model);
+
+        ModelInstance grid3Model = new ModelInstance(grid);
+        grid3Model.transform.setToRotation(Vector3.Z, 90);
+        grid3Model.transform.setTranslation(GRID_SIZE + (CUBE_OFFSET.x * x * 2), cubePos.y, cubePos.z);
+        renderInstances.add(grid3Model);
+
+        ModelInstance grid4Model = new ModelInstance(grid);
+        grid4Model.transform.setToRotation(Vector3.Z, 270);
+        grid4Model.transform.setTranslation((CUBE_OFFSET.x * x * 2), cubePos.y, cubePos.z);
+        renderInstances.add(grid4Model);
     }
 
 }

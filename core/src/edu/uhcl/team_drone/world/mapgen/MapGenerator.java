@@ -52,7 +52,7 @@ public class MapGenerator {
         directions.add(Direction.E);
         directions.add(Direction.W);
         Collections.shuffle(directions);
-        
+
         // fill maze with walls to start
         initMazeAndFillWithWalls();
 
@@ -60,8 +60,9 @@ public class MapGenerator {
         int currentX = columns / 2;
         int currentY = rows / 2;
         mapCells[currentX][currentY].visited = true;
-        mapCells[currentX][currentY].setImage('#');     
-        
+        mapCells[currentX][currentY].setImage('#');
+        mapCells[currentX][currentY].isStartOfMaze = true;
+
         int loopCount = 0;
         boolean firstLoop = true;
 
@@ -88,7 +89,9 @@ public class MapGenerator {
 
                     // visit it, and set it as current cell
                     mapCells[nextX][nextY].visited = true;
+                    mapCells[nextX][nextY].setImage('.');
                     mapCells[nextX - chosenDirection.changeInX][nextY - chosenDirection.changeInY].visited = true;
+                    mapCells[nextX - chosenDirection.changeInX][nextY - chosenDirection.changeInY].setImage('.');
                     currentX = nextX;
                     currentY = nextY;
                 }
@@ -96,7 +99,9 @@ public class MapGenerator {
         }
         int finalX = currentX;
         int finalY = currentY;
-        mapCells[finalX][finalY].setImage('#');
+        mapCells[finalX][finalY].visited = true;
+        mapCells[finalX][finalY].isEndOfMaze = true;
+        mapCells[finalX][finalY].setImage('E');
     }
 
     private void initMazeAndFillWithWalls() {
@@ -129,6 +134,9 @@ public class MapGenerator {
         char[][] charMap = new char[columns][rows];
         for (int x = 0; x < rows; x++) {
             for (int y = 0; y < columns; y++) {
+                if(mapCells[y][x].getImage() =='E'){
+                    System.out.println("E");
+                }
                 charMap[y][x] = mapCells[y][x].getImage();
             }
         }

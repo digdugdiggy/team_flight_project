@@ -5,7 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.utils.IntIntMap;
 import edu.uhcl.team_drone.drone.Drone;
-import edu.uhcl.team_drone.screens.PlayScreen;
+import edu.uhcl.team_drone.screens.playscreen.PlayScreen;
 
 // Class for Hardware drone input
 

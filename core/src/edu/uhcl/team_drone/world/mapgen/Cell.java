@@ -7,8 +7,11 @@ public class Cell {
 
     public boolean visited = false;
     public boolean isWall = false;
+    public boolean isEndOfMaze = false;
+    public boolean isStartOfMaze = false;
     
     private char image = 'X';
+    
 
     public Cell(int x, int y) {
         this.x = x;
@@ -24,13 +27,10 @@ public class Cell {
     }
 
     public char getImage() {
-        if (visited) {
-            if (image == '#') {
-                return '#';
-            }
-            return '.';
-        } else {
+        if (!visited) {
             return 'X';
+        } else {
+            return image;
         }
 
     }

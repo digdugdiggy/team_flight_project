@@ -3,7 +3,7 @@ package edu.uhcl.team_drone.world;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.collision.ContactListener;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionObject;
-import edu.uhcl.team_drone.screens.PlayScreen;
+import edu.uhcl.team_drone.screens.playscreen.PlayScreen;
 
 public class MyContactListener extends ContactListener {
 
@@ -12,9 +12,12 @@ public class MyContactListener extends ContactListener {
             btCollisionObject obj1,
             btCollisionObject obj2) {
         System.out.println("COLLIDE");
-        System.out.println(obj1.getWorldTransform().getTranslation(Vector3.Zero));
-        System.out.println();
-        System.out.println(obj2.getWorldTransform().getTranslation(Vector3.Zero));
-        PlayScreen.getDrone().moveToPosition(1000, 1000, 1000);
+
+        if (obj1.getUserIndex() == 100 || obj2.getUserIndex() == 100) {
+            System.out.println("END ");
+            PlayScreen.setState(PlayScreen.GAME_STATES.ENDED);            
+        } else {
+            PlayScreen.getDrone().moveToPosition(1000, 1000, 1000);
+        }
     }
 }

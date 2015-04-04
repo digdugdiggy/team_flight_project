@@ -1,4 +1,4 @@
-package edu.uhcl.team_drone.screens.main_menu;
+package edu.uhcl.team_drone.screens.mainmenu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;

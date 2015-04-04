@@ -14,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
-import edu.uhcl.team_drone.screens.main_menu.MenuSoundPlayer;
+import edu.uhcl.team_drone.screens.mainmenu.MenuSoundPlayer;
 
 public class Assets {
     

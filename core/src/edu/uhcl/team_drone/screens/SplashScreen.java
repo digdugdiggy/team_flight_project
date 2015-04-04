@@ -1,6 +1,6 @@
 package edu.uhcl.team_drone.screens;
 
-import edu.uhcl.team_drone.screens.main_menu.MainMenuScreen;
+import edu.uhcl.team_drone.screens.mainmenu.MainMenuScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;

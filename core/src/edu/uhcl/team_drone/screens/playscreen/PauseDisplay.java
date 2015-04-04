@@ -1,9 +1,11 @@
-package edu.uhcl.team_drone.screens;
+/*
+// This class displays the pause screen shown after pressing ESC 
+// during the main game.
+*/
+package edu.uhcl.team_drone.screens.playscreen;
 
-import edu.uhcl.team_drone.screens.main_menu.MainMenuScreen;
+import edu.uhcl.team_drone.screens.mainmenu.MainMenuScreen;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -14,26 +16,25 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.uhcl.team_drone.assets.Assets;
 import edu.uhcl.team_drone.main.Main;
+import edu.uhcl.team_drone.ui.PlayUI;
 
-public class PauseMenu {
+public class PauseDisplay {
 
-    private Stage stage;
-    private Table pauseTableLayout;
-    private Main game;
-    private PlayScreen playScreen;
+    private final Stage stage;
+    private final Table pauseTableLayout;
+    private final Main game;    
     
-    private MenuInput menuKeyInput;
-    private InputMultiplexer inputMixer;    
+    private final MenuInput menuKeyInput;
+    private final InputMultiplexer inputMixer;    
 
-    public PauseMenu(Main gameIn, PlayScreen screenIn) {
-        this.playScreen = screenIn;
+    public PauseDisplay(Main gameIn) {        
         this.game = gameIn;
-        stage = new Stage(new FitViewport(800, 600));
+        this.stage = new Stage(new FitViewport(800,600));
         
-        menuKeyInput = new MenuInput();
-        
+        // Create input and add to multiplexer
         inputMixer = new InputMultiplexer();
         inputMixer.addProcessor(stage);
+        menuKeyInput = new MenuInput();
         inputMixer.addProcessor(menuKeyInput);
 
         // create table
@@ -51,23 +52,26 @@ public class PauseMenu {
         TextButton exitToMenuButton = new TextButton("Exit to Menu", Assets.blueTextBtnStyle);
         TextButton exitToDesktopButton = new TextButton("Exit to Desktop", Assets.blueTextBtnStyle);
 
+        // add action listeners to buttons
         resumeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                PlayScreen.isPaused = false;
-                PlayScreen.ui.timeIndicator.start();
-                Gdx.input.setInputProcessor(playScreen.getDrone().input.getInputProcessor());
+                PlayScreen.setState(PlayScreen.GAME_STATES.PLAYING); 
+                Gdx.input.setInputProcessor(PlayScreen.getDrone().input.getInputProcessor());
             }
         });
         restartButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                PlayScreen.getDrone().moveToPosition(1000, 1000, 1000);
+                PlayUI.timeIndicator.reset();
+                PlayScreen.setState(PlayScreen.GAME_STATES.PLAYING); 
+                Gdx.input.setInputProcessor(PlayScreen.getDrone().input.getInputProcessor());
             }
         });
         exitToMenuButton.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y) {
-                PlayScreen.isPaused = false;                
+            public void clicked(InputEvent event, float x, float y) {                            
                 game.setScreen(new MainMenuScreen(game));
             }
         });
@@ -87,32 +91,19 @@ public class PauseMenu {
         pauseTableLayout.row();
         pauseTableLayout.add(exitToDesktopButton).align(Align.center);
 
+        // add table to stage
         stage.addActor(pauseTableLayout);
     }
 
-    public void render(boolean isPaused) {
-        //pauseTableLayout.setVisible(isPaused);
-        if (isPaused) {
-            Gdx.input.setInputProcessor(inputMixer);
-            stage.act();
-            stage.draw();
-        }
+    public void render() {
+        // if the game is paused, allow input on this pause menu, and display it
+        Gdx.input.setInputProcessor(inputMixer);
+        stage.act();
+        stage.draw();
+
     }
 
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
-    }
-
-    private class MenuInput extends InputAdapter {
-
-        @Override
-        public boolean keyUp(int keycode) {
-            if (keycode == Input.Keys.ESCAPE) {
-                PlayScreen.isPaused = false;
-                PlayScreen.ui.timeIndicator.start();
-                Gdx.input.setInputProcessor(playScreen.getDrone().input.getInputProcessor());
-            }
-            return true;
-        }
     }
 }

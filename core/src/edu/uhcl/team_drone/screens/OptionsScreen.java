@@ -1,6 +1,6 @@
 package edu.uhcl.team_drone.screens;
 
-import edu.uhcl.team_drone.screens.main_menu.MainMenuScreen;
+import edu.uhcl.team_drone.screens.mainmenu.MainMenuScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -17,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.uhcl.team_drone.assets.Assets;
 import edu.uhcl.team_drone.main.Main;
-import edu.uhcl.team_drone.screens.main_menu.BottomInfoBar;
+import edu.uhcl.team_drone.screens.mainmenu.BottomInfoBar;
 
 public class OptionsScreen implements Screen {
 
