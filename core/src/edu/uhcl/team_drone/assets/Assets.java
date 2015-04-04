@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
-import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
@@ -66,12 +65,9 @@ public class Assets {
         manager.load("2d/hud/CompassInner.png", Texture.class);
         manager.load("2d/hud/CompassOuter.png", Texture.class);        
                 
-        // HUD frame        
+        // clouds image       
         manager.load("2d/menu/clouds.jpg", Texture.class);
-        
-        // load slider 
-        manager.load("2d/menu/slider/bar.png", Texture.class);
-        manager.load("2d/menu/slider/knob.png", Texture.class);
+       
     }
 
     private static void makeFonts() {       
@@ -97,29 +93,12 @@ public class Assets {
         backgroundPatch = new NinePatchDrawable(
                 new NinePatch(
                         manager.get("2d/menu/clouds.jpg", Texture.class)));
-        
-        greyButtonPatchUp = new NinePatchDrawable(atlas.createPatch("grey_button_up"));
-        greyButtonPatchDown = new NinePatchDrawable(atlas.createPatch("grey_button_down"));     
-        
-        // grey button style
-        textBtnStyle = new TextButtonStyle(
-                greyButtonPatchUp, greyButtonPatchDown, greyButtonPatchUp, bigFont);
-        textBtnStyle.downFontColor = Color.DARK_GRAY;
-        textBtnStyle.fontColor = Color.BLACK;
-        
-        // alternate small font button style
-        smallTextBtnStyle = new TextButtonStyle(
-                greyButtonPatchUp, greyButtonPatchDown, greyButtonPatchUp, robotoFont);
-        textBtnStyle.downFontColor = Color.DARK_GRAY;
-        textBtnStyle.fontColor = Color.BLACK;
-        
+                          
         // blue button style
-        NinePatchDrawable bluepatch = new NinePatchDrawable(atlas.createPatch("blue_button"));
-        NinePatchDrawable bluepatchDown = new NinePatchDrawable(atlas.createPatch("blue_button_down"));
+        NinePatchDrawable bluepatch = new NinePatchDrawable(atlas.createPatch("buttonup"));
+        NinePatchDrawable bluepatchDown = new NinePatchDrawable(atlas.createPatch("buttondown"));
         blueTextBtnStyle = new TextButtonStyle(
-                bluepatch, bluepatchDown, bluepatch, robotoFont);
-        textBtnStyle.downFontColor = Color.DARK_GRAY;
-        textBtnStyle.fontColor = Color.BLACK;
+                bluepatch, bluepatchDown, bluepatch, robotoFont);        
 
         // style for the bottom info bar
         bottomBarStyle = new LabelStyle(robotoFont, Color.BLACK);
@@ -129,15 +108,15 @@ public class Assets {
         // style for Title label at top of menu's
         labelStyle = new LabelStyle(bigFont, Color.BLACK);
         labelStyle.background = new NinePatchDrawable(
-                new NinePatch(atlas.createPatch("blue_button")));
+                new NinePatch(atlas.createPatch("buttonup")));
         labelStyle.background.setMinWidth(100);
         labelStyle.fontColor = Color.BLACK;
 
         sliderStyle = new SliderStyle();
         sliderStyle.background = new NinePatchDrawable(
-                new NinePatch(manager.get("2d/menu/slider/bar.png", Texture.class)));
+                new NinePatch(atlas.createPatch("bar")));
         sliderStyle.knob = new NinePatchDrawable(
-                new NinePatch(manager.get("2d/menu/slider/knob.png", Texture.class)));
+                new NinePatch(atlas.createPatch("knob")));
     }
 
     public static void dispose() {

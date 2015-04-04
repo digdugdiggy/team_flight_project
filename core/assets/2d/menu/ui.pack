@@ -3,43 +3,43 @@ ui.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-blue_button
+buttondown
   rotate: false
-  xy: 1, 297
-  size: 402, 202
-  split: 21, 21, 21, 21
-  orig: 402, 202
+  xy: 1, 259
+  size: 402, 200
+  split: 24, 24, 24, 24
+  orig: 402, 200
   offset: 0, 0
   index: -1
-blue_button_down
+buttonup
   rotate: false
-  xy: 1, 93
-  size: 402, 202
-  split: 21, 21, 21, 21
-  orig: 402, 202
-  offset: 0, 0
-  index: -1
-grey_button_up
-  rotate: false
-  xy: 405, 401
-  size: 380, 98
-  split: 14, 14, 14, 22
-  orig: 380, 98
-  offset: 0, 0
-  index: -1
-grey_button_down
-  rotate: false
-  xy: 1, 1
-  size: 380, 90
-  split: 12, 12, 10, 12
-  orig: 380, 90
+  xy: 1, 57
+  size: 402, 200
+  split: 24, 24, 24, 24
+  orig: 402, 200
   offset: 0, 0
   index: -1
 bottombar
   rotate: false
-  xy: 405, 344
+  xy: 405, 404
   size: 402, 55
   split: 2, 2, 6, 2
   orig: 402, 55
+  offset: 0, 0
+  index: -1
+bar
+  rotate: false
+  xy: 1, 1
+  size: 211, 54
+  split: 30, 32, 10, 10
+  orig: 211, 54
+  offset: 0, 0
+  index: -1
+knob
+  rotate: false
+  xy: 405, 348
+  size: 54, 54
+  split: 0, 0, 0, 0
+  orig: 54, 54
   offset: 0, 0
   index: -1
