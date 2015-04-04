@@ -4,7 +4,6 @@ import edu.uhcl.team_drone.screens.mainmenu.MainMenuScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -12,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.uhcl.team_drone.assets.Assets;
@@ -27,8 +25,8 @@ public class OptionsScreen implements Screen {
 
     private BottomInfoBar infoBar;
     
-    Label sliderLabel;
-    Slider slider;
+    private Label sliderLabel;
+    private Slider slider;
 
     public OptionsScreen(Main gameIn) {
         this.game = gameIn;
@@ -41,32 +39,33 @@ public class OptionsScreen implements Screen {
 
         TextButton backToMenuButton = new TextButton("Back to Menu", Assets.blueTextBtnStyle);
 
-        Label label = new Label("OPTIONS", Assets.labelStyle);
-        label.setAlignment(Align.center);
+        Label optionsTitle = new Label("OPTIONS", Assets.labelStyle);
+        optionsTitle.setAlignment(Align.center);
 
         Table rootTable = new Table();
         rootTable.setBackground(Assets.backgroundPatch);
         rootTable.setFillParent(true);
         rootTable.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        rootTable.add(label).align(Align.center).padBottom(100).size(400, 100);
+        rootTable.add(optionsTitle).align(Align.center).padBottom(100).size(400, 100).colspan(2);
         rootTable.row();
-
+        
         slider = new Slider(0, 100, 10, false, Assets.sliderStyle);
-        rootTable.add(slider).size(600, 30);
-        sliderLabel = new Label(Float.toString(slider.getValue()), Assets.labelStyle);
-        rootTable.add(sliderLabel);
+        sliderLabel = new Label(Integer.toString((int)slider.getValue()), Assets.labelStyle);
+        sliderLabel.setAlignment(Align.center);
+        rootTable.add(sliderLabel).size(110,80).align(Align.center).padBottom(40);
+        rootTable.row();
+        rootTable.add(slider).size(200, 5);
+        
+        
         
 
         rootTable.row();
-        rootTable.add(backToMenuButton).size(300, 80).bottom().align(Align.center).space(40).padTop(10).padBottom(180);
-        rootTable.row();
-        
+        rootTable.add(backToMenuButton).size(300, 80).bottom().align(Align.center).space(40).padTop(10).padBottom(180).colspan(2);
+        rootTable.row();        
 
         infoBar = new BottomInfoBar("", Assets.bottomBarStyle);
         infoBar.addToTable(rootTable);
-
-        
 
         stage.addActor(rootTable);
 
@@ -81,7 +80,7 @@ public class OptionsScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        sliderLabel.setText(Float.toString(slider.getValue()));
+        sliderLabel.setText(Integer.toString((int)slider.getValue()));
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act();
