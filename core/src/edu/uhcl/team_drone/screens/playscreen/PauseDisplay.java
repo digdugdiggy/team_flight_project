@@ -73,7 +73,9 @@ public class PauseDisplay {
         exitToMenuButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                PlayScreen.setState(PlayScreen.GAME_STATES.PLAYING);
+                PlayScreen.getDrone().moveToPosition(1000, 1000, 1000);
+                PlayUI.timeIndicator.reset();
+                PlayScreen.setState(PlayScreen.GAME_STATES.START);
                 game.setScreen(Main.mainMenuScreen);
             }
         });
@@ -102,7 +104,6 @@ public class PauseDisplay {
         Gdx.input.setInputProcessor(inputMixer);
         stage.act();
         stage.draw();
-
     }
 
     public void resize(int width, int height) {

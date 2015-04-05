@@ -35,6 +35,8 @@ public class PlayScreen implements Screen, Disposable {
     private static Drone drone;
 
     private final Viewport view;
+    
+    private ControlsDisplay controlDisplay;
     private PauseDisplay pauseDisplay;
     private EndDisplay endDisplay;
 
@@ -49,7 +51,7 @@ public class PlayScreen implements Screen, Disposable {
         view = new FitViewport(Main.RESOLUTION.x, Main.RESOLUTION.y);
         view.setCamera(cam);
         view.apply();
-        currentState = GAME_STATES.PLAYING;
+        currentState = GAME_STATES.START;
 
         // initialize Bullet 3D Physics
         Bullet.init();
@@ -63,9 +65,11 @@ public class PlayScreen implements Screen, Disposable {
 
         // set up the UI, debug renderer and pause menu
         ui = new PlayUI(drone, view);
+        PlayUI.timeIndicator.stop();
         debug = new DebugRender(drone);
         pauseDisplay = new PauseDisplay(game);
         endDisplay = new EndDisplay(game);
+        controlDisplay = new ControlsDisplay();
     }
 
     @Override
@@ -85,6 +89,9 @@ public class PlayScreen implements Screen, Disposable {
         ui.render(delta);
 
         switch (currentState) {
+            case START:
+                controlDisplay.render();
+                break;
             case PLAYING:
                 drone.update(delta);
                 collisionWorld.update(cam);
@@ -114,6 +121,7 @@ public class PlayScreen implements Screen, Disposable {
         ui.resize(width, height);
         pauseDisplay.resize(width, height);
         endDisplay.resize(width, height);
+        controlDisplay.resize(width, height);
     }
 
     @Override
@@ -124,7 +132,6 @@ public class PlayScreen implements Screen, Disposable {
         debug.dispose();
         worldManager.dispose();
         collisionWorld.dispose();
-
     }
 
     @Override
@@ -150,8 +157,7 @@ public class PlayScreen implements Screen, Disposable {
 
     private static void entry(GAME_STATES stateIn) {
         switch (stateIn) {
-            case START:
-                PlayUI.timeIndicator.start();
+            case START:                
                 break;
             case PLAYING:
                 PlayUI.timeIndicator.start();

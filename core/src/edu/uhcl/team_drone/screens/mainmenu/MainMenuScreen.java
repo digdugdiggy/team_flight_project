@@ -17,9 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.uhcl.team_drone.assets.Assets;
 import edu.uhcl.team_drone.main.Main;
-import edu.uhcl.team_drone.screens.FlyScreen;
-import edu.uhcl.team_drone.screens.OptionsScreen;
-import edu.uhcl.team_drone.screens.playscreen.PlayScreen;
 
     // This class is for displaying the main menu. It has multiple buttons to
 // launch other game modes,and is the central navigation point of the 

@@ -64,7 +64,11 @@ public class Assets {
         manager.load("2d/hud/compassIndicator/CompassOuter.png", Texture.class);        
                 
         // clouds image       
-        manager.load("2d/menu/clouds.jpg", Texture.class);       
+        manager.load("2d/menu/clouds.jpg", Texture.class);     
+        
+        // Controls image
+        manager.load("2d/menu/controls.png", Texture.class);
+        
     }
 
     private static void makeFonts() {       
