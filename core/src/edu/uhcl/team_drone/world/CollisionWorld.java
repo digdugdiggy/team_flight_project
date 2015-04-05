@@ -72,4 +72,15 @@ public class CollisionWorld {
             debugDrawer.end();
         }
     }
+    
+    public void dispose(){        
+        collisionConfig.dispose();
+        dispatcher.dispose();
+        broadPhase.dispose();
+        btWorld.dispose();
+        debugDrawer.dispose();
+        contactListener.dispose();       
+        
+    }
 }
+

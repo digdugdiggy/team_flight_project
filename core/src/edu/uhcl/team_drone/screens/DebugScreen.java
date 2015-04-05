@@ -44,19 +44,19 @@ public class DebugScreen implements Screen {
         simButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new PlayScreen(game));
+                game.setScreen(game.playScreen);
             }
         });
         normalButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new SplashScreen(game));
+                game.setScreen(game.splashScreen);
             }
         });
         menuButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new MainMenuScreen(game));
+                game.setScreen(game.mainMenuScreen);
             }
         });
 

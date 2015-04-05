@@ -9,7 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.physics.bullet.Bullet;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.uhcl.team_drone.debug.DebugRender;
@@ -21,12 +21,13 @@ import edu.uhcl.team_drone.ui.PlayUI;
 import edu.uhcl.team_drone.world.CollisionWorld;
 import edu.uhcl.team_drone.world.WorldManager;
 
-public class PlayScreen implements Screen {
+public class PlayScreen implements Screen, Disposable {
 
     public enum GAME_STATES {
+
         START, PLAYING, PAUSED, ENDED;
     };
-    
+
     private static GAME_STATES currentState;
 
     private final Main game;
@@ -35,7 +36,7 @@ public class PlayScreen implements Screen {
 
     private final Viewport view;
     private PauseDisplay pauseDisplay;
-    private EndDisplay endDisplay;    
+    private EndDisplay endDisplay;
 
     public static WorldManager worldManager;
     public static CollisionWorld collisionWorld;
@@ -47,29 +48,30 @@ public class PlayScreen implements Screen {
         this.game = gameIn;
         view = new FitViewport(800, 600);
         view.setCamera(cam);
-        view.apply();        
-        currentState = GAME_STATES.PLAYING;               
-    }
+        view.apply();
+        currentState = GAME_STATES.PLAYING;
 
-    @Override
-    public void show() {
         // initialize Bullet 3D Physics
         Bullet.init();
         // Create drone(player) object
         drone = new Drone(true);
-        
+
         //create the world and its collisionbits
         worldManager = new WorldManager();
         collisionWorld = new CollisionWorld(drone);
-        
+
         // set up the UI, debug renderer and pause menu
         ui = new PlayUI(drone, view);
         debug = new DebugRender(drone);
         pauseDisplay = new PauseDisplay(game);
         endDisplay = new EndDisplay(game);
+    }
+
+    @Override
+    public void show() {
 
         // Set input to accept player controls
-        Gdx.input.setInputProcessor(drone.input.getInputProcessor());        
+        Gdx.input.setInputProcessor(drone.input.getInputProcessor());
     }
 
     @Override
@@ -94,7 +96,7 @@ public class PlayScreen implements Screen {
                 endDisplay.render();
                 break;
         }
-        
+
         debug.update();
         updateCameraFromDrone();
     }
@@ -111,7 +113,7 @@ public class PlayScreen implements Screen {
         view.update(width, height);
         ui.resize(width, height);
         pauseDisplay.resize(width, height);
-        endDisplay.resize(width,height);
+        endDisplay.resize(width, height);
     }
 
     @Override
@@ -120,6 +122,9 @@ public class PlayScreen implements Screen {
         modelBatch.dispose();
         ui.dispose();
         debug.dispose();
+        worldManager.dispose();
+        collisionWorld.dispose();
+
     }
 
     @Override
@@ -146,16 +151,16 @@ public class PlayScreen implements Screen {
     private static void entry(GAME_STATES stateIn) {
         switch (stateIn) {
             case START:
-                ui.timeIndicator.start();
+                PlayUI.timeIndicator.start();
                 break;
             case PLAYING:
-                ui.timeIndicator.start();
+                PlayUI.timeIndicator.start();
                 break;
             case PAUSED:
-                ui.timeIndicator.stop();
+                PlayUI.timeIndicator.stop();
                 break;
             case ENDED:
-                ui.timeIndicator.stop();
+                PlayUI.timeIndicator.stop();
                 break;
         }
     }

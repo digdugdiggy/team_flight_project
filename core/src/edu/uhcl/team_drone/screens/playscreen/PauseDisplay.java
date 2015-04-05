@@ -1,12 +1,13 @@
 /*
-// This class displays the pause screen shown after pressing ESC 
-// during the main game.
-*/
+ // This class displays the pause screen shown after pressing ESC 
+ // during the main game.
+ */
 package edu.uhcl.team_drone.screens.playscreen;
 
 import edu.uhcl.team_drone.screens.mainmenu.MainMenuScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -22,15 +23,15 @@ public class PauseDisplay {
 
     private final Stage stage;
     private final Table pauseTableLayout;
-    private final Main game;    
-    
-    private final MenuInput menuKeyInput;
-    private final InputMultiplexer inputMixer;    
+    private final Main game;
 
-    public PauseDisplay(Main gameIn) {        
+    private final MenuInput menuKeyInput;
+    private final InputMultiplexer inputMixer;
+
+    public PauseDisplay(Main gameIn) {
         this.game = gameIn;
-        this.stage = new Stage(new FitViewport(800,600));
-        
+        this.stage = new Stage(new FitViewport(800, 600));
+
         // Create input and add to multiplexer
         inputMixer = new InputMultiplexer();
         inputMixer.addProcessor(stage);
@@ -48,7 +49,7 @@ public class PauseDisplay {
     private void createPauseMenu(Stage stageIn) {
         // make buttons to go in table
         TextButton resumeButton = new TextButton("Resume", Assets.blueTextBtnStyle);
-        TextButton restartButton = new TextButton("Restart", Assets.blueTextBtnStyle);        
+        TextButton restartButton = new TextButton("Restart", Assets.blueTextBtnStyle);
         TextButton exitToMenuButton = new TextButton("Exit to Menu", Assets.blueTextBtnStyle);
         TextButton exitToDesktopButton = new TextButton("Exit to Desktop", Assets.blueTextBtnStyle);
 
@@ -56,7 +57,7 @@ public class PauseDisplay {
         resumeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                PlayScreen.setState(PlayScreen.GAME_STATES.PLAYING); 
+                PlayScreen.setState(PlayScreen.GAME_STATES.PLAYING);
                 Gdx.input.setInputProcessor(PlayScreen.getDrone().input.getInputProcessor());
             }
         });
@@ -65,14 +66,15 @@ public class PauseDisplay {
             public void clicked(InputEvent event, float x, float y) {
                 PlayScreen.getDrone().moveToPosition(1000, 1000, 1000);
                 PlayUI.timeIndicator.reset();
-                PlayScreen.setState(PlayScreen.GAME_STATES.PLAYING); 
+                PlayScreen.setState(PlayScreen.GAME_STATES.PLAYING);
                 Gdx.input.setInputProcessor(PlayScreen.getDrone().input.getInputProcessor());
             }
         });
         exitToMenuButton.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y) {                            
-                game.setScreen(new MainMenuScreen(game));
+            public void clicked(InputEvent event, float x, float y) {
+                PlayScreen.setState(PlayScreen.GAME_STATES.PLAYING);
+                game.setScreen(Main.mainMenuScreen);
             }
         });
         exitToDesktopButton.addListener(new ClickListener() {
@@ -86,7 +88,7 @@ public class PauseDisplay {
         pauseTableLayout.add(resumeButton).align(Align.center);
         pauseTableLayout.row();
         pauseTableLayout.add(restartButton).align(Align.center);
-        pauseTableLayout.row();       
+        pauseTableLayout.row();
         pauseTableLayout.add(exitToMenuButton).align(Align.center);
         pauseTableLayout.row();
         pauseTableLayout.add(exitToDesktopButton).align(Align.center);

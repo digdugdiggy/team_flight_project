@@ -52,9 +52,7 @@ public class Assets {
     }
 
     private static void loadMenuAssets() {       
-        manager.load("2d/logo/Logo-Circled-small.png", Texture.class);
-        manager.load("blue_panel.png", Texture.class);
-        manager.load("blue_button13.png", Texture.class);       
+        manager.load("2d/logo/Logo-Circled-small.png", Texture.class);   
         
         // attitude indicator        
         manager.load("2d/hud/attitudeIndicator/background.png", Texture.class);
@@ -62,12 +60,11 @@ public class Assets {
         manager.load("2d/hud/attitudeIndicator/outer.png", Texture.class);
         
         // compass 
-        manager.load("2d/hud/CompassInner.png", Texture.class);
-        manager.load("2d/hud/CompassOuter.png", Texture.class);        
+        manager.load("2d/hud/compassIndicator/CompassInner.png", Texture.class);
+        manager.load("2d/hud/compassIndicator/CompassOuter.png", Texture.class);        
                 
         // clouds image       
-        manager.load("2d/menu/clouds.jpg", Texture.class);
-       
+        manager.load("2d/menu/clouds.jpg", Texture.class);       
     }
 
     private static void makeFonts() {       

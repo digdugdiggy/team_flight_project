@@ -100,9 +100,9 @@ public class MainMenuScreen implements Screen {
         addTooltipAction(optionsButton, "Change game options");
 
         // add click actions to buttons in order to traverse to other screens
-        addClickAction(playButton, new PlayScreen(game));
-        addClickAction(flyButton, new FlyScreen(game));
-        addClickAction(optionsButton, new OptionsScreen(game));
+        addClickAction(playButton, Main.playScreen);
+        addClickAction(flyButton, Main.flyScreen);
+        addClickAction(optionsButton, Main.optionsScreen);
 
         // make quit button close game
         quitButton.addListener(new ClickListener() {

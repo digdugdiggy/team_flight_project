@@ -71,7 +71,7 @@ public class SplashScreen implements Screen {
         stage.draw(); //draw all actors on the Stage.getBatch()
 
         if (animationDone) {
-            game.setScreen(new MainMenuScreen(game));
+            game.setScreen(game.mainMenuScreen);
         }
     }
 
