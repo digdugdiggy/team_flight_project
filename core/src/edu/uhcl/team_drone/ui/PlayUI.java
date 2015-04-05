@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.uhcl.team_drone.drone.Drone;
+import edu.uhcl.team_drone.main.Main;
 
 // This class is responsible for displaying the in-game HUD.
 // It displays data like Altitude, attitude, orientation
@@ -24,7 +25,7 @@ public class PlayUI {
         this.drone = owner;
         
         // make stage, let it acept input for button clicks, etc
-        stage = new Stage(new FitViewport(800, 600));           
+        stage = new Stage(new FitViewport(Main.RESOLUTION.x, Main.RESOLUTION.y));           
         
         // create and add timer
         Table timerTable = new Table();

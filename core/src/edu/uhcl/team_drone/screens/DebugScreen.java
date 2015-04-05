@@ -1,7 +1,5 @@
 package edu.uhcl.team_drone.screens;
 
-import edu.uhcl.team_drone.screens.playscreen.PlayScreen;
-import edu.uhcl.team_drone.screens.mainmenu.MainMenuScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -27,14 +25,14 @@ public class DebugScreen implements Screen {
 
     public DebugScreen(Main gameIn) {
         this.game = gameIn;
-        view = new FitViewport(800, 600);
+        view = new FitViewport(Main.RESOLUTION.x, Main.RESOLUTION.y);
         view.setCamera(cam);
         view.apply();
     }
 
     @Override
     public void show() {
-        stage = new Stage(new FitViewport(800, 600));
+        stage = new Stage(new FitViewport(Main.RESOLUTION.x, Main.RESOLUTION.y));
         Gdx.input.setInputProcessor(stage);
 
         TextButton simButton = new TextButton("Sim", Assets.blueTextBtnStyle);

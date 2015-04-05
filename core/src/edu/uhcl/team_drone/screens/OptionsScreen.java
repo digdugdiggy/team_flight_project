@@ -34,7 +34,7 @@ public class OptionsScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new FitViewport(800, 600));
+        stage = new Stage(new FitViewport(Main.RESOLUTION.x, Main.RESOLUTION.y));
         Gdx.input.setInputProcessor(stage);
 
         TextButton backToMenuButton = new TextButton("Back to Menu", Assets.blueTextBtnStyle);

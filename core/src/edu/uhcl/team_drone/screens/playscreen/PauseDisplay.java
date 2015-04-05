@@ -30,7 +30,7 @@ public class PauseDisplay {
 
     public PauseDisplay(Main gameIn) {
         this.game = gameIn;
-        this.stage = new Stage(new FitViewport(800, 600));
+        this.stage = new Stage(new FitViewport(Main.RESOLUTION.x, Main.RESOLUTION.y));
 
         // Create input and add to multiplexer
         inputMixer = new InputMultiplexer();

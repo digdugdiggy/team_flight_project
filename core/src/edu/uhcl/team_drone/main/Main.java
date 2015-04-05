@@ -5,6 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
+import com.badlogic.gdx.math.Vector2;
 import edu.uhcl.team_drone.screens.DebugScreen;
 import edu.uhcl.team_drone.screens.FlyScreen;
 import edu.uhcl.team_drone.screens.OptionsScreen;
@@ -13,6 +14,8 @@ import edu.uhcl.team_drone.screens.mainmenu.MainMenuScreen;
 import edu.uhcl.team_drone.screens.playscreen.PlayScreen;
 
 public class Main extends Game {
+    
+    public static Vector2 RESOLUTION = new Vector2(800,600);
 
     public static PerspectiveCamera cam; // 3D camera
     public static ModelBatch modelBatch; // used to render the instance    

@@ -20,7 +20,7 @@ public class EndDisplay {
 
     public EndDisplay(Main gameIn) {
         this.game = gameIn;
-        this.stage = new Stage(new FitViewport(800, 600));
+        this.stage = new Stage(new FitViewport(Main.RESOLUTION.x, Main.RESOLUTION.y));
 
         table = new Table();
         table.defaults().center().pad(10).height(80).align(Align.center);

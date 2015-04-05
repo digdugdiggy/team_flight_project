@@ -46,13 +46,14 @@ public class PlayScreen implements Screen, Disposable {
 
     public PlayScreen(Main gameIn) {
         this.game = gameIn;
-        view = new FitViewport(800, 600);
+        view = new FitViewport(Main.RESOLUTION.x, Main.RESOLUTION.y);
         view.setCamera(cam);
         view.apply();
         currentState = GAME_STATES.PLAYING;
 
         // initialize Bullet 3D Physics
         Bullet.init();
+        
         // Create drone(player) object
         drone = new Drone(true);
 
@@ -69,7 +70,6 @@ public class PlayScreen implements Screen, Disposable {
 
     @Override
     public void show() {
-
         // Set input to accept player controls
         Gdx.input.setInputProcessor(drone.input.getInputProcessor());
     }
@@ -164,9 +164,4 @@ public class PlayScreen implements Screen, Disposable {
                 break;
         }
     }
-
-    public void endGame() {
-
-    }
-
 }
