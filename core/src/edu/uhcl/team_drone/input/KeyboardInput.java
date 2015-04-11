@@ -78,14 +78,14 @@ public class KeyboardInput extends InputAdapter {
 
         if (keys.containsKey(DEBUGON)) {
             PlayScreen.debug.isVisible = true;
-            //PlayScreen.collisionWorld.debugOn = true;
+            PlayScreen.collisionWorld.debugOn = true;
             System.out.println("ENDED FROM KEYBOARD");
-            PlayScreen.setState(PlayScreen.GAME_STATES.ENDED);
-            keys.remove(DEBUGON, 0);
+            //PlayScreen.setState(PlayScreen.GAME_STATES.ENDED);
+            //keys.remove(DEBUGON, 0);
         }
         if (keys.containsKey(DEBUGOFF)) {
             PlayScreen.debug.isVisible = false;
-            //PlayScreen.collisionWorld.debugOn = false;
+            PlayScreen.collisionWorld.debugOn = false;
         }
     }
 

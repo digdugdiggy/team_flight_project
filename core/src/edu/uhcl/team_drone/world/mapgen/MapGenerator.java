@@ -18,6 +18,35 @@ public class MapGenerator {
             this.changeInX = xChange;
             this.changeInY = yChange;
         }
+        Direction rotClockwise() {
+            switch (this) {
+                case N:
+                    return E;
+                case S:
+                    return W;
+                case E:
+                    return S;
+                case W:
+                    return N;
+                default:
+                    return N;
+            }
+        }
+
+        Direction rotCounterClockwise() {
+            switch (this) {
+                case N:
+                    return W;
+                case S:
+                    return E;
+                case E:
+                    return N;
+                case W:
+                    return S;
+                default:
+                    return S;
+            }
+        }
     };
     
     
