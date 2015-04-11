@@ -35,7 +35,7 @@ public class Main extends Game {
 
         cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         cam.near = 400f;
-        cam.far = 25000f;
+        cam.far = 27000f;
         cam.update(true);
 
         // Create Screens

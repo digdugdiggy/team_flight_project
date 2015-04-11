@@ -10,8 +10,7 @@ public class KeyboardInput extends InputAdapter {
 
     // drone that this input object controls
     private Drone owner;
-
-    private final float MAX_PITCH = 0.6f;
+    
     private int keysPressed = 0;
 
     private boolean pitchAdjusted;
@@ -79,11 +78,14 @@ public class KeyboardInput extends InputAdapter {
 
         if (keys.containsKey(DEBUGON)) {
             PlayScreen.debug.isVisible = true;
-            PlayScreen.collisionWorld.debugOn = true;
+            //PlayScreen.collisionWorld.debugOn = true;
+            System.out.println("ENDED FROM KEYBOARD");
+            PlayScreen.setState(PlayScreen.GAME_STATES.ENDED);
+            keys.remove(DEBUGON, 0);
         }
         if (keys.containsKey(DEBUGOFF)) {
             PlayScreen.debug.isVisible = false;
-            PlayScreen.collisionWorld.debugOn = false;
+            //PlayScreen.collisionWorld.debugOn = false;
         }
     }
 

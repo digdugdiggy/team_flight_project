@@ -16,11 +16,11 @@ public class Timer {
     private DecimalFormat formatter;
 
     public Timer(Table tableIn) {       
-        this.timeCount = 0;
+        this.timeCount = 00.00f;
         this.isActive = false;
 
-        timerLabel = new Label(Float.toString(timeCount), Assets.labelStyle);
-        //timerLabel.setAlignment(Align.right);        
+        timerLabel = new Label("", Assets.labelStyle);
+            
 
         tableIn.add(timerLabel).size(140, 90);
         tableIn.center().top().left();
@@ -29,6 +29,8 @@ public class Timer {
         DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols();
         formatSymbols.setDecimalSeparator(':');
         formatter = new DecimalFormat("#00.##", formatSymbols);
+        
+        timerLabel.setText(formatter.format(timeCount));  
 
     }
 
@@ -47,8 +49,7 @@ public class Timer {
         isActive = false;
     }
 
-    public void reset() {
-        isActive = false;        
+    public void reset() {               
         timeCount = 0;
     }
 

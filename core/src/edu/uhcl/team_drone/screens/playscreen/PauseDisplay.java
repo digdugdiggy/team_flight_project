@@ -43,10 +43,10 @@ public class PauseDisplay {
         pauseTableLayout.defaults().center().pad(10).height(80).align(Align.center);
         pauseTableLayout.setFillParent(true);
 
-        createPauseMenu(stage);
+        createPauseMenu();
     }
 
-    private void createPauseMenu(Stage stageIn) {
+    private void createPauseMenu() {
         // make buttons to go in table
         TextButton resumeButton = new TextButton("Resume", Assets.blueTextBtnStyle);
         TextButton restartButton = new TextButton("Restart", Assets.blueTextBtnStyle);

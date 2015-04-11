@@ -4,35 +4,27 @@ import com.badlogic.gdx.Gdx;
 import edu.uhcl.team_drone.assets.Assets;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.uhcl.team_drone.drone.Drone;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 public class DebugRender {
 
     private Drone owner;
-    private SpriteBatch sb;    
-    private PIDGraph graph;
+    private SpriteBatch sb;  
+   
     public boolean isVisible = false;
 
     public DebugRender(Drone ownerIn) {
         this.owner = ownerIn;
-        sb = new SpriteBatch();        
-        graph = new PIDGraph(sb, owner);
-        graph.setPosition(230, 370);
+        sb = new SpriteBatch();  
     }
 
     public void update() {
-        sb.begin();
+        if (isVisible) {
+            sb.begin();
             String temp;
             temp = "FPS: " + Gdx.graphics.getFramesPerSecond();
             writeString(temp, 10, 400);
             sb.end();
-        if (isVisible) {
-            
-
-            graph.render();
         }
-
     }
 
     private void writeString(String string, float x, float y) {
@@ -40,8 +32,7 @@ public class DebugRender {
     }
 
     public void dispose() {
-        sb.dispose();
-        graph.dispose();
+        sb.dispose();       
     }
 
 }

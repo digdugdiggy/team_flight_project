@@ -65,7 +65,7 @@ public class PlayScreen implements Screen, Disposable {
 
         // set up the UI, debug renderer and pause menu
         ui = new PlayUI(drone, view);
-        PlayUI.timeIndicator.stop();
+        PlayUI.timeIndicator.stop();        
         debug = new DebugRender(drone);
         pauseDisplay = new PauseDisplay(game);
         endDisplay = new EndDisplay(game);
@@ -153,13 +153,16 @@ public class PlayScreen implements Screen, Disposable {
     public static void setState(GAME_STATES stateIn) {
         entry(stateIn);
         currentState = stateIn;
+        System.out.println("State changing to : " +stateIn.toString());
     }
 
     private static void entry(GAME_STATES stateIn) {
         switch (stateIn) {
-            case START:                
+            case START:    
+                drone.moveToPosition(1000, 1000, 1000);
+                PlayUI.timeIndicator.reset();
                 break;
-            case PLAYING:
+            case PLAYING:                
                 PlayUI.timeIndicator.start();
                 break;
             case PAUSED:
