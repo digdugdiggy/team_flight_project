@@ -34,7 +34,7 @@ public class ControlsDisplay {
 
         Image image = new Image(Assets.manager.get("2d/menu/controls.png", Texture.class));
 
-        table.add(image).size(675,450);
+        table.add(image).size(500,400);
         table.row();
 
         TextButton startButton = new TextButton("Start", Assets.blueTextBtnStyle);
