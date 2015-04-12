@@ -42,8 +42,7 @@ public class EndDisplay {
     private void createMenu() {                           
         
         timeLabel = new Label("Your Time: " + PlayUI.timeIndicator.getTime(), Assets.labelStyle);
-        table.add(timeLabel);
-        table.row();
+        table.add(timeLabel).row();       
 
         TextButton restartButton = new TextButton("Restart", Assets.blueTextBtnStyle);
         restartButton.addListener(new ClickListener() {
@@ -53,7 +52,19 @@ public class EndDisplay {
                 PlayScreen.setState(PlayScreen.GAME_STATES.START);                
             }
         });
-        table.add(restartButton).center();
+        table.add(restartButton).center().row();;
+
+        TextButton mainMenuButton = new TextButton("Main Menu", Assets.blueTextBtnStyle);
+        mainMenuButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                PlayScreen.getDrone().moveToPosition(1000, 1000, 1000);
+                PlayUI.timeIndicator.reset();
+                PlayScreen.setState(PlayScreen.GAME_STATES.START);
+                game.setScreen(Main.mainMenuScreen);
+            }
+        });        
+        table.add(mainMenuButton).center();
     }
 
     public void render() {
