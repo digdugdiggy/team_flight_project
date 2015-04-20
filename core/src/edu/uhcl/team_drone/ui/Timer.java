@@ -1,3 +1,11 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: Timer class used in main gameplay timer.
+*
+ * * * * * * * * * * * * * * * * * */
 package edu.uhcl.team_drone.ui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;

@@ -1,3 +1,13 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: This class handles mixing the two input types 
+*          (Keyboard and controller) into one global input.
+*
+ * * * * * * * * * * * * * * * * * */
+
 package edu.uhcl.team_drone.input;
 
 import edu.uhcl.team_drone.input.controller.ControllerInput;

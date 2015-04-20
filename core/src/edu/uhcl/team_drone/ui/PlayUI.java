@@ -1,3 +1,11 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: UI shown during gameplay.
+*
+ * * * * * * * * * * * * * * * * * */
 package edu.uhcl.team_drone.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -6,10 +14,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.uhcl.team_drone.drone.Drone;
 import edu.uhcl.team_drone.main.Main;
-
-// This class is responsible for displaying the in-game HUD.
-// It displays data like Altitude, attitude, orientation
-// liftoff button
 
 public class PlayUI {
 

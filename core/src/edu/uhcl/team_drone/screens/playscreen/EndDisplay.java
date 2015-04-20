@@ -1,6 +1,13 @@
-/*
-// This class displays the menu shown after the player has completed the maze
-*/
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: This class displays the menu shown after the player has 
+*          completed the maze.
+*
+ * * * * * * * * * * * * * * * * * */
+
 package edu.uhcl.team_drone.screens.playscreen;
 
 import com.badlogic.gdx.Gdx;

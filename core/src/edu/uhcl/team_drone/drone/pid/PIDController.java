@@ -1,3 +1,12 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: This class models a PID (Proportion, Integral, Derivative) Controller.
+*           for purposes of auto-leveling in the 3d flight model.
+ * * * * * * * * * * * * * * * * * */
+
 package edu.uhcl.team_drone.drone.pid;
 
 import com.badlogic.gdx.Gdx;
@@ -24,9 +33,8 @@ public class PIDController {
     private boolean isActive;
 
     public PIDController() {
-    }
-
-    ;
+    };
+    
     public PIDController(double pGainIn, double iGainIn, double dGainIn) {
         this.pGain = pGainIn;
         this.iGain = iGainIn;

@@ -1,3 +1,11 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: Class for input using an xbox360 controller.
+*
+ * * * * * * * * * * * * * * * * * */
 package edu.uhcl.team_drone.input.controller;
 
 import com.badlogic.gdx.controllers.Controller;

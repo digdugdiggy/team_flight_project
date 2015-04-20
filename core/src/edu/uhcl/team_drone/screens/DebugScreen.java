@@ -1,3 +1,12 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: This class will be disabled in final release and is only for coding 
+*          and testing. It allows one to choose which screen to navigate to.
+*
+ * * * * * * * * * * * * * * * * * */
 package edu.uhcl.team_drone.screens;
 
 import com.badlogic.gdx.Gdx;

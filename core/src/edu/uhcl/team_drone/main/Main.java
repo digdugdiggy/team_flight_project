@@ -1,3 +1,12 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: Main starter class of the software. It stores references to all 
+*          Screen objects, the one camera, and the one 3D rendering batch.
+*
+ * * * * * * * * * * * * * * * * * */
 package edu.uhcl.team_drone.main;
 
 import edu.uhcl.team_drone.assets.Assets;

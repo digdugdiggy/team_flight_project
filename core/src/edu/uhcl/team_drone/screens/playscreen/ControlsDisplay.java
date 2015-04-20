@@ -1,4 +1,11 @@
-// This class displays the controls image when PLAY mode is started.
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: This class displays the controls image when PLAY mode is started.
+*
+ * * * * * * * * * * * * * * * * * */
 
 package edu.uhcl.team_drone.screens.playscreen;
 

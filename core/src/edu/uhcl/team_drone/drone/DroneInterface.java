@@ -1,4 +1,11 @@
-
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: Interface for the Drone.
+*
+ * * * * * * * * * * * * * * * * * */
 package edu.uhcl.team_drone.drone;
 
 public interface DroneInterface {

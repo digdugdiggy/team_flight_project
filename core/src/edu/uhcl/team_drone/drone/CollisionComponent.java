@@ -1,3 +1,12 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: This class handles all collision about the drone(player)
+*
+ * * * * * * * * * * * * * * * * * */
+
 package edu.uhcl.team_drone.drone;
 
 import com.badlogic.gdx.math.Matrix4;
@@ -5,7 +14,6 @@ import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionObject;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionShape;
-import com.badlogic.gdx.physics.bullet.collision.btCollisionWorld;
 import com.badlogic.gdx.physics.bullet.collision.btSphereShape;
 
 public class CollisionComponent {
@@ -19,7 +27,6 @@ public class CollisionComponent {
 
     private Drone owner;
 
-
     public CollisionComponent(Drone ownerIn) {
         this.owner = ownerIn;
         this.collisionShape = new btSphereShape(DRONE_COLLISION_SIZE);
@@ -31,8 +38,6 @@ public class CollisionComponent {
                 new Quaternion(),
                 new Vector3(0,0,0));
         collisionObject.setWorldTransform(transform);
-        // set collisionflags
-        //collisionObject.setCollisionFlags(collisionObject.getCollisionFlags() | btCollisionObject.CollisionFlags.CF_CUSTOM_MATERIAL_CALLBACK);
     }
   
 

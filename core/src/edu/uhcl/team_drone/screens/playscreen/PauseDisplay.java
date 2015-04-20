@@ -1,7 +1,13 @@
-/*
- // This class displays the pause screen shown after pressing ESC 
- // during the main game.
- */
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: This class displays the pause screen shown after pressing ESC 
+*          during the main game.
+*
+ * * * * * * * * * * * * * * * * * */
+
 package edu.uhcl.team_drone.screens.playscreen;
 
 import com.badlogic.gdx.Gdx;

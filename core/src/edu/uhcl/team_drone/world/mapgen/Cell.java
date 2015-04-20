@@ -1,3 +1,12 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: A Cell is an individual map tile. used in map generation.
+*
+ * * * * * * * * * * * * * * * * * */
+
 package edu.uhcl.team_drone.world.mapgen;
 
 public class Cell {

@@ -1,3 +1,13 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: Reads the Drone's roll/pitch/yaw and converts them to readable data.
+   *       Similar to a Gyroscope
+*
+ * * * * * * * * * * * * * * * * * */
+
 package edu.uhcl.team_drone.drone;
 
 import com.badlogic.gdx.math.MathUtils;
@@ -59,9 +69,6 @@ public class GyroComponent {
         double dot = owner.getDirection().dot(cross);
         currentRoll = (dot >= 0) ? (float) absAngle : (float) -absAngle;
 
-    }
-    public boolean isMaxTilt(){
-        return isMaxTilt;
     }
 
     public float getCurrentPitch() {

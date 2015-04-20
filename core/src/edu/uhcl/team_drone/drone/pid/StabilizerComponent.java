@@ -1,13 +1,20 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: This class serves as a wrapper for controlling two PID's.
+*
+ * * * * * * * * * * * * * * * * * */
+
 package edu.uhcl.team_drone.drone.pid;
 
 import edu.uhcl.team_drone.drone.Drone;
 
 public class StabilizerComponent {
 
-    private Drone owner;
-    
-    private PIDController rollPID, pitchPID;
-    
+    private Drone owner;    
+    private PIDController rollPID, pitchPID;            
 
     public StabilizerComponent(Drone ownerIn) {
         this.owner = ownerIn;

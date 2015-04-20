@@ -1,3 +1,11 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: MICHAEL TRUNCALE
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: This class handles node.js and interfacing with the hardware drone.
+*
+ * * * * * * * * * * * * * * * * * */
 package edu.uhcl.team_drone.input.hardware;
 
 import java.awt.Desktop;

@@ -1,3 +1,12 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: Converts the generated level into actual 3D models and adds collision
+*
+ * * * * * * * * * * * * * * * * * */
+
 package edu.uhcl.team_drone.world;
 
 import com.badlogic.gdx.graphics.Color;
@@ -19,8 +28,6 @@ import edu.uhcl.team_drone.world.mapgen.MapGenerator;
 import java.util.Random;
 
 public class Level {
-
-    private final int LEVEL_SIZE = 100000;
     private final int GRID_SIZE = 3000;
     private final int MAZE_DIMENSION = 11;
     private final Vector3 CUBE_OFFSET = new Vector3(GRID_SIZE / 2, GRID_SIZE / 2, GRID_SIZE / 2);

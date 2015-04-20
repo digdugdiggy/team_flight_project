@@ -1,3 +1,11 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: MICHAEL TRUNCALE
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: Class for sending input to the hardware drone.
+*
+ * * * * * * * * * * * * * * * * * */
 package edu.uhcl.team_drone.input.hardware;
 
 import com.badlogic.gdx.Input;

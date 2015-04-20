@@ -1,3 +1,12 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: This class is a simple stage and setup for the hardware video.
+*
+ * * * * * * * * * * * * * * * * * */
+
 package edu.uhcl.team_drone.screens;
 
 import com.badlogic.gdx.Gdx;
@@ -30,22 +39,14 @@ public class FlyScreen implements Screen {
     }
 
     @Override
-    public void show() {
-        
+    public void show() {        
         stage = new Stage(new FitViewport(Main.RESOLUTION.x, Main.RESOLUTION.y));
-        //Gdx.input.setInputProcessor(stage);
-        
         
         drone = new Drone(false);
-        input = new HardwareInputComponent();
-        
-        // TODO
-        // Drone video input stuff here
-        //
+        input = new HardwareInputComponent();   
         
         ui = new PlayUI(drone,stage.getViewport());
         Gdx.input.setInputProcessor(input);
-
     }
 
     @Override

@@ -1,3 +1,12 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: Handles all 3D collision objects in the world.
+*
+ * * * * * * * * * * * * * * * * * */
+
 package edu.uhcl.team_drone.world;
 
 import com.badlogic.gdx.graphics.PerspectiveCamera;

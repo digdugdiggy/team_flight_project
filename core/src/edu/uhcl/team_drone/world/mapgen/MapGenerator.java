@@ -1,3 +1,11 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: This is the main Map Generator class.
+*
+ * * * * * * * * * * * * * * * * * */
 package edu.uhcl.team_drone.world.mapgen;
 
 import java.util.ArrayList;
@@ -100,7 +108,8 @@ public class MapGenerator {
             
             // choose a random direction
             Collections.shuffle(directions);
-            Direction chosenDirection = directions.get(rand.nextInt(directions.size()));
+            Direction chosenDirection = directions.get(
+                    rand.nextInt(directions.size()));
             if(firstLoop){
                 firstLoop = false;
                 chosenDirection = Direction.E;
@@ -111,7 +120,9 @@ public class MapGenerator {
             int nextY = currentY + chosenDirection.changeInY * 2;
 
             //check if new position will be in bounds
-            if (nextX <= columns - 2 && nextY <= rows - 2 && nextX > 0 && nextY > 0) {
+            if (nextX <= columns - 2
+                    && nextY <= rows - 2
+                    && nextX > 0 && nextY > 0) {
 
                 // and if new position HASNT been visited
                 if (!mapCells[nextX][nextY].visited) {
@@ -119,8 +130,12 @@ public class MapGenerator {
                     // visit it, and set it as current cell
                     mapCells[nextX][nextY].visited = true;
                     mapCells[nextX][nextY].setImage('.');
-                    mapCells[nextX - chosenDirection.changeInX][nextY - chosenDirection.changeInY].visited = true;
-                    mapCells[nextX - chosenDirection.changeInX][nextY - chosenDirection.changeInY].setImage('.');
+                    mapCells[nextX - chosenDirection.changeInX]
+                            [nextY - chosenDirection.changeInY]
+                            .visited = true;
+                    mapCells[nextX - chosenDirection.changeInX]
+                            [nextY - chosenDirection.changeInY]
+                            .setImage('.');
                     currentX = nextX;
                     currentY = nextY;
                 }

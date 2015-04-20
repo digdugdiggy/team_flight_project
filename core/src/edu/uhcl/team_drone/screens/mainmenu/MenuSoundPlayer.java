@@ -1,3 +1,11 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: This class plays simple sounds on the main menu.
+*
+ * * * * * * * * * * * * * * * * * */
 package edu.uhcl.team_drone.screens.mainmenu;
 
 import com.badlogic.gdx.Gdx;

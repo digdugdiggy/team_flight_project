@@ -1,3 +1,11 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: Displays and updates compass direction
+*
+ * * * * * * * * * * * * * * * * * */
 package edu.uhcl.team_drone.ui;
 
 import com.badlogic.gdx.graphics.Texture;

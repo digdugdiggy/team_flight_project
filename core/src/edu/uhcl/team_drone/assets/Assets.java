@@ -1,3 +1,12 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: This class is a globally accessible place to store assets.
+*          It loads all assets at program launch.
+ * * * * * * * * * * * * * * * * * */
+
 package edu.uhcl.team_drone.assets;
 
 import com.badlogic.gdx.Gdx;
@@ -15,8 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import edu.uhcl.team_drone.screens.mainmenu.MenuSoundPlayer;
 
-public class Assets {
-    
+public class Assets {    
     // This class serves as a general asset directory. All assets used are loaded here.
 
     public static MenuSoundPlayer menuSoundPlayer;
@@ -79,8 +87,7 @@ public class Assets {
         bigFont.setFixedWidthGlyphs("0123456789");
         params.size = 40;
         smallFont = gen.generateFont(params);
-        smallFont.setFixedWidthGlyphs("0123456789");
-        
+        smallFont.setFixedWidthGlyphs("0123456789");        
         
         gen = new FreeTypeFontGenerator(Gdx.files.internal("Roboto-Regular.ttf"));
         params = new FreeTypeFontParameter();

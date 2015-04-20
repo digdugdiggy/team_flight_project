@@ -1,30 +1,17 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: Constants for xbox360 controller usage.
+*
+ * * * * * * * * * * * * * * * * * */
+
 package edu.uhcl.team_drone.input.controller;
 
 import com.badlogic.gdx.controllers.PovDirection;
 
-// This code was taken from http://www.java-gaming.org/index.php?topic=29223.0
-// With thanks that is!
-
-public class XBox360Pad {
-    /*
-     * It seems there are different versions of gamepads with different ID 
-     Strings.
-     * Therefore its IMO a better bet to check for:
-     * if (controller.getName().toLowerCase().contains("xbox") &&
-     controller.getName().contains("360"))
-     *
-     * Controller (Gamepad for Xbox 360)
-     Controller (XBOX 360 For Windows)
-     Controller (Xbox 360 Wireless Receiver for Windows)
-     Controller (Xbox wireless receiver for windows)
-     XBOX 360 For Windows (Controller)
-     Xbox 360 Wireless Receiver
-     Xbox Receiver for Windows (Wireless Controller)
-     Xbox wireless receiver for windows (Controller)
-     */
-
-    //public static final String ID = "XBOX 360 For Windows (Controller)";
-    
+public class XBox360Pad {    
     public static final int BUTTON_X = 2;
     public static final int BUTTON_Y = 3;
     public static final int BUTTON_A = 0;

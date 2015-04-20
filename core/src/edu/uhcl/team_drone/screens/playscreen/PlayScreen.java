@@ -1,8 +1,13 @@
-/*
- // This class is responsible for the main gameplay portion of the simulator.
- // 
- // It handles all objects related to the playing of the software maze game.
- */
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: This class is responsible for the main gameplay portion of the 
+*          simulator.
+*
+ * * * * * * * * * * * * * * * * * */
+
 package edu.uhcl.team_drone.screens.playscreen;
 
 import com.badlogic.gdx.Gdx;

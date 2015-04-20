@@ -1,3 +1,13 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: Main Drone class. Represents the player. 
+*           Uses a component-entity system to update proper modules.
+*
+ * * * * * * * * * * * * * * * * * */
+
 package edu.uhcl.team_drone.drone;
 
 import edu.uhcl.team_drone.drone.pid.StabilizerComponent;
@@ -12,18 +22,15 @@ public class Drone implements DroneInterface {
     private final static float AIR_RESISTANCE = 6f;
 
     private Vector3 position, direction, up, right, temp;
-
     private float dx, dy, dz; // current accelerations
     private float speedX, speedY, speedZ; // current Speeds    
-
     private float controlRollAmt = 0, controlPitchAmt = 0;
+    private boolean simulated; // whether this is a software drone or a physical one.
 
     public StabilizerComponent stabilityCmpnt;
     public KeyboardControllerInputComponent input;
     public GyroComponent gyroCmpnt;
-    public CollisionComponent collisionCmpnt;
-
-    private boolean simulated; // whether this is a software drone or a physical one.
+    public CollisionComponent collisionCmpnt;    
 
     public Drone(boolean simulatedIn) {
         this.simulated = simulatedIn;
@@ -114,7 +121,6 @@ public class Drone implements DroneInterface {
         } else if (speedY < -MAX_SPEED) {
             speedY = -MAX_SPEED;
         }
-
     }
 
     //-----------------------

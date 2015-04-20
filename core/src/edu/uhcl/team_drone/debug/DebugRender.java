@@ -1,3 +1,13 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: This class is responsible for rendering debug information.
+*            It is not usually visible during gameplay.
+*
+ * * * * * * * * * * * * * * * * * */
+
 package edu.uhcl.team_drone.debug;
 
 import com.badlogic.gdx.Gdx;

@@ -1,3 +1,11 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: Handles the keyboard input. Converts keypresses to game events.
+*
+ * * * * * * * * * * * * * * * * * */
 package edu.uhcl.team_drone.input;
 
 import com.badlogic.gdx.Input;

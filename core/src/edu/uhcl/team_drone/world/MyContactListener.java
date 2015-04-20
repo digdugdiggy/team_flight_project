@@ -1,10 +1,16 @@
+/* * * * * * * * * * * * * * * * * *
+* PROGRAMMER: CHARLES FAHSELT
+*
+* COURSE: CINF 4388 SENIOR PROJECT 2015
+*
+* PURPOSE: Listens for contacts and acts upon them.
+*
+ * * * * * * * * * * * * * * * * * */
+
 package edu.uhcl.team_drone.world;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.collision.ContactListener;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionObject;
-import edu.uhcl.team_drone.main.Main;
 import edu.uhcl.team_drone.screens.playscreen.PlayScreen;
 import edu.uhcl.team_drone.ui.PlayUI;
 
