@@ -46,8 +46,10 @@ public class HardwareInputComponent extends InputAdapter {
     private int TAKEOFF = Input.Keys.P;
     private int LAND = Input.Keys.L;
     private int DRONESTOP = Input.Keys.SPACE;
-    private int ENDCONNECTION = Input.Keys.F12;
+    private int LOADVIDEO = Input.Keys.F9;
+    private int CLOSEVIDEO = Input.Keys.F10;
     private int RESTARTCONNECTION = Input.Keys.F11;
+    private int ENDCONNECTION = Input.Keys.F12;
     private int DISABLEEMERGENCY = Input.Keys.U;
     private int CALIBRATE = Input.Keys.M;
     private int DEBUGON = Input.Keys.F1;
@@ -147,6 +149,12 @@ public class HardwareInputComponent extends InputAdapter {
             }
         }
     }
+    
+    
+    //Starts video
+    public void startVideo(){
+        droneHardware.loadVideo();
+    }
 
     
     //User inter-actionable keycommands
@@ -230,6 +238,14 @@ public class HardwareInputComponent extends InputAdapter {
                         
             if (keys.containsKey(DISABLEEMERGENCY)) {
                 droneCommand("disableEmergency");
+            }
+            
+            if (keys.containsKey(LOADVIDEO)) {
+                droneHardware.loadVideo();
+            }
+            
+            if (keys.containsKey(CLOSEVIDEO)) {
+                droneHardware.closeVideo();
             }
             
             if (keys.containsKey(ENDCONNECTION)) {

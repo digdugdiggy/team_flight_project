@@ -31,7 +31,7 @@ public class CommandIndicator {
         droneData = input;
         commandLabel = new Label("", Assets.labelStyle);
         
-        tableIn.top().left().padTop(450); //360
+        tableIn.top().left().padTop(360);
         tableIn.add(commandLabel).size(800, 90);
         
         commandLabel.setText("Current Command: " + currentCommand);
@@ -60,6 +60,15 @@ public class CommandIndicator {
                 }
                 if (currentCommand == "droneLand"){
                     commandLabel.setText("Current Command: Landing");
+                }
+                if (currentCommand == "disableEmergency"){
+                    commandLabel.setText("Current Command: Drone Reset");
+                }
+                if (currentCommand == "droneCalibrate"){
+                    commandLabel.setText("Current Command: Calibrating");
+                }
+                if (currentCommand == "closeConnection"){
+                    commandLabel.setText("Current Command: Server Stopped");
                 }
             }
             else{
