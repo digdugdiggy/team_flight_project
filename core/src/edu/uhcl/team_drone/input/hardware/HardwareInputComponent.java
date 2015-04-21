@@ -48,6 +48,8 @@ public class HardwareInputComponent extends InputAdapter {
     private int DRONESTOP = Input.Keys.SPACE;
     private int ENDCONNECTION = Input.Keys.F12;
     private int RESTARTCONNECTION = Input.Keys.F11;
+    private int DISABLEEMERGENCY = Input.Keys.U;
+    private int CALIBRATE = Input.Keys.M;
     private int DEBUGON = Input.Keys.F1;
     private int DEBUGOFF = Input.Keys.F2;
     private int TOGGLEMODE = Input.Keys.F8;
@@ -220,6 +222,14 @@ public class HardwareInputComponent extends InputAdapter {
             
             if (keys.containsKey(DRONESTOP)) {
                 droneCommand("droneStop");
+            }
+            
+            if (keys.containsKey(CALIBRATE)) {
+                droneCommand("droneCalibrate");
+            }
+                        
+            if (keys.containsKey(DISABLEEMERGENCY)) {
+                droneCommand("disableEmergency");
             }
             
             if (keys.containsKey(ENDCONNECTION)) {
