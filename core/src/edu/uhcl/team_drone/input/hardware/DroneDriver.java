@@ -80,7 +80,7 @@ public class DroneDriver {
             System.out.println("     " + e + "\n");
         }
         
-        loadVideo();
+        //loadVideo();
     }
     
     
@@ -161,7 +161,7 @@ public class DroneDriver {
         
         try{
             Robot robot = new Robot();
-            robot.delay(4000);
+            robot.delay(2000);
             robot.keyPress(KeyEvent.VK_F11); 
             robot.keyRelease(KeyEvent.VK_F11);
         }
@@ -188,14 +188,10 @@ public class DroneDriver {
         outputWriter.flush();
         outputWriter.close();
         System.out.println("Connection to JS Server Closed");
-        
-        try{
-            Runtime.getRuntime().exec("taskkill /F /IM chrome.exe");
-        }
-        catch (Exception e){
-            System.out.println("Error closing browser: ");
-            System.out.println("     " + e + "\n");
-        }
+
+        //Video closing can be automatically done here or via seperate command
+        //as it is w/ this closeVideo() commented out
+        //closeVideo();
     }
 }
 

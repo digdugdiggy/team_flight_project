@@ -17,32 +17,24 @@ import edu.uhcl.team_drone.input.hardware.HardwareInputComponent;
 
 
 
-public class HardwareAltitudeIndicator{
+public class EmergencyIndicator{
     private HardwareInputComponent droneData;
-    private Label altitudeLabel;  
-    private String altitudeData = "--";
+    private Label emergencyLabel;  
+
     
-
-    public HardwareAltitudeIndicator(Table tableIn, HardwareInputComponent input) {  
+    public EmergencyIndicator(Table tableIn, HardwareInputComponent input) {  
         droneData = input;
-        altitudeLabel = new Label("", Assets.labelStyle);
+        emergencyLabel = new Label("", Assets.labelStyle);
 
-        tableIn.top().right().padTop(270);
-        tableIn.add(altitudeLabel).size(380, 90);
+        tableIn.top().center().padTop(490);
+        tableIn.add(emergencyLabel).size(280, 90);
         
-        altitudeLabel.setText("Altitude:   " + altitudeData + "m");  
+        emergencyLabel.setText("Reset Drone");
     }
     
     
     public void update(float dt) {
-        altitudeData = droneData.getAltitude();
 
-        if (altitudeData != null){
-            altitudeLabel.setText("Altitude:   " + altitudeData + " m");  
-        }
-        else{
-            altitudeLabel.setText("Altitude:   -- m");  
-        }
     }
 }
 

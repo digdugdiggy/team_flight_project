@@ -10,13 +10,17 @@
 
 package edu.uhcl.team_drone.ui;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.uhcl.team_drone.drone.Drone;
 import edu.uhcl.team_drone.input.hardware.HardwareInputComponent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import edu.uhcl.team_drone.main.Main;
+import edu.uhcl.team_drone.screens.*;
 
 
 
@@ -28,6 +32,8 @@ public class HardwareUI {
     public static CommandIndicator commandIndicator;
     public static HardwareAltitudeIndicator hardwareAltitudeIndicator;
     public static FlightModeIndicator flightModeIndicator;
+    public static EmergencyIndicator emergencyIndicator;
+    public static VideoIndicator videoIndicator;
 
     
     public HardwareUI(HardwareInputComponent input, Drone owner, Viewport viewIn) {       
@@ -59,6 +65,16 @@ public class HardwareUI {
         modeTable.setFillParent(true);
         flightModeIndicator = new FlightModeIndicator(modeTable, input);
         stage.addActor(modeTable);
+        
+        Table emergencyTable = new Table();
+        emergencyTable.setFillParent(true);
+        emergencyIndicator = new EmergencyIndicator(emergencyTable, input);
+        stage.addActor(emergencyTable);
+        
+        Table videoTable = new Table();
+        videoTable.setFillParent(true);
+        videoIndicator = new VideoIndicator(videoTable, input);
+        stage.addActor(videoTable);
     }
 
 

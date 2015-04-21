@@ -27,7 +27,7 @@ public class FlightModeIndicator{
         droneData = input;
         modeLabel = new Label("", Assets.labelStyle);
 
-        tableIn.top().left().padTop(360);
+        tableIn.top().left().padTop(270);
         tableIn.add(modeLabel).size(420, 90);
         
         modeLabel.setText("Precision Mode: Off");  
