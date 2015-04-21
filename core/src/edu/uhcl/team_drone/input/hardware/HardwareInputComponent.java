@@ -1,11 +1,12 @@
-/* * * * * * * * * * * * * * * * * *
-* PROGRAMMER: MICHAEL TRUNCALE
-*
-* COURSE: CINF 4388 SENIOR PROJECT 2015
-*
-* PURPOSE: Class for sending input to the hardware drone.
-*
- * * * * * * * * * * * * * * * * * */
+/* *****************************************************************************
+* Programmer: Michael Truncale
+* Course: CSCI 4388.01 - Senior Project
+* Date: April 20, 2015
+* Assignment: Senior Project
+* Environment: Windows 7 - 64 bit
+* IDE: Compiled and tested under NetBeans 8.0.2 / JDK 1.8
+/******************************************************************************/
+
 package edu.uhcl.team_drone.input.hardware;
 
 import com.badlogic.gdx.Input;
@@ -15,20 +16,21 @@ import edu.uhcl.team_drone.screens.playscreen.PlayScreen;
 
 
 
-// Class for Hardware drone input
+//Used to handle drone hardware inputs on Java side and also to request drone
+//hardware data for later display in UI
 public class HardwareInputComponent extends InputAdapter {
-
-    //Object which starts communication between this software and drone
     DroneDriver droneHardware;
 
     //True = real drone flight mode, drone commands will be transmitted
     //False = drone commands will be ignored by droneCommand()
     private boolean realFlightEnabled = true;
-    private boolean serverRunning = false;
     
     //True = drone only flies w/ key held down
     //False = drone continues to fly in given direction until stopped
     private boolean precisionMode = false;
+
+    //Sentinal value for rebooting server
+    private boolean serverRunning = false;
     
     float MAX_PITCH = 0.6f;
 
@@ -59,39 +61,70 @@ public class HardwareInputComponent extends InputAdapter {
  
     public float rollAmt = 0;
     public float pitchAmt = 0;
-    private int batteryCharge = 0;
-    
-    //Controls speed of update cycle
-    private int controlTime = 0;
-    
+    private String batteryCharge = "--";
+    private String altitude = "--";
+    private String currentCommand = "none";
     
     
+
     public HardwareInputComponent() {
 
-        startServer(); // starts the node.js server to connect to the physical drone
+        startServer(); // starts the Node.js server to connect to the drone
     }
 
     
+    //Update cycle runs continually - used to poll drone hardware data
     public void update(float deltaTime) {
-        controlTime++;
-        
-        if (controlTime >= 250){
-            try {
-                droneHardware.readDroneData();
-            }
-            catch (Exception e){
-                //Error handling in readData()    
-            }
-            
-            controlTime = 0;
+        try{
+            batteryCharge = droneHardware.readBatteryData();
+            altitude = droneHardware.readAltitudeData();
+        }
+        catch (Exception e){
+            //Error handling in readData()   
         }
     }
-
     
+    
+    //Returns string value of the current battery charge [0 - 100]
+    public String getBatteryCharge(){
+        return batteryCharge;
+    }
+    
+    
+    //Returns shortened string of drone's altitude
+    public String getAltitude(){
+        String parsedAltitude;
+        
+        parsedAltitude = altitude;
+        
+        try {
+            parsedAltitude = parsedAltitude.substring(0, 4);
+        }
+        catch (Exception e){
+        }
+        
+        return parsedAltitude;
+    }
+    
+    
+    //Returns last command issued to drone for logging
+    public String getCurrentCommand(){
+        return currentCommand;
+    }
+    
+    
+    //Returns if drone is in precision flight mode or not
+    public boolean getMode(){
+        return precisionMode;
+    }
+    
+
+    //Sends string command to DroneDriver for transmit to drone
     public void droneCommand(String command) {
         if (realFlightEnabled == true) {
             try {
                 droneHardware.sendCommand(command);
+                currentCommand = command;
             } catch (Exception e) {
                 //Error handling in DroneDriver()
             }
@@ -99,8 +132,8 @@ public class HardwareInputComponent extends InputAdapter {
     }
 
     
+    //Starts communication between software and drone 
     public void startServer() {
-        //Starts communication between software and drone
         if (realFlightEnabled == true) {
             try {
                 this.droneHardware = new DroneDriver();
@@ -114,6 +147,7 @@ public class HardwareInputComponent extends InputAdapter {
     }
 
     
+    //User inter-actionable keycommands
     @Override
     public boolean keyDown(int keycode) {
         keysPressed++;
@@ -168,11 +202,11 @@ public class HardwareInputComponent extends InputAdapter {
             if (keys.containsKey(TOGGLEMODE)) {
                 if (precisionMode == true){
                     precisionMode = false;
-                    System.out.println("Precision mode turned off...");
+                    //System.out.println("Precision mode turned off...");
                 }
                 else{
                     precisionMode = true;    
-                    System.out.println("Precision mode turned on...");
+                    //System.out.println("Precision mode turned on...");
                 }
             }
             
@@ -191,6 +225,8 @@ public class HardwareInputComponent extends InputAdapter {
             if (keys.containsKey(ENDCONNECTION)) {
                 droneCommand("closeConnection");
                 serverRunning = false;
+                
+                droneHardware.closeVideo();
             }
             
             if (keys.containsKey(RESTARTCONNECTION)) {
@@ -203,11 +239,13 @@ public class HardwareInputComponent extends InputAdapter {
     }
 
     
+    //Detects when a key is released, mainly used for precision mode to know
+    //when to tell the drone to stop
     @Override
     public boolean keyUp(int keycode) {
         keysPressed--;
         keys.remove(keycode, 0);
-        
+
         precisionMoveCheck(keycode);
         
         return true;
@@ -215,7 +253,10 @@ public class HardwareInputComponent extends InputAdapter {
     
     
     //Precision mode only moves drone when key is pressed down, this function
-    //is called when key is released (keyUp()) to stop the drone
+    //is called when key is released (keyUp()) to stop the drone - works by
+    //searching through precisionKeyCodes[] to see if the key released is a 
+    //precision move (forward, backward, etc...) and if precisionMode == true
+    //then drone is told to stop, otherwise it does not
     public void precisionMoveCheck(int keycode){
         boolean isPrecisionMove = false;
         

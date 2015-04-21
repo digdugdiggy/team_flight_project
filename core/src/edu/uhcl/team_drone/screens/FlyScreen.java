@@ -18,6 +18,7 @@ import edu.uhcl.team_drone.drone.Drone;
 import edu.uhcl.team_drone.input.hardware.HardwareInputComponent;
 import edu.uhcl.team_drone.main.Main;
 import edu.uhcl.team_drone.ui.PlayUI;
+import edu.uhcl.team_drone.ui.HardwareUI;
 
 //
 // This class is a screen that shows the video from a physical drone, and 
@@ -29,23 +30,23 @@ public class FlyScreen implements Screen {
     private Stage stage;    
 
     private Main game;
-    private PlayUI ui;
+    private HardwareUI ui;
     private Drone drone; // unneccessary, need to refactor for this bit.
     
     private HardwareInputComponent input;
     
     public FlyScreen(Main gameIn) {
-        this.game = gameIn;                
+        this.game = gameIn;        
     }
 
     @Override
-    public void show() {        
+    public void show() {
         stage = new Stage(new FitViewport(Main.RESOLUTION.x, Main.RESOLUTION.y));
         
         drone = new Drone(false);
-        input = new HardwareInputComponent();   
-        
-        ui = new PlayUI(drone,stage.getViewport());
+        input = new HardwareInputComponent();
+
+        ui = new HardwareUI(input,drone,stage.getViewport());
         Gdx.input.setInputProcessor(input);
     }
 
@@ -55,7 +56,7 @@ public class FlyScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
         input.update(delta);
-        
+
         stage.act();
         stage.draw();
         ui.render(delta);
