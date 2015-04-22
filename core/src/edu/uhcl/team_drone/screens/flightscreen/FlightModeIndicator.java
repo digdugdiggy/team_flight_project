@@ -8,22 +8,22 @@
 * IDE: Compiled and tested under NetBeans 8.0.2 / JDK 1.8
 /******************************************************************************/
 
-package edu.uhcl.team_drone.ui;
+package edu.uhcl.team_drone.screens.flightscreen;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import edu.uhcl.team_drone.assets.Assets;
-import edu.uhcl.team_drone.input.hardware.HardwareInputComponent;
+import edu.uhcl.team_drone.input.hardware.HardwareInterface;
 
 
 
 public class FlightModeIndicator{
-    private HardwareInputComponent droneData;
+    private HardwareInterface droneData;
     private Label modeLabel;  
     private boolean inPrecisionMode = false;
     
 
-    public FlightModeIndicator(Table tableIn, HardwareInputComponent input) {  
+    public FlightModeIndicator(Table tableIn, HardwareInterface input) {  
         droneData = input;
         modeLabel = new Label("", Assets.labelStyle);
 

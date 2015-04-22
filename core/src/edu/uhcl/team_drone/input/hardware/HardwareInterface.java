@@ -12,14 +12,16 @@ package edu.uhcl.team_drone.input.hardware;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.utils.IntIntMap;
+import edu.uhcl.team_drone.main.Main;
 import edu.uhcl.team_drone.screens.playscreen.PlayScreen;
+import edu.uhcl.team_drone.screens.flightscreen.FlyScreen;
 
 
 
 //Used to handle drone hardware inputs on Java side and also to request drone
 //hardware data for later display in UI
-public class HardwareInputComponent extends InputAdapter {
-    DroneDriver droneHardware;
+public class HardwareInterface extends InputAdapter {
+    DroneDriver droneDriver;
 
     //True = real drone flight mode, drone commands will be transmitted
     //False = drone commands will be ignored by droneCommand()
@@ -32,8 +34,6 @@ public class HardwareInputComponent extends InputAdapter {
     //Sentinal value for rebooting server
     private boolean serverRunning = false;
     
-    float MAX_PITCH = 0.6f;
-
     private final IntIntMap keys = new IntIntMap();
     private int LEFT = Input.Keys.A;
     private int RIGHT = Input.Keys.D;
@@ -55,6 +55,7 @@ public class HardwareInputComponent extends InputAdapter {
     private int DEBUGON = Input.Keys.F1;
     private int DEBUGOFF = Input.Keys.F2;
     private int TOGGLEMODE = Input.Keys.F8;
+    private int ESCAPESCREEN = Input.Keys.ESCAPE;
 
     //51 forward, 47 backward, 29 left, 32 right
     //46 up, 34 down, 33 right rotate, 45 left rotate 
@@ -63,25 +64,28 @@ public class HardwareInputComponent extends InputAdapter {
     private int keysPressed = 0;
     private int maxKeysPressed = 3;
  
-    public float rollAmt = 0;
-    public float pitchAmt = 0;
+    float MAX_PITCH = 0.6f;
+    float rollAmt = 0;
+    float pitchAmt = 0;
     private String batteryCharge = "--";
     private String altitude = "--";
     private String currentCommand = "none";
-    
+    private Main game;
+    private FlyScreen flyScreen;
     
 
-    public HardwareInputComponent() {
-
+    public HardwareInterface(Main gameIn, FlyScreen flyIn) {
+        game = gameIn;
+        flyScreen = flyIn;
         startServer(); // starts the Node.js server to connect to the drone
     }
-
     
+   
     //Update cycle runs continually - used to poll drone hardware data
     public void update(float deltaTime) {
         try{
-            batteryCharge = droneHardware.readBatteryData();
-            altitude = droneHardware.readAltitudeData();
+            batteryCharge = droneDriver.readBatteryData();
+            altitude = droneDriver.readAltitudeData();
         }
         catch (Exception e){
             //Error handling in readData()   
@@ -127,7 +131,7 @@ public class HardwareInputComponent extends InputAdapter {
     public void droneCommand(String command) {
         if (realFlightEnabled == true) {
             try {
-                droneHardware.sendCommand(command);
+                droneDriver.sendCommand(command);
                 currentCommand = command;
             } catch (Exception e) {
                 //Error handling in DroneDriver()
@@ -140,7 +144,7 @@ public class HardwareInputComponent extends InputAdapter {
     public void startServer() {
         if (realFlightEnabled == true) {
             try {
-                this.droneHardware = new DroneDriver();
+                this.droneDriver = new DroneDriver();
                 serverRunning = true;
             } 
             catch (Exception e) {
@@ -153,7 +157,7 @@ public class HardwareInputComponent extends InputAdapter {
     
     //Starts video
     public void startVideo(){
-        droneHardware.loadVideo();
+        droneDriver.loadVideo();
     }
 
     
@@ -241,24 +245,28 @@ public class HardwareInputComponent extends InputAdapter {
             }
             
             if (keys.containsKey(LOADVIDEO)) {
-                droneHardware.loadVideo();
+                droneDriver.loadVideo();
             }
             
             if (keys.containsKey(CLOSEVIDEO)) {
-                droneHardware.closeVideo();
+                droneDriver.closeVideo();
             }
             
             if (keys.containsKey(ENDCONNECTION)) {
                 droneCommand("closeConnection");
                 serverRunning = false;
                 
-                droneHardware.closeVideo();
+                droneDriver.closeVideo();
             }
             
             if (keys.containsKey(RESTARTCONNECTION)) {
                 if (serverRunning == false) {
                     startServer();
                 }
+            }
+            
+            if (keys.containsKey(ESCAPESCREEN)) {
+                flyScreen.setToggleEscapeMenu();
             }
         }
         return true;

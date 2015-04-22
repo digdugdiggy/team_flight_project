@@ -8,7 +8,7 @@
 * IDE: Compiled and tested under NetBeans 8.0.2 / JDK 1.8
 /******************************************************************************/
 
-package edu.uhcl.team_drone.ui;
+package edu.uhcl.team_drone.screens.flightscreen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -17,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.uhcl.team_drone.drone.Drone;
-import edu.uhcl.team_drone.input.hardware.HardwareInputComponent;
+import edu.uhcl.team_drone.input.hardware.HardwareInterface;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import edu.uhcl.team_drone.main.Main;
 import edu.uhcl.team_drone.screens.*;
@@ -36,7 +36,7 @@ public class HardwareUI {
     public static VideoIndicator videoIndicator;
 
     
-    public HardwareUI(HardwareInputComponent input, Drone owner, Viewport viewIn) {       
+    public HardwareUI(HardwareInterface input, Drone owner, Viewport viewIn) {       
         this.drone = owner;
         stage = new Stage(new FitViewport(Main.RESOLUTION.x, Main.RESOLUTION.y));      
         

@@ -161,7 +161,7 @@ public class DroneDriver {
         
         try{
             Robot robot = new Robot();
-            robot.delay(2000);
+            robot.delay(1000);
             robot.keyPress(KeyEvent.VK_F11); 
             robot.keyRelease(KeyEvent.VK_F11);
         }

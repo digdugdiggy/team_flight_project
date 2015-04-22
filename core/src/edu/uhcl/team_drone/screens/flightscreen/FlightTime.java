@@ -8,19 +8,19 @@
 * IDE: Compiled and tested under NetBeans 8.0.2 / JDK 1.8
 /******************************************************************************/
 
-package edu.uhcl.team_drone.ui;
+package edu.uhcl.team_drone.screens.flightscreen;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import edu.uhcl.team_drone.assets.Assets;
-import edu.uhcl.team_drone.input.hardware.HardwareInputComponent;
+import edu.uhcl.team_drone.input.hardware.HardwareInterface;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
 
 
 public class FlightTime {
-    private HardwareInputComponent droneData;
+    private HardwareInterface droneData;
     private float timeCount;
     private boolean isActive;
     private Label timerLabel;  
@@ -28,7 +28,7 @@ public class FlightTime {
     private float altitude;
 
     
-    public FlightTime(Table tableIn, HardwareInputComponent input) {       
+    public FlightTime(Table tableIn, HardwareInterface input) {       
         droneData = input;
         altitude = 0;
         this.timeCount = 00.00f;

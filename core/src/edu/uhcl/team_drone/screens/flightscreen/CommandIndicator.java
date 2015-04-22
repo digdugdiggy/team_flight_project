@@ -8,26 +8,26 @@
 * IDE: Compiled and tested under NetBeans 8.0.2 / JDK 1.8
 /******************************************************************************/
 
-package edu.uhcl.team_drone.ui;
+package edu.uhcl.team_drone.screens.flightscreen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import edu.uhcl.team_drone.assets.Assets;
-import edu.uhcl.team_drone.input.hardware.HardwareInputComponent;
+import edu.uhcl.team_drone.input.hardware.HardwareInterface;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
 
 
 public class CommandIndicator {
-    private HardwareInputComponent droneData;
+    private HardwareInterface droneData;
     private Label commandLabel;  
     public String currentCommand = "none";
   
 
-    public CommandIndicator(Table tableIn, HardwareInputComponent input) {       
+    public CommandIndicator(Table tableIn, HardwareInterface input) {       
         droneData = input;
         commandLabel = new Label("", Assets.labelStyle);
         
@@ -41,7 +41,7 @@ public class CommandIndicator {
     public void update(float dt) {
         currentCommand = droneData.getCurrentCommand();
         
-        //Cleans up text from HardwareInputComponent for display in label
+        //Cleans up text from HardwareInterface for display in label
         try{
             if (currentCommand != null){
                 commandLabel.setText("Current Command: " + currentCommand);
@@ -78,6 +78,5 @@ public class CommandIndicator {
         catch (Exception e){
         }
     }
-    
 }
 
