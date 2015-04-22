@@ -10,20 +10,16 @@
 
 package edu.uhcl.team_drone.screens.flightscreen;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import edu.uhcl.team_drone.assets.Assets;
 import edu.uhcl.team_drone.input.hardware.HardwareInterface;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 
 
 
 public class CommandIndicator {
-    private HardwareInterface droneData;
-    private Label commandLabel;  
+    private final HardwareInterface droneData;
+    private final Label commandLabel;  
     public String currentCommand = "none";
   
 
@@ -46,28 +42,28 @@ public class CommandIndicator {
             if (currentCommand != null){
                 commandLabel.setText("Current Command: " + currentCommand);
                 
-                if (currentCommand == "droneStop"){
+                if (currentCommand.equals("droneStop")){
                     commandLabel.setText("Current Command: none");
                 }
-                if (currentCommand == "rotateRight"){
+                if (currentCommand.equals("rotateRight")){
                     commandLabel.setText("Current Command: Rotate Right");
                 }
-                if (currentCommand == "rotateLeft"){
+                if (currentCommand.equals("rotateLeft")){
                     commandLabel.setText("Current Command: Rotate Left");
                 }
-                if (currentCommand == "droneTakeOff"){
+                if (currentCommand.equals("droneTakeOff")){
                     commandLabel.setText("Current Command: Taking Off");
                 }
-                if (currentCommand == "droneLand"){
+                if (currentCommand.equals("droneLand")){
                     commandLabel.setText("Current Command: Landing");
                 }
-                if (currentCommand == "disableEmergency"){
+                if (currentCommand.equals("disableEmergency")){
                     commandLabel.setText("Current Command: Drone Reset");
                 }
-                if (currentCommand == "droneCalibrate"){
+                if (currentCommand.equals("droneCalibrate")){
                     commandLabel.setText("Current Command: Calibrating");
                 }
-                if (currentCommand == "closeConnection"){
+                if (currentCommand.equals("closeConnection")){
                     commandLabel.setText("Current Command: Server Stopped");
                 }
             }

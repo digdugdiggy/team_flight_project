@@ -11,25 +11,33 @@
 package edu.uhcl.team_drone.screens.flightscreen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import edu.uhcl.team_drone.assets.Assets;
 import edu.uhcl.team_drone.drone.Drone;
 import edu.uhcl.team_drone.input.hardware.HardwareInterface;
 import edu.uhcl.team_drone.main.Main;
-import edu.uhcl.team_drone.ui.PlayUI;
 
 
 
 public class FlyScreen implements Screen {
-    private Stage stage;    
+    public Stage stage;    
     private Main game;
     private Drone drone;
     private HardwareUI ui;
     private HardwareInterface input;
     private EscapeScreen escapeScreen;
     private boolean escapeScreenActive;
+    InputMultiplexer iMixer;
+    TextButton loadVideoButton;
+    TextButton closeVideoButton;
 
     
     public FlyScreen(Main gameIn) {
@@ -44,9 +52,45 @@ public class FlyScreen implements Screen {
         drone = new Drone(false);
         input = new HardwareInterface(game, this);
         escapeScreen = new EscapeScreen(game, this, input);
-
-        ui = new HardwareUI(input,drone,stage.getViewport());
-        Gdx.input.setInputProcessor(input);
+        ui = new HardwareUI(this, input,drone,stage.getViewport());
+        
+        iMixer = new InputMultiplexer();
+        iMixer.addProcessor(stage);
+        iMixer.addProcessor(input);
+        
+        loadVideoButton = new TextButton("Load Video", Assets.blueTextBtnStyle);
+        loadVideoButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                input.startVideo();
+                displayCloseVideoButton();
+            }
+        });
+                
+        closeVideoButton = new TextButton("Close Video", Assets.blueTextBtnStyle);
+        closeVideoButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                input.stopVideo();
+                displayLoadVideoButton();
+            }
+        });
+                
+        TextButton resetDroneButton = new TextButton("Reset Drone", Assets.blueTextBtnStyle);
+        resetDroneButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                input.droneCommand("disableEmergency");
+            }
+        });
+                
+        Table resetLayout = new Table();
+        resetLayout.setFillParent(true);  
+        resetLayout.bottom().padTop(0);
+        resetLayout.add(resetDroneButton).size(250, 90).padRight(250);
+        stage.addActor(resetLayout);
+        
+        displayLoadVideoButton();
     }
 
     
@@ -54,12 +98,13 @@ public class FlyScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        
-        input.update(delta);
 
         stage.act();
         stage.draw();
         ui.render(delta);
+
+        input.update(delta);
+        Gdx.input.setInputProcessor(iMixer);
         
         if (escapeScreenActive == true){
             displayEscapeMenu();
@@ -67,18 +112,23 @@ public class FlyScreen implements Screen {
     }
     
     public void displayEscapeMenu(){
+        int x = Gdx.graphics.getWidth();
+        int y = Gdx.graphics.getHeight();
+
+        escapeScreen.resize(x,y);
         escapeScreen.render();
     }
     
+    
     public void setHideEscapeMenu(){
         escapeScreenActive = false;
-        //escapeScreen.dispose();
     }
+    
     
     public void setShowEscapeMenu(){
         escapeScreenActive = true;
-        //escapeScreen.dispose();
     }
+    
     
     public void setToggleEscapeMenu(){
         if (escapeScreenActive == true){
@@ -88,6 +138,25 @@ public class FlyScreen implements Screen {
             escapeScreenActive = true;
         }
     }
+    
+    
+    public void displayLoadVideoButton(){
+        Table videoLayout = new Table();
+        videoLayout.setFillParent(true);  
+        videoLayout.bottom().padTop(0);
+        videoLayout.add(loadVideoButton).size(250, 90).padLeft(250);
+        stage.addActor(videoLayout);
+    }
+    
+    
+    public void displayCloseVideoButton(){
+        Table videoLayout2 = new Table();
+        videoLayout2.setFillParent(true);  
+        videoLayout2.bottom().padTop(0);
+        videoLayout2.add(closeVideoButton).size(250, 90).padLeft(250);
+        stage.addActor(videoLayout2);
+    }
+    
     
     @Override
     public void resize(int width, int height) {

@@ -31,18 +31,18 @@ public class EscapeScreen {
     private final Main game;
     private final InputMultiplexer inputMixer;
     private final FlyScreen flyScreen;
-    private HardwareInterface input;
+    private final HardwareInterface hardwareInterface;
 
     
-    public EscapeScreen(Main gameIn, FlyScreen flyIn, HardwareInterface gameInput) {
+    public EscapeScreen(Main gameIn, FlyScreen flyIn, HardwareInterface droneIn) {
         game = gameIn;
         flyScreen = flyIn;
-        input = gameInput;
+        hardwareInterface = droneIn;
         stage = new Stage(new FitViewport(Main.RESOLUTION.x, Main.RESOLUTION.y));
 
         inputMixer = new InputMultiplexer();
         inputMixer.addProcessor(stage);
-        inputMixer.addProcessor(input);
+        inputMixer.addProcessor(hardwareInterface);
 
         tableLayout = new Table();
         tableLayout.defaults().center().pad(10).height(80).align(Align.center);
@@ -69,7 +69,7 @@ public class EscapeScreen {
         resetDrone.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                input.droneCommand("disableEmergency");
+                hardwareInterface.droneCommand("disableEmergency");
                 flyScreen.setHideEscapeMenu();
             }
         });
@@ -103,10 +103,15 @@ public class EscapeScreen {
 
     
     public void render() {
-        Gdx.input.setInputProcessor(inputMixer);
-
         stage.act();
         stage.draw();
+        
+        Gdx.input.setInputProcessor(inputMixer);
+    }
+
+    
+    public void dispose(){
+        stage.dispose();
     }
     
     

@@ -29,7 +29,7 @@ public class HardwareInterface extends InputAdapter {
     
     //True = drone only flies w/ key held down
     //False = drone continues to fly in given direction until stopped
-    private boolean precisionMode = false;
+    private boolean precisionMode = true;
 
     //Sentinal value for rebooting server
     private boolean serverRunning = false;
@@ -161,6 +161,11 @@ public class HardwareInterface extends InputAdapter {
     }
 
     
+    public void stopVideo(){
+        droneDriver.closeVideo();
+    }
+    
+        
     //User inter-actionable keycommands
     @Override
     public boolean keyDown(int keycode) {
