@@ -179,7 +179,7 @@ public class MapGenerator {
         for (int x = 0; x < rows; x++) {
             for (int y = 0; y < columns; y++) {
                 if(mapCells[y][x].getImage() =='E'){
-                    System.out.println("E");
+                    //System.out.println("E");
                 }
                 charMap[y][x] = mapCells[y][x].getImage();
             }

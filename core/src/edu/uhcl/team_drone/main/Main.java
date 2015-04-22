@@ -53,7 +53,6 @@ public class Main extends Game {
         optionsScreen = new OptionsScreen(this);
         playScreen = new PlayScreen(this);
         flyScreen = new FlyScreen(this);
-
         debugScreen = new DebugScreen(this);
 
         // Set starting Screen
