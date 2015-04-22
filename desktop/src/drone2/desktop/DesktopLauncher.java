@@ -7,6 +7,13 @@ import edu.uhcl.team_drone.main.Main;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new Main(), config);
+		System.setProperty("org.lwjgl.opengl.Window.undecorated", "true");
+                config.title = "Team Flight";
+                //config.fullscreen = true;
+                config.width = 800;
+                config.height = 600;
+                
+                new LwjglApplication(new Main(), config);
+                
 	}
 }

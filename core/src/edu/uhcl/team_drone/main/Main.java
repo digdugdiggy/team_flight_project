@@ -16,7 +16,7 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Vector2;
 import edu.uhcl.team_drone.screens.DebugScreen;
-import edu.uhcl.team_drone.screens.FlyScreen;
+import edu.uhcl.team_drone.screens.flightscreen.FlyScreen;
 import edu.uhcl.team_drone.screens.OptionsScreen;
 import edu.uhcl.team_drone.screens.SplashScreen;
 import edu.uhcl.team_drone.screens.mainmenu.MainMenuScreen;

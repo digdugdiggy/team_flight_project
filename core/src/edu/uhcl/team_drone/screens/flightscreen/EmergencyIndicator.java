@@ -8,35 +8,33 @@
 * IDE: Compiled and tested under NetBeans 8.0.2 / JDK 1.8
 /******************************************************************************/
 
-package edu.uhcl.team_drone.ui;
+package edu.uhcl.team_drone.screens.flightscreen;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import edu.uhcl.team_drone.assets.Assets;
-import edu.uhcl.team_drone.input.hardware.HardwareInputComponent;
+import edu.uhcl.team_drone.input.hardware.HardwareInterface;
 
 
 
-public class VideoIndicator{
-    private HardwareInputComponent droneData;
-    private Label videoLabel;  
+public class EmergencyIndicator{
+    private HardwareInterface droneData;
+    private Label emergencyLabel;  
 
     
-    public VideoIndicator(Table tableIn, HardwareInputComponent input) {  
+    public EmergencyIndicator(Table tableIn, HardwareInterface input) {  
         droneData = input;
-        videoLabel = new Label("", Assets.labelStyle);
+        emergencyLabel = new Label("", Assets.labelStyle);
 
-        tableIn.top().right().padTop(0);
-        tableIn.add(videoLabel).size(250, 90);
+        tableIn.top().center().padTop(490);
+        tableIn.add(emergencyLabel).size(280, 90);
         
-        videoLabel.setText("Load Video");
-        
-        //Loads video - attach to an actionListener
-        //droneData.startVideo();
+        emergencyLabel.setText("Reset Drone");
     }
     
     
     public void update(float dt) {
+
     }
 }
 
