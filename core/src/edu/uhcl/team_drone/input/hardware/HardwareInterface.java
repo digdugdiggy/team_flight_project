@@ -52,8 +52,6 @@ public class HardwareInterface extends InputAdapter {
     private int ENDCONNECTION = Input.Keys.F12;
     private int DISABLEEMERGENCY = Input.Keys.U;
     private int CALIBRATE = Input.Keys.M;
-    private int DEBUGON = Input.Keys.F1;
-    private int DEBUGOFF = Input.Keys.F2;
     private int TOGGLEMODE = Input.Keys.F8;
     private int ESCAPESCREEN = Input.Keys.ESCAPE;
 
@@ -64,9 +62,6 @@ public class HardwareInterface extends InputAdapter {
     private int keysPressed = 0;
     private int maxKeysPressed = 3;
  
-    float MAX_PITCH = 0.6f;
-    float rollAmt = 0;
-    float pitchAmt = 0;
     private String batteryCharge = "--";
     private String altitude = "--";
     private String currentCommand = "none";
@@ -146,6 +141,7 @@ public class HardwareInterface extends InputAdapter {
             try {
                 this.droneDriver = new DroneDriver();
                 serverRunning = true;
+                currentCommand = "Server Started";
             } 
             catch (Exception e) {
                 System.out.println("Error starting DroneDriver():");
@@ -155,13 +151,25 @@ public class HardwareInterface extends InputAdapter {
     }
     
     
+    //Stops server
+    public void stopServer(){
+        try{
+            droneCommand("closeConnection");
+            serverRunning = false;
+        }
+        catch (Exception e){
+        }
+    }
+    
+    
     //Starts video
-    public void startVideo(){
+    public void loadVideo(){
         droneDriver.loadVideo();
     }
 
     
-    public void stopVideo(){
+    //Stops video
+    public void closeVideo(){
         droneDriver.closeVideo();
     }
     
@@ -191,15 +199,11 @@ public class HardwareInterface extends InputAdapter {
             } 
             
             if (keys.containsKey(FORWARD)) {
-                if (pitchAmt > -MAX_PITCH) {
-                    droneCommand("forward");
-                }
+                droneCommand("forward");
             } 
             
             if (keys.containsKey(BACKWARD)) {
-                if (pitchAmt < MAX_PITCH) {
-                    droneCommand("backward");
-                }
+                droneCommand("backward");
             }
             
             if (keys.containsKey(ROTATELEFT)) {
@@ -210,22 +214,12 @@ public class HardwareInterface extends InputAdapter {
                 droneCommand("rotateRight");
             }
 
-            if (keys.containsKey(DEBUGON)) {
-                PlayScreen.debug.isVisible = true;
-            }
-            
-            if (keys.containsKey(DEBUGOFF)) {
-                PlayScreen.debug.isVisible = false;
-            }
-            
             if (keys.containsKey(TOGGLEMODE)) {
                 if (precisionMode == true){
                     precisionMode = false;
-                    //System.out.println("Precision mode turned off...");
                 }
                 else{
                     precisionMode = true;    
-                    //System.out.println("Precision mode turned on...");
                 }
             }
             
@@ -250,18 +244,15 @@ public class HardwareInterface extends InputAdapter {
             }
             
             if (keys.containsKey(LOADVIDEO)) {
-                droneDriver.loadVideo();
+                loadVideo();
             }
             
             if (keys.containsKey(CLOSEVIDEO)) {
-                droneDriver.closeVideo();
+                closeVideo();
             }
             
             if (keys.containsKey(ENDCONNECTION)) {
-                droneCommand("closeConnection");
-                serverRunning = false;
-                
-                droneDriver.closeVideo();
+                stopServer();
             }
             
             if (keys.containsKey(RESTARTCONNECTION)) {

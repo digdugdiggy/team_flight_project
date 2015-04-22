@@ -66,6 +66,9 @@ public class CommandIndicator {
                 if (currentCommand.equals("closeConnection")){
                     commandLabel.setText("Current Command: Server Stopped");
                 }
+                if (currentCommand.equals("closeConnection")){
+                    commandLabel.setText("Current Command: Server Stopped");
+                }
             }
             else{
                 commandLabel.setText("Current Command: " + currentCommand);

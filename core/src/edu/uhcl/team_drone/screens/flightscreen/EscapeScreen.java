@@ -54,7 +54,7 @@ public class EscapeScreen {
     
     private void createEscapeMenu() {
         TextButton resumeButton = new TextButton("Back to Flight", Assets.blueTextBtnStyle);
-        TextButton resetDrone = new TextButton("Reset Drone", Assets.blueTextBtnStyle);
+        TextButton restartServerButton = new TextButton("Restart Server", Assets.blueTextBtnStyle);
         TextButton exitToMenuButton = new TextButton("Exit to Menu", Assets.blueTextBtnStyle);
         TextButton exitToDesktopButton = new TextButton("Exit to Desktop", Assets.blueTextBtnStyle);
 
@@ -66,10 +66,12 @@ public class EscapeScreen {
             }
         });
         
-        resetDrone.addListener(new ClickListener() {
+        restartServerButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                hardwareInterface.droneCommand("disableEmergency");
+                //hardwareInterface.droneCommand("disableEmergency");
+                hardwareInterface.stopServer();
+                hardwareInterface.startServer();
                 flyScreen.setHideEscapeMenu();
             }
         });
@@ -92,7 +94,7 @@ public class EscapeScreen {
 
         tableLayout.add(resumeButton).align(Align.center);
         tableLayout.row();
-        tableLayout.add(resetDrone).align(Align.center);
+        tableLayout.add(restartServerButton).align(Align.center);
         tableLayout.row();
         tableLayout.add(exitToMenuButton).align(Align.center);
         tableLayout.row();

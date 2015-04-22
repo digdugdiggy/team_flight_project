@@ -62,7 +62,7 @@ public class FlyScreen implements Screen {
         loadVideoButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                input.startVideo();
+                input.loadVideo();
                 displayCloseVideoButton();
             }
         });
@@ -71,7 +71,7 @@ public class FlyScreen implements Screen {
         closeVideoButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                input.stopVideo();
+                input.closeVideo();
                 displayLoadVideoButton();
             }
         });
