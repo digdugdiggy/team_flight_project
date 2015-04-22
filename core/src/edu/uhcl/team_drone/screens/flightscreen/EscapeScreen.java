@@ -69,7 +69,6 @@ public class EscapeScreen {
         restartServerButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //hardwareInterface.droneCommand("disableEmergency");
                 hardwareInterface.stopServer();
                 hardwareInterface.startServer();
                 flyScreen.setHideEscapeMenu();
@@ -80,6 +79,11 @@ public class EscapeScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 flyScreen.setHideEscapeMenu();
+                
+                int xc = (int) Main.RESOLUTION.x;
+                int yc = (int) Main.RESOLUTION.y;
+                Gdx.graphics.setDisplayMode(xc, yc, false);
+
                 game.setScreen(Main.mainMenuScreen);
             }
         });

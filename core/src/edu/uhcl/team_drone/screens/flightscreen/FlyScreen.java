@@ -48,7 +48,10 @@ public class FlyScreen implements Screen {
     
     @Override
     public void show() {
+        Gdx.graphics.setDisplayMode(600, 300, false);
         stage = new Stage(new FitViewport(Main.RESOLUTION.x, Main.RESOLUTION.y));
+        //stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        
         drone = new Drone(false);
         input = new HardwareInterface(game, this);
         escapeScreen = new EscapeScreen(game, this, input);
