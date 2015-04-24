@@ -61,8 +61,7 @@ public class EscapeScreen {
         resumeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                flyScreen.setHideEscapeMenu();
-                
+                flyScreen.setHideEscapeMenu();                
             }
         });
         

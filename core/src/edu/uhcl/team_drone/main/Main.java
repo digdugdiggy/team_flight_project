@@ -56,7 +56,7 @@ public class Main extends Game {
         debugScreen = new DebugScreen(this);
 
         // Set starting Screen
-        setScreen(mainMenuScreen);
+        setScreen(splashScreen);
     }
 
     @Override

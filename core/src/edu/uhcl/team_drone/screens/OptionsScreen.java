@@ -58,17 +58,6 @@ public class OptionsScreen implements Screen {
         rootTable.add(optionsTitle).align(Align.center).padBottom(100).size(400, 100).colspan(2);
         rootTable.row();
         
-        slider = new Slider(0, 100, 10, false, Assets.sliderStyle);
-        sliderLabel = new Label(Integer.toString((int)slider.getValue()), Assets.labelStyle);
-        sliderLabel.setAlignment(Align.center);
-        rootTable.add(sliderLabel).size(110,80).align(Align.center).padBottom(40);
-        rootTable.row();
-        rootTable.add(slider).size(200, 5);
-        
-        
-        
-
-        rootTable.row();
         rootTable.add(backToMenuButton).size(300, 80).bottom().align(Align.center).space(40).padTop(10).padBottom(180).colspan(2);
         rootTable.row();        
 
@@ -87,8 +76,7 @@ public class OptionsScreen implements Screen {
     }
 
     @Override
-    public void render(float delta) {
-        sliderLabel.setText(Integer.toString((int)slider.getValue()));
+    public void render(float delta) {        
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act();
