@@ -66,7 +66,7 @@ public class MainMenuScreen implements Screen {
         rootTable.setBackground(Assets.backgroundPatch);
         rootTable.setFillParent(true);
         rootTable.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
+        
         rootTable.add(label).align(Align.center).padBottom(100).padTop(40).size(640, 120);
         rootTable.row();
 

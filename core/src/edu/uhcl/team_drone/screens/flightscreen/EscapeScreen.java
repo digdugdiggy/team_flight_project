@@ -78,11 +78,7 @@ public class EscapeScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 flyScreen.setHideEscapeMenu();
-                
-                int xc = (int) Main.RESOLUTION.x;
-                int yc = (int) Main.RESOLUTION.y;
-                Gdx.graphics.setDisplayMode(xc, yc, false);
-
+                Gdx.graphics.setDisplayMode(Main.defaultX, Main.defaultY, false);
                 game.setScreen(Main.mainMenuScreen);
             }
         });

@@ -35,6 +35,8 @@ public class Main extends Game {
     public static PlayScreen playScreen;
     public static FlyScreen flyScreen;
     public static DebugScreen debugScreen;
+    public static int defaultX;
+    public static int defaultY;
 
     @Override
     public void create() {
@@ -46,6 +48,9 @@ public class Main extends Game {
         cam.near = 400f;
         cam.far = 27000f;
         cam.update(true);
+		
+        defaultX = Gdx.graphics.getWidth();
+        defaultY = Gdx.graphics.getHeight();
 
         // Create Screens
         splashScreen = new SplashScreen(this);
