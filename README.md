@@ -27,8 +27,9 @@ Together our team used many technologies to make this project a reality.
 
 ##### [Node.js](https://nodejs.org/)
 * A Javascript library for building network applications.
-* Used for interfacing with the Parrot 2.0's wifi network
------
+* Used for interfacing with the Parrot 2.0's wifi network.  
+
+------
 
 
 
