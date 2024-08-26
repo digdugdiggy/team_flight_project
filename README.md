@@ -13,7 +13,7 @@ It is composed of two main modules:
   * Simplified 3D flight model based on vector math.
   * XBOX 360 controller support.
   
-2. A Hardware Controller for the [Parrot AR 2.0][(http://ardrone2.parrot.com/](https://en.wikipedia.org/wiki/Parrot_AR.Drone)) Drone (which is now discontinued)
+2. A Hardware Controller for the [Parrot AR 2.0](https://en.wikipedia.org/wiki/Parrot_AR.Drone) Drone (which is now discontinued)
   * Watch live onboard camera footage.
   * Multiple input modes and safety features.
   
@@ -21,7 +21,7 @@ It is composed of two main modules:
 #### Technologies
 Together our team used many technologies to make this project a reality. 
 
-##### [LibGDX](http://libgdx.badlogicgames.com/)
+##### [LibGDX](https://libgdx.com/)
 * A cross-platform Java game development framework
 * Used extensively for Screens, Scene-graph based user interface, Asset storage, Physics
 
